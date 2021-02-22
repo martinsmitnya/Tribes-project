@@ -1,12 +1,12 @@
 import express from 'express';
 const cors = require('cors');
-import { resource } from '../controllers';
+import { resourceController } from '../controllers';
 
 const router = express.Router();
 
 router.use(cors());
 router.use(express.json());
 
-router.get('/resource', helloController.get);
+router.get('/resource', resourceController.get);
 
 export default router;
