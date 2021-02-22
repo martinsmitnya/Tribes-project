@@ -1,4 +1,4 @@
-import { resource } from '../models/helloWorld';
+import { resource } from '../models/resource';
 
 export const helloService = {
     async getResource() {
