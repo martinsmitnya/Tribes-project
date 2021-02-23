@@ -46,14 +46,6 @@ function Login() {
   }
 
 
-  useEffect(
-    () => {
-
-
-    }, [errorMessage]
-  );
-
-
   return (
     <div className="Login">
 
