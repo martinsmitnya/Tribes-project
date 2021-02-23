@@ -1,18 +1,12 @@
 import { db } from '../data/connection';
 
-db.query('SELECT * FROM resources');
+async function resource() {
+  try {
+    const result = await db.query('SELECT * FROM resources ');
+    return result.results;
+  } catch (error) {
+    console.log(error);
+  }
+}
 
-export const resource = [
-  {
-    type: 'food',
-    amount: 1,
-    generation: 1,
-    updatedAt: 1614007605,
-  },
-  {
-    type: 'gold',
-    amount: 1,
-    generation: 1,
-    updatedAt: 1614007605,
-  },
-];
+exports.resource = resource();

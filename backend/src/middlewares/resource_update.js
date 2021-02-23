@@ -1,10 +1,6 @@
 import { resource } from '../models/resource';
+import { db } from '../data/connection';
 
-resource.forEach(element => {
-  let dateNow = Date.now() / 1000;
-  element.amount +=
-    element.generation * Math.floor((dateNow - element.updatedAt) / 60);
-  element.updatedAt = Math.floor(dateNow);
-});
+db.query('UPDATE resources SET amount=2');
 
 export const updatedResource = resource;
