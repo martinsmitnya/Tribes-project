@@ -13,19 +13,24 @@ function Login() {
       setErrorMessage(() => 'All the input fields are required.')
     }
     console.log('Username: ' + userName + ' Password: ' + password);
-    //Fetch comes here
-    //Inse fetch if(good) return things -- no else no nothing ---
     let myRequestObject = {
       "username" : userName,
       "password" : password
     }
-    fetch('http://localhost:3000/login', {
+    fetch('http://localhost:8080/login', {
       method: 'POST',
-      headers: {'content-type': 'application/json'},
+      headers: {'Content-Type': 'application/json'},
       body: {myRequestObject}
     })
-    //.then() I log in or return some error message like wrong username / wrong password
-
+    .then(response => response.json()).then(data => {
+      if(data.status !== 'ok') {
+        setErrorMessage(()=> data.error) 
+      } else {
+        //REDIRECT TO MAIN PAGE
+        console.log('Status: ' + data.status + 'Your token is: ' + data.token) 
+      }
+    })
+    .catch(error => console.log(error))
   }
 
   function handleUsernameChange(event) {
