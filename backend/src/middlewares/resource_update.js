@@ -1,15 +1,16 @@
 import { db } from '../data/connection';
+import { postResource } from '../data/query';
 
 export function updatedResource(resource) {
   let output = [];
   resource.then(result => {
     output = Update(result);
-    db.query('UPDATE resources SET amount=?, updatedAt=? WHERE type=?', [
+    db.query(postResource, [
       output[0].amount,
       output[0].updatedAt,
       output[0].type,
     ]);
-    db.query('UPDATE resources SET amount=?, updatedAt=? WHERE type=?', [
+    db.query(postResource, [
       output[1].amount,
       output[1].updatedAt,
       output[1].type,
