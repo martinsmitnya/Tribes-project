@@ -14,23 +14,23 @@ function Login() {
     }
     console.log('Username: ' + userName + ' Password: ' + password);
     let myRequestObject = {
-      "username" : userName,
-      "password" : password
+      "username": userName,
+      "password": password
     }
     fetch('http://localhost:8080/login', {
       method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: {myRequestObject}
+      headers: { 'Content-Type': 'application/json' },
+      body: { myRequestObject }
     })
-    .then(response => response.json()).then(data => {
-      if(data.status !== 'ok') {
-        setErrorMessage(()=> data.error) 
-      } else {
-        //REDIRECT TO MAIN PAGE
-        console.log('Status: ' + data.status + 'Your token is: ' + data.token) 
-      }
-    })
-    .catch(error => console.log(error))
+      .then(response => response.json()).then(data => {
+        if (data.status !== 'ok') {
+          setErrorMessage(() => data.error)
+        } else {
+          //REDIRECT TO MAIN PAGE
+          console.log('Status: ' + data.status + 'Your token is: ' + data.token)
+        }
+      })
+      .catch(error => console.log(error))
   }
 
   function handleUsernameChange(event) {
@@ -56,14 +56,17 @@ function Login() {
 
         <div class='formWrapper'>
           <form onSubmit={handleSubmit}>
-            <label htmlFor='username'>
-              <input name='username' class='formInput' type='text' onChange={handleUsernameChange} />
-            </label>
-            <label htmlFor='password'>
-              <input name='password' class='formInput' type='password' onChange={handlePasswordChange} />
-            </label>
-            <div class='errorMessageWrapper'>{errorMessage && <div><p>{errorMessage}</p><img src={loginErrorIcon} alt='loginErrorWarning' /> </div>}</div>
-            <button>Login</button>
+
+            <div class='inputWrapper'>
+              <label htmlFor='username'>
+                <input name='username' class='formInput' type='text' onChange={handleUsernameChange} />
+              </label>
+              <label htmlFor='password'>
+                <input name='password' class='formInput' type='password' onChange={handlePasswordChange} />
+              </label>
+              <div >{errorMessage && <div class='errorMessageWrapper'><p>{errorMessage}</p><img src={loginErrorIcon} alt='loginErrorWarning' /> </div>}</div>
+            </div>
+            <button class='loginSubmitButton'>Login</button>
           </form>
         </div>
       </div>
