@@ -3,17 +3,37 @@ import './Login.css';
 const loginErrorIcon = '../../../../docs/assets/oops.png'
 function Login() {
   const [errorMessage, setErrorMessage] = useState('');
+  const [userName, setUserName] = useState('');
+  const [password, setPassword] = useState('');
 
 
   function handleSubmit(event) {
     event.preventDefault();
+    if(password === '' || userName === '') {
+      setErrorMessage(()=> 'All the input fields are required.')
+    } 
+    console.log('Username: ' + userName + ' Password: ' + password);
     //Fetch comes here
+    //Inse fetch if(good) return things else() return -
 
-    setErrorMessage(() => 'We have an error')
   }
+
+  function handleUsernameChange(event) {
+    let container = event.target.value;
+    setUserName(()=> container)
+    console.log('Username: '+ userName)
+
+  }
+  function handlePasswordChange(event) {
+    let container = event.target.value;
+    setPassword(()=> container)
+    console.log('Password: '+ password)
+  }
+
 
   useEffect(
     () => {
+
 
     }, [errorMessage]
   );
@@ -39,10 +59,10 @@ function Login() {
       <div class = 'formWrapper'> 
         <form onSubmit={handleSubmit}>
           <label htmlFor='username'>
-            <input name='username' class='formInput' type='text' required />
+            <input name='username' class='formInput' type='text' onChange={handleUsernameChange}  />
           </label>
           <label htmlFor='password'>
-            <input name='password' class='formInput' type='password' required />
+            <input name='password' class='formInput' type='password' onChange={handlePasswordChange}  />
           </label>
           <div class='errorMessageWrapper'>{errorMessage && <div><p>{errorMessage}</p><img src ={loginErrorIcon} alt ='loginErrorWarning'/> </div>}</div>
           <button>Login</button>
