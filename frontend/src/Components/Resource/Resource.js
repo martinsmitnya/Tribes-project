@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
+const port = process.env.PORT;
+console.log(process.env);
+console.log(port);
+
 function Resources() {
   const [food, setFood] = useState(null);
   const [gold, setGold] = useState(null);
@@ -8,7 +12,7 @@ function Resources() {
   const [user, setUser] = useState(0);
 
   const fetchResources = async () => {
-    const call = await fetch('http://localhost:3000/kingdom/resource');
+    const call = await fetch(`http://localhost:3000/kingdom/resource`);
     const result = await call.json();
     setFood(result[0]);
     setGold(result[1]);
