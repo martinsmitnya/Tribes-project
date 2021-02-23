@@ -1,5 +1,7 @@
 import { db } from '../data/connection';
 
+db.query('SELECT * FROM resources');
+
 export const resource = [
   {
     type: 'food',
