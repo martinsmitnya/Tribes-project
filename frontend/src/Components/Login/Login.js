@@ -15,6 +15,16 @@ function Login() {
     console.log('Username: ' + userName + ' Password: ' + password);
     //Fetch comes here
     //Inse fetch if(good) return things -- no else no nothing ---
+    let myRequestObject = {
+      "username" : userName,
+      "password" : password
+    }
+    fetch('http://localhost:3000/login', {
+      method: 'POST',
+      headers: {'content-type': 'application/json'},
+      body: {myRequestObject}
+    })
+    //.then() I log in or return some error message like wrong username / wrong password
 
   }
 
