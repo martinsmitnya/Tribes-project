@@ -4,10 +4,11 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import LoginPage from './Components/Login/LoginPage';
+import Resources from './Components/Resource/Resource';
 
 ReactDOM.render(
   <React.StrictMode>
-    <LoginPage />
+    <Resources />
   </React.StrictMode>,
   document.getElementById('root')
 );
