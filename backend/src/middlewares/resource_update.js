@@ -7,12 +7,12 @@ export function updatedResource(resource) {
     output = Update(result);
     db.query(postResource, [
       output[0].amount,
-      output[0].updatedAt,
+      output[0].updated_at,
       output[0].type,
     ]);
     db.query(postResource, [
       output[1].amount,
-      output[1].updatedAt,
+      output[1].updated_at,
       output[1].type,
     ]);
   });
@@ -25,10 +25,10 @@ function Update(input) {
   input.forEach(element => {
     let amount = element.amount;
     element.amount +=
-      element.generation * Math.floor((currentDate - element.updatedAt) / 60);
+      element.generation * Math.floor((currentDate - element.updated_at) / 60);
 
     if (amount != element.amount) {
-      element.updatedAt = currentDate;
+      element.updated_at = currentDate;
     }
 
     output.push(element);
