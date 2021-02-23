@@ -1,3 +1,5 @@
+import { db } from '../data/connection';
+
 export const resource = [
   {
     type: 'food',

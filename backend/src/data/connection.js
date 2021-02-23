@@ -1,5 +1,4 @@
 import mysql from 'mysql';
-
 import config from '../config';
 
 var pool = mysql.createPool({
@@ -17,10 +16,8 @@ export const db = {
         console.log(config);
         if (err) {
           reject(err);
-
           return;
         }
-
         resolve({ results, fields });
       });
     });
