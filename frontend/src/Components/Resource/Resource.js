@@ -5,21 +5,19 @@ function Resources() {
   const [gold, setGold] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState(null);
+  const [user, setUser] = useState(0);
+
+  const fetchResources = async () => {
+    const call = await fetch('http://localhost:3000/kingdom/resource');
+    const result = await call.json();
+    setFood(result[0]);
+    setGold(result[1]);
+    setIsLoaded(true);
+  };
 
   useEffect(() => {
-    fetch('http://localhost:3000/kingdom/resource')
-      .then(res => res.text())
-      .then(
-        result => {
-          setIsLoaded(true);
-          console.log(result);
-        },
-        error => {
-          setIsLoaded(true);
-          setError(error);
-        }
-      );
-  });
+    fetchResources();
+  }, [user]);
 
   if (error) {
     return <div> Error: {error.message} </div>;
