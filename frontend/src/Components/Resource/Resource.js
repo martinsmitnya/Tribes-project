@@ -27,12 +27,12 @@ function Resources() {
     return (
       <div>
         <ul>
-          <li>Food</li>
-          <li>{food.amount}</li>
+          <li>Food: {food.amount}</li>
+          <li>+{food.generation} / minute</li>
         </ul>
         <ul>
-          <li>Gold</li>
-          <li>{gold.amount}</li>
+          <li>Gold: {gold.amount}</li>
+          <li>+{gold.generation} / minute</li>
         </ul>
       </div>
     );

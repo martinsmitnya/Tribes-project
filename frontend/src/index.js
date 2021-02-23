@@ -8,6 +8,7 @@ import Resources from './Components/Resource/Resource';
 
 ReactDOM.render(
   <React.StrictMode>
+    <LoginPage />
     <Resources />
   </React.StrictMode>,
   document.getElementById('root')
