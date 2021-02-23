@@ -24,7 +24,18 @@ function Resources() {
   } else if (!isLoaded) {
     return <div> Loading... </div>;
   } else {
-    return <div> Sikers </div>;
+    return (
+      <div>
+        <ul>
+          <li>Food</li>
+          <li>{food.amount}</li>
+        </ul>
+        <ul>
+          <li>Gold</li>
+          <li>{gold.amount}</li>
+        </ul>
+      </div>
+    );
   }
 }
 
