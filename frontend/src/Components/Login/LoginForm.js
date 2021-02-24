@@ -11,7 +11,7 @@ function LoginForm() {
     if (password === '' || userName === '') {
       setErrorMessage(() => 'All the input fields are required.');
     }
-    console.log('Username: ' + userName + ' Password: ' + password);
+
     let myRequestObject = {
       username: userName,
       password: password,
@@ -25,11 +25,10 @@ function LoginForm() {
       .then(data => {
         if (data.status !== 'ok') {
           setErrorMessage(() => data.error);
+          return;
         } else {
-          //REDIRECT TO MAIN PAGE
-          console.log(
-            'Status: ' + data.status + 'Your token is: ' + data.token
-          );
+          localStorage.setItem('token', data.token);
+          //REDIRECT TO MAIN PAGE       location.replace("http://localhost:3000/")
         }
       })
       .catch(error => console.log(error));
