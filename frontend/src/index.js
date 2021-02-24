@@ -10,8 +10,8 @@ import Resources from './Components/Resource/Resource';
 ReactDOM.render(
   <React.StrictMode>
     <LoginPage />
-    <RegisterPage />
     <Resources />
+    <RegisterPage />
   </React.StrictMode>,
   document.getElementById('root')
 );
