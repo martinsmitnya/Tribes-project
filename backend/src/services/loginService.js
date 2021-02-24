@@ -1,4 +1,4 @@
-import { loginTokenCreator } from '../data/loginTokenCreator';
+import { loginTokenCreator } from '../middlewares/loginTokenCreator';
 
 export const loginService = {
   async postLogin(requestBody) {
