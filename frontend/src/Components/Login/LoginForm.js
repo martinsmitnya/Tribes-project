@@ -49,24 +49,24 @@ function LoginForm() {
   return (
     <div className="Login">
 
-      <div class='mainContent'>
-        <div class='MainTitle'>
+      <div className='mainContent'>
+        <div className='MainTitle'>
           <h1>Tribes of Gymnocercus</h1>
         </div>
 
-        <div class='formWrapper'>
+        <div className='formWrapper'>
           <form onSubmit={handleSubmit}>
 
-            <div class='inputWrapper'>
+            <div className='inputWrapper'>
               <label htmlFor='username'>
-                <input name='username' class='formInput' type='text' onChange={handleUsernameChange} />
+                <input name='username' className='formInput' type='text' onChange={handleUsernameChange} />
               </label>
               <label htmlFor='password'>
-                <input name='password' class='formInput' type='password' onChange={handlePasswordChange} />
+                <input name='password' className='formInput' type='password' onChange={handlePasswordChange} />
               </label>
-              <div >{errorMessage && <div class='errorMessageWrapper'><p>{errorMessage}</p><img src={loginErrorIcon} alt='loginErrorWarning' /> </div>}</div>
+              <div >{errorMessage && <div className='errorMessageWrapper'><p>{errorMessage}</p><img src={loginErrorIcon} alt='loginErrorWarning' /> </div>}</div>
             </div>
-            <button class='loginSubmitButton'>Login</button>
+            <button className='loginSubmitButton'>Login</button>
           </form>
         </div>
       </div>
