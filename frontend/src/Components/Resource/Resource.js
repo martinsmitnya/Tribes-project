@@ -44,19 +44,19 @@ function Resources() {
     return (
       <div className="resources">
         <div className="building farm">
-          <img src={farm}></img>
+          <img src={farm} alt="farm"></img>
         </div>
         <div className="text food">
-          {food.amount} <img className="bread" src={bread}></img>
+          {food.amount} <img className="bread" alt="bread" src={bread}></img>
         </div>
         {Generation(food, 'foodgen')}
 
         <div className="building mine">
-          <img src={mine}></img>
+          <img src={mine} alt="mine"></img>
         </div>
         <div className="text gold">
           {gold.amount}
-          <img className="coins" src={coin}></img>
+          <img className="coins" alt="coin" src={coin}></img>
         </div>
         {Generation(gold, 'goldsgen')}
       </div>
