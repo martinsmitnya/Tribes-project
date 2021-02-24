@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import '../Login/LoginForm.css';
+import './Resource.css';
+import farm from '../../icons/svg/buildings/farm.svg';
+import mine from '../../icons/svg/buildings/mine.svg';
+import bread from '../../icons/better_bread.png';
+import coin from '../../icons/better_coin.png';
 
 function Resources() {
   const [food, setFood] = useState(null);
@@ -20,35 +24,41 @@ function Resources() {
     fetchResources();
   }, [user]);
 
-  function Generation(generation) {
-    if (generation > 0) {
-      return '+';
-    } else if (generation < 0) {
-      return '-';
+  function Generation(item, class_name) {
+    if (item.generation > 0) {
+      class_name = ' pos';
+      return <div className={class_name}>+{item.generation} / minute</div>;
+    } else if (item.generation < 0) {
+      class_name = ' neg';
+      return <div className={class_name}>{item.generation} / minute</div>;
+    } else {
+      return <div className={class_name}>{item.generation} / minute</div>;
     }
   }
 
   if (error) {
-    return <div className="formWrapper"> Error: {error.message} </div>;
+    return <div className="resources"> Error: {error.message} </div>;
   } else if (!isLoaded) {
-    return <div className="formWrapper"> Loading... </div>;
+    return <div className="resources"> Loading... </div>;
   } else {
     return (
-      <div className="formWrapper">
-        <ul>
-          <li>Food: {food.amount}</li>
-          <li>
-            {Generation(food.generation)}
-            {food.generation} / minute
-          </li>
-        </ul>
-        <ul>
-          <li>Gold: {gold.amount}</li>
-          <li>
-            {Generation(gold.generation)}
-            {gold.generation} / minute
-          </li>
-        </ul>
+      <div className="resources">
+        <div className="building farm">
+          <img src={farm}></img>
+        </div>
+        <div className="text food">
+          {food.amount} <img className="bread" src={bread}></img>
+        </div>
+        {Generation(food, 'foodgen')}
+
+        <div className="building mine">
+          <img src={mine}></img>
+        </div>
+        <div className="text gold">
+          {gold.amount}
+          <img className="coins" src={coin}></img>
+        </div>
+        {Generation(gold, 'goldsgen')}
       </div>
     );
   }
