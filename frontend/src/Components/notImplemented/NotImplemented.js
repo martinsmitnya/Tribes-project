@@ -1,5 +1,5 @@
 import './NotImplemented.css';
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import React from 'react';
 
 
@@ -14,9 +14,9 @@ const NotImplemented = () => {
   return ( 
     
     <div className="container">
-      <p>Not Implemented yet.</p>
+      <p>Not implemented yet!</p>
      <Link to="/login"> 
-      <button onClick={handleClick} className="redirect" >Go home!</button>
+      <button onClick={handleClick} className="redirect" >Let's go home!</button>
       </Link> 
     </div>
    );
