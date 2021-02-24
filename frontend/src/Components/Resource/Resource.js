@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import '../Login/LoginForm.css';
 
 const port = process.env.PORT;
 console.log(process.env);
@@ -23,20 +24,34 @@ function Resources() {
     fetchResources();
   }, [user]);
 
+  function Generation(generation) {
+    if (generation > 0) {
+      return '+';
+    } else if (generation < 0) {
+      return '-';
+    }
+  }
+
   if (error) {
     return <div> Error: {error.message} </div>;
   } else if (!isLoaded) {
     return <div> Loading... </div>;
   } else {
     return (
-      <div>
+      <div class="formWrapper">
         <ul>
           <li>Food: {food.amount}</li>
-          <li>+{food.generation} / minute</li>
+          <li>
+            {Generation(food.generation)}
+            {food.generation} / minute
+          </li>
         </ul>
         <ul>
           <li>Gold: {gold.amount}</li>
-          <li>+{gold.generation} / minute</li>
+          <li>
+            {Generation(gold.generation)}
+            {gold.generation} / minute
+          </li>
         </ul>
       </div>
     );
