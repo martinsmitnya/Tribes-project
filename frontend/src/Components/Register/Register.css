@@ -1,0 +1,34 @@
+.mainContent{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 40px;
+  }
+  
+  .MainTitle{
+    border: 1px dotted black;
+  }
+  .MainTitle h1 {
+    font-size: 36px;
+  }
+  
+  .formWrapper {
+    border: 1px solid black;
+    height: 250px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  
+  .formWrapper form{
+    width: 95%;
+  }
+  
+  .formInput{
+    width: 100%;
+    padding: 20px 0;
+    margin: 20px 0;
+  }
