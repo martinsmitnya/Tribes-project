@@ -1,14 +1,20 @@
 import React from 'react';
 import NotImplemented from './components/notImplemented/NotImplemented';
-import { BrowserRouter as Router} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 
 
 function App() {
   return (
     <Router>
-      <NotImplemented />
-    </Router>
+      <div className="App">
+        <Switch>
+          <Route path="/">
+            <NotImplemented />
+          </Route>
+        </Switch>
+      </div>
+    </Router> 
   );
 }
 
