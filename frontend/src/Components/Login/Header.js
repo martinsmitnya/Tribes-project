@@ -8,10 +8,10 @@ function Header() {
 
   return (
     <div className="Header">
-      <div class="navbarWrapper">
+      <div className="navbarWrapper">
         <h2>Tribes of Gymnocercus</h2>
-        <div class="headerButtonsWraper">
-          <ul class="headerButtons">
+        <div className="headerButtonsWraper">
+          <ul className="headerButtons">
             <li>
               <button>Login</button>
             </li>
