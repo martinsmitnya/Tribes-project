@@ -7,7 +7,6 @@ const NotImplemented = () => {
  
   const handleClick = () => {
     localStorage.removeItem('token');
-    //egészet clearery
    // window.localStorage.clear();
   }
 
@@ -15,8 +14,8 @@ const NotImplemented = () => {
     
     <div className="container">
       <p>Not implemented yet!</p>
-     <Link to="/login"> 
-      <button onClick={handleClick} className="redirect" >Let's go home!</button>
+      <Link to="/login"> 
+        <button onClick={handleClick} className="redirect" >Let's go home!</button>
       </Link> 
     </div>
    );
