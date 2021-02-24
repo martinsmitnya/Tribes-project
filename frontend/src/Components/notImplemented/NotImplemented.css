@@ -1,0 +1,26 @@
+.container {
+  height: 50vh;
+  width: 50vh;
+  margin: 150px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  background-color:rgba(100, 100, 100, 0.4);
+  
+}
+
+.redirect {
+  font-size: 1.2rem;
+  background-color: rgb(101, 170, 42);
+  border: none;
+  color: white;
+  outline: none;
+  padding: 10px;
+  margin: 20px;
+}
+
+.redirect:hover {
+  background-color: rgb(0, 150, 130);
+}
