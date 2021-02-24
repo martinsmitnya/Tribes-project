@@ -15,7 +15,7 @@ function Register() {
       username: username,
       passwordhash: passwordhash,
     };
-    fetch('http://localhost:8080/register', {
+    fetch(process.env.REACT_APP_PORT + '/register', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(myRequestObject),
@@ -49,17 +49,17 @@ function Register() {
 
   return (
     <div className="Login">
-      <div class="mainContent">
-        <div class="MainTitle">
+      <div className="mainContent">
+        <div className="MainTitle">
           <h1>Tribes of Gymnocercus</h1>
         </div>
 
-        <div class="formWrapper">
+        <div className="formWrapper">
           <form onSubmit={handleSubmit}>
             <label htmlFor="username">
               <input
                 name="username"
-                class="formInput"
+                className="formInput"
                 type="text"
                 onChange={handleUsernameChange}
               />
@@ -67,12 +67,12 @@ function Register() {
             <label htmlFor="passwordhash">
               <input
                 name="passwordhash"
-                class="formInput"
+                className="formInput"
                 type="password"
                 onChange={handlePasswordChange}
               />
             </label>
-            <div class="errorMessageWrapper">
+            <div className="errorMessageWrapper">
               {errorMessage && (
                 <div>
                   <p>{errorMessage}</p>

@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../Login/LoginForm.css';
 
-const port = process.env.PORT;
-console.log(process.env);
-console.log(port);
-
 function Resources() {
   const [food, setFood] = useState(null);
   const [gold, setGold] = useState(null);
@@ -33,9 +29,9 @@ function Resources() {
   }
 
   if (error) {
-    return <div> Error: {error.message} </div>;
+    return <div className="formWrapper"> Error: {error.message} </div>;
   } else if (!isLoaded) {
-    return <div> Loading... </div>;
+    return <div className="formWrapper"> Loading... </div>;
   } else {
     return (
       <div className="formWrapper">
