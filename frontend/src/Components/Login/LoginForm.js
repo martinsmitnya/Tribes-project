@@ -7,7 +7,7 @@ function LoginForm() {
   const [errorMessage, setErrorMessage] = useState('');
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
-  useEffect( ()=> {}, [errorMessage])
+  useEffect(() => { }, [errorMessage])
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -19,7 +19,7 @@ function LoginForm() {
       "username": userName,
       "password": password
     })
-    
+
     fetch('http://localhost:8080/api/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -36,12 +36,12 @@ function LoginForm() {
         }
       })
       .catch(error => {
-        setErrorMessage(() => `${error}`); 
+        setErrorMessage(() => `${error}`);
         console.log(error);
       })
   }
 
-  
+
 
   function handleUsernameChange(event) {
     let container = event.target.value;
@@ -58,27 +58,22 @@ function LoginForm() {
 
   return (
     <div className="Login">
-
-      <div className='mainContent'>
-
-        <div className='formWrapper'>
-          <form onSubmit={handleSubmit}>
-
-            <div className='inputWrapper'>
-              <label htmlFor='username'>
-                <input name='username' className='formInput' type='text' onChange={handleUsernameChange} />
-              </label>
-              <label htmlFor='password'>
-                <input name='password' className='formInput' type='password' onChange={handlePasswordChange} />
-              </label>
-              <div >{errorMessage && <div className='errorMessageWrapper'><p>{errorMessage}</p><img src={oopsErrorIcon} alt='oopsErrorIcon' /> </div>}</div>
-            </div>
-            <button className='loginSubmitButton'>Login</button>
-          </form>
-        </div>
+      <div className='formWrapper'>
+        <form onSubmit={handleSubmit}>
+          <div className='inputWrapper'>
+            <label htmlFor='username'>
+              <input name='username' className='formInput' type='text' onChange={handleUsernameChange} />
+            </label>
+            <label htmlFor='password'>
+              <input name='password' className='formInput' type='password' onChange={handlePasswordChange} />
+            </label>
+            <div >{errorMessage && <div className='errorMessageWrapper'><p>{errorMessage}</p><img src={oopsErrorIcon} alt='oopsErrorIcon' /> </div>}</div>
+          </div>
+          <button className='loginSubmitButton'>Login</button>
+        </form>
       </div>
-
     </div>
+
   );
 }
 
