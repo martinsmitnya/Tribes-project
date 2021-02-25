@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './LoginForm.css';
-const loginErrorIcon = '../../../../docs/assets/oops.png'
+import oopsErrorIcon from '../../assets/oops.png'
+
 function LoginForm() {
   const [errorMessage, setErrorMessage] = useState('');
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
-
+  useEffect( ()=> {}, [errorMessage])
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -23,7 +24,7 @@ function LoginForm() {
       body: { myRequestObject }
     })
       .then(response => response.json()).then(data => {
-        if (data.status !== 'ok') {
+        if (data.status !== 200) {
           setErrorMessage(() => data.error)
           return
         } else {
@@ -31,8 +32,10 @@ function LoginForm() {
           //REDIRECT TO MAIN PAGE       location.replace("http://localhost:3000/")
         }
       })
-      .catch(error => console.log(error))
+      .catch(error => {setErrorMessage(() => `${error}`); console.log(error)})
   }
+
+  
 
   function handleUsernameChange(event) {
     let container = event.target.value;
@@ -65,7 +68,7 @@ function LoginForm() {
               <label htmlFor='password'>
                 <input name='password' className='formInput' type='password' onChange={handlePasswordChange} />
               </label>
-              <div >{errorMessage && <div className='errorMessageWrapper'><p>{errorMessage}</p><img src={loginErrorIcon} alt='loginErrorWarning' /> </div>}</div>
+              <div >{errorMessage && <div className='errorMessageWrapper'><p>{errorMessage}</p><img src={oopsErrorIcon} alt='oopsErrorIcon' /> </div>}</div>
             </div>
             <button className='loginSubmitButton'>Login</button>
           </form>

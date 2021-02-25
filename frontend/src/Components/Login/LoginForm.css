@@ -73,6 +73,12 @@
   display: flex;
   justify-content: space-between;
 }
+.errorMessageWrapper img{
+  padding: 5px;
+  margin: 0;
+  background-color: rgba(0, 0, 0, 0);
+  height: 28px;
+}
 
 .loginSubmitButton{
   color: white;

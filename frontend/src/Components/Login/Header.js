@@ -4,7 +4,7 @@ function Header() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    //Fetch comes here
+    console.log('hello I was clicked')
 
   }
 
@@ -17,8 +17,8 @@ function Header() {
         <h2>Tribes of Gymnocercus</h2>
         <div className='headerButtonsWraper'>
           <ul className='headerButtons'>
-            <li><button>Login</button></li>
-            <li><button>Register</button></li>
+            <li><button onClick={handleSubmit}>Login</button></li>
+            <li><button onClick={handleSubmit}>Register</button></li>
           </ul>
         </div>
       </div>
