@@ -15,8 +15,13 @@ function Resources() {
   const fetchResources = async () => {
     const call = await fetch(`${process.env.REACT_APP_PORT}/kingdom/resource`);
     const result = await call.json();
-    setFood(result[0]);
-    setGold(result[1]);
+    if (call.ok) {
+      console.log(result);
+      setFood(result[0]);
+      setGold(result[1]);
+    } else {
+      setError(result);
+    }
     setIsLoaded(true);
   };
 
