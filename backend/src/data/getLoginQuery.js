@@ -1,1 +1,0 @@
-export const getLoginQuery = 'GET * FROM [tablename];';
