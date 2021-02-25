@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './LoginForm.css';
 import oopsErrorIcon from '../../assets/oops.png'
 
+
 function LoginForm() {
   const [errorMessage, setErrorMessage] = useState('');
   const [userName, setUserName] = useState('');
@@ -14,25 +15,30 @@ function LoginForm() {
       setErrorMessage(() => 'All the input fields are required.')
     }
 
-    let myRequestObject = {
+    let myRequestObject = JSON.stringify({
       "username": userName,
       "password": password
-    }
-    fetch('http://localhost:8080/login', {
+    })
+    
+    fetch('http://localhost:8080/api/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: { myRequestObject }
+      body: myRequestObject
     })
       .then(response => response.json()).then(data => {
         if (data.status !== 200) {
           setErrorMessage(() => data.error)
           return
         } else {
+          //Set token and redirect
           localStorage.setItem('token', data.token);
-          //REDIRECT TO MAIN PAGE       location.replace("http://localhost:3000/")
+          window.location.replace('http://localhost:3000/')
         }
       })
-      .catch(error => {setErrorMessage(() => `${error}`); console.log(error)})
+      .catch(error => {
+        setErrorMessage(() => `${error}`); 
+        console.log(error);
+      })
   }
 
   
@@ -54,9 +60,6 @@ function LoginForm() {
     <div className="Login">
 
       <div className='mainContent'>
-        <div className='MainTitle'>
-          <h1>Tribes of Gymnocercus</h1>
-        </div>
 
         <div className='formWrapper'>
           <form onSubmit={handleSubmit}>
