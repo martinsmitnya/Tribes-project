@@ -1,5 +1,8 @@
 import { db } from '../data/connection';
 import { getLoginQuery } from '../data/getLoginQuery'
+const jwt = require('jsonwebtoken');
+
+const privateKey = 'secretkeycode'
 
 export const loginTokenCreator = {
 
@@ -19,8 +22,8 @@ export const loginTokenCreator = {
         status: 400,
         data: { 'error': 'All fields are required.' }
       }
-    } else if (requestBody.username && requestBody.password) {/*I need to setup database with proper table and implenent tokenization*/
-      
+    } else if (requestBody.username && requestBody.password) { /*When username and pw is here*/
+      //query results saved to queryArray
       let queryResults ={};
       try {
         queryResults = await db.query(getLoginQuery);
@@ -28,54 +31,24 @@ export const loginTokenCreator = {
         console.log(error)
       }
       let queryArray = queryResults.results;
-      
-      console.log('Queryarray is: ', queryArray[0].username, queryArray[0].passwordhash)
+      //Check the user or say its not good
+      for (let i = 0; i < queryArray.length; i++) {
+        if (queryArray[i].username === requestBody.username && queryArray[i].passwordhash === requestBody.password) {
 
-      // for (let i = 0; i < queryArray.length; i++) {
-      //   if (queryArray[i].username === requestBody.username && queryArray[i].password === requestBody.password) {
-      //     //return token and staff
-      //     //return token and staff
-      //     //return token and staff
-      //     //return token and staff
-      //   } else {
-      //     return {
-      //       status: 406,
-      //       data: { 'error': 'Username or password is incorrect.' }
-      //     }
-      //   }
-      // }
+         //Generate JWT token
+         let token = jwt.sign({ 'username': queryArray[i].username, 'password': queryArray[i].passwordhash}, privateKey);
+         
+         return { status: 200, data: {'status': 200,'token': token} }
+        } else {
+          return {
+            status: 406,
+            data: { 'error': 'Username or password is incorrect.' }
+          }
+        }
+      }
 
-
-
-
-
-
-
-
-
-
-
-
-    }//I need to setup database with proper table and implenent tokenization
+    } //query with username, and pw ended
 
   }
 
 }
-
-
-//conn.query(getLoginQuery)
-//return await {'Username': requestBody.username, 'password': requestBody.password};
-
-
-// try {
-//   return {
-//     status: 200, 
-//     data: {'Username': requestBody.username, 'password': requestBody.password} 
-//   }
-
-// }catch(error){
-//   return {
-//     status: 500, 
-//     data: {'error': 'Internal database error'} 
-//   }
-// }
