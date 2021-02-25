@@ -14,14 +14,10 @@ function Resources() {
 
   const fetchResources = async () => {
     const call = await fetch(`${process.env.REACT_APP_PORT}/kingdom/resource`);
-    const response = await call.json();
+    const result = await call.json();
+    setFood(result[0]);
+    setGold(result[1]);
     setIsLoaded(true);
-    if (response.status === 200) {
-      setFood(response[0]);
-      setGold(response[1]);
-    } else {
-      setError(response.text());
-    }
   };
 
   useEffect(() => {
