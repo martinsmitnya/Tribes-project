@@ -30,6 +30,9 @@ function Update(input) {
     if (amount != element.amount) {
       element.updated_at = currentDate;
     }
+    if (element.amount < 0) {
+      element.amount = 0;
+    }
 
     output.push(element);
   });
