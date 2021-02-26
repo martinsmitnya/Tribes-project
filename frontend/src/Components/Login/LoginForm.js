@@ -20,7 +20,6 @@ function LoginForm() {
         "username": userName,
         "password": password
       })
-      console.log(process.env.REACT_APP_PORT)
       fetch(`${process.env.REACT_APP_PORT}/api/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -32,6 +31,7 @@ function LoginForm() {
             return
           } else {
             //Set token and redirect
+            setErrorMessage(() => ``);
             localStorage.setItem('token', data.token);
             window.location.replace('http://localhost:3000/')
           }
