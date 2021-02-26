@@ -47,9 +47,6 @@ export const loginTokenCreator = {
         return { status: 200, data: { 'status': 200, 'token': token } }
       }
 
-
-
-
     } //query with username, and pw ended
 
   }
