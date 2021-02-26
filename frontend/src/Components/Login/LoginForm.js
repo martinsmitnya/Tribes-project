@@ -1,44 +1,51 @@
 import React, { useEffect, useState } from 'react';
 import './LoginForm.css';
 import oopsErrorIcon from '../../assets/oops.png'
+// require('dotenv').config()
 
 
 function LoginForm() {
   const [errorMessage, setErrorMessage] = useState('');
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
-  useEffect(() => { }, [errorMessage])
+  useEffect(() => { }, [errorMessage]);
+  useEffect(() => { setErrorMessage(() => ``); }, [userName, password]);
 
   function handleSubmit(event) {
     event.preventDefault();
     if (password === '' || userName === '') {
       setErrorMessage(() => 'All the input fields are required.')
+    }else{
+      let myRequestObject = JSON.stringify({
+        "username": userName,
+        "password": password
+      })
+      console.log(process.env.REACT_APP_PORT)
+      fetch(`${process.env.REACT_APP_PORT}/api/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: myRequestObject
+      })
+        .then(response => response.json()).then(data => {
+          if (data.status !== 200) {
+            setErrorMessage(() => data.error)
+            return
+          } else {
+            //Set token and redirect
+            localStorage.setItem('token', data.token);
+            window.location.replace('http://localhost:3000/')
+          }
+        })
+        .catch(error => {
+          setErrorMessage(() => `${error}`);
+          console.log(error);
+        })
+
+
+
     }
 
-    let myRequestObject = JSON.stringify({
-      "username": userName,
-      "password": password
-    })
 
-    fetch('http://localhost:8080/api/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: myRequestObject
-    })
-      .then(response => response.json()).then(data => {
-        if (data.status !== 200) {
-          setErrorMessage(() => data.error)
-          return
-        } else {
-          //Set token and redirect
-          localStorage.setItem('token', data.token);
-          window.location.replace('http://localhost:3000/')
-        }
-      })
-      .catch(error => {
-        setErrorMessage(() => `${error}`);
-        console.log(error);
-      })
   }
 
 
@@ -46,13 +53,13 @@ function LoginForm() {
   function handleUsernameChange(event) {
     let container = event.target.value;
     setUserName(() => container)
-    console.log('Username: ' + userName)
+    // console.log('Username: ' + userName)
 
   }
   function handlePasswordChange(event) {
     let container = event.target.value;
     setPassword(() => container)
-    console.log('Password: ' + password)
+    // console.log('Password: ' + password)
   }
 
 
