@@ -33,18 +33,21 @@ export const loginTokenCreator = {
       let queryArray = queryResults.results;
       //Check the user or say its not good
 
-      if (queryArray[0].username === requestBody.username && queryArray[0].passwordhash === requestBody.password) {
-
-        //Generate JWT token
-        let token = jwt.sign({ 'username': queryArray[0].username, 'password': queryArray[0].passwordhash }, privateKey);
-
-        return { status: 200, data: { 'status': 200, 'token': token } }
-      } else {
+      if (queryArray.length < 1) {
         return {
           status: 406,
           data: { 'status': 406, 'error': 'Username or password is incorrect.' }
         }
+        
+      } else if (queryArray[0].username === requestBody.username && queryArray[0].passwordhash === requestBody.password) {
+        
+        //Generate JWT token
+        let token = jwt.sign({ 'username': queryArray[0].username, 'password': queryArray[0].passwordhash }, privateKey);
+
+        return { status: 200, data: { 'status': 200, 'token': token } }
       }
+
+
 
 
     } //query with username, and pw ended
