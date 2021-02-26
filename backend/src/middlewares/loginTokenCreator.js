@@ -42,7 +42,8 @@ export const loginTokenCreator = {
       } else if (queryArray[0].username === requestBody.username && queryArray[0].passwordhash === requestBody.password) {
         
         //Generate JWT token
-        let token = jwt.sign({ 'username': queryArray[0].username, 'password': queryArray[0].passwordhash }, privateKey);
+        let token = jwt.sign({ 'userid': queryArray[0].user_id}, privateKey);
+        console.log(queryArray[0].user_id)
 
         return { status: 200, data: { 'status': 200, 'token': token } }
       }
