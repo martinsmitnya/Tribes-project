@@ -7,6 +7,7 @@ import Resources from './components/resource/Resource';
 
 ReactDOM.render(
   <React.StrictMode>
+    <App />
     <Resources />
   </React.StrictMode>,
   document.getElementById('root')
