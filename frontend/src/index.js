@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import LoginPage from './Components/Login/LoginPage';
+import LoginPage from './components/login/LoginPage';
 
 ReactDOM.render(
   <React.StrictMode>
