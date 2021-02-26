@@ -10,42 +10,42 @@ export const loginTokenCreator = {
     if (requestBody.username && !requestBody.password) {
       return {
         status: 400,
-        data: { 'error': 'Password is required.' }
+        data: { 'status': 400, 'error': 'Password is required.' }
       }
     } else if (!requestBody.username && requestBody.password) {
       return {
         status: 400,
-        data: { 'error': 'Username is required.' }
+        data: { 'status': 400, 'error': 'Username is required.' }
       }
     } else if (!requestBody.username && !requestBody.password) {
       return {
         status: 400,
-        data: { 'error': 'All fields are required.' }
+        data: { 'status': 400, 'error': 'All fields are required.' }
       }
     } else if (requestBody.username && requestBody.password) { /*When username and pw is here*/
       //query results saved to queryArray
-      let queryResults ={};
+      let queryResults = {};
       try {
-        queryResults = await db.query(getLoginQuery);
-      }catch (error) {
+        queryResults = await db.query(getLoginQuery, [requestBody.username]);
+      } catch (error) {
         console.log(error)
       }
       let queryArray = queryResults.results;
       //Check the user or say its not good
-      for (let i = 0; i < queryArray.length; i++) {
-        if (queryArray[i].username === requestBody.username && queryArray[i].passwordhash === requestBody.password) {
 
-         //Generate JWT token
-         let token = jwt.sign({ 'username': queryArray[i].username, 'password': queryArray[i].passwordhash}, privateKey);
-         
-         return { status: 200, data: {'status': 200,'token': token} }
-        } else {
-          return {
-            status: 406,
-            data: { 'error': 'Username or password is incorrect.' }
-          }
+      if (queryArray[0].username === requestBody.username && queryArray[0].passwordhash === requestBody.password) {
+
+        //Generate JWT token
+        let token = jwt.sign({ 'username': queryArray[0].username, 'password': queryArray[0].passwordhash }, privateKey);
+
+        return { status: 200, data: { 'status': 200, 'token': token } }
+      } else {
+        return {
+          status: 406,
+          data: { 'status': 406, 'error': 'Username or password is incorrect.' }
         }
       }
+
 
     } //query with username, and pw ended
 

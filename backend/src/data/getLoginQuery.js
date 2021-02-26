@@ -1,1 +1,1 @@
-export const getLoginQuery = 'SELECT * FROM users;';
+export const getLoginQuery = 'SELECT * FROM users WHERE username =?;';
