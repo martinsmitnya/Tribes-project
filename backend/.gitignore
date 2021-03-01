@@ -5,9 +5,3 @@ logs/
 yarn-error.log
 dist
 coverage
-.prettiarc
-.yarn/*
-!.yarn/releases
-!.yarn/plugins
-!.yarn/sdks
-!.yarn/versions
