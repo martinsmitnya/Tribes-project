@@ -5,8 +5,13 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: rgb(32, 29, 29);
+
+
+  /* out */
+  background-image: url('./background/bg3-01.png');
    /* out */
+
+   
 }
 
 code {
