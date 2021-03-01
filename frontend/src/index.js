@@ -3,11 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import LoginPage from './components/login/LoginPage';
+import Resources from './components/resource/Resource';
+
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <LoginPage />
+    <App />
+    <Resources />
   </React.StrictMode>,
   document.getElementById('root')
 );
