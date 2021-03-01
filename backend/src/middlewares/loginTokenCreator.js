@@ -26,7 +26,7 @@ export const loginTokenCreator = {
       //query results saved to queryArray
       let queryResults = {};
       try {
-        queryResults = await db.query(getLoginQuery, [requestBody.username]);
+        queryResults = await db.query(getLoginQuery, [requestBody.username, requestBody.password]);
       } catch (error) {
         console.log(error)
       }
