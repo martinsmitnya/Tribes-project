@@ -1,0 +1,13 @@
+node_modules/
+output/
+logs/
+.env
+yarn-error.log
+dist
+coverage
+.prettiarc
+.yarn/*
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
