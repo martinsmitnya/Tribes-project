@@ -7,6 +7,7 @@ const Form = () => {
     const [errorMessage, setErrorMessage] = useState('');
     const [userName, setUserName] = useState('');
     const [passwordHash, setPasswordHash] = useState('');
+    const [kingdomName, setKingdomName] = useState('');
 
     function handleUsernameChange(event) {
         setUserName(event.target.value.trim());
@@ -16,6 +17,9 @@ const Form = () => {
         setPasswordHash(event.target.value);
     }
  
+    function handleKingdomNameChange(event) {
+        setKingdomName(event.target.value);
+    }
     function handleSubmit(event) {
         event.preventDefault();
         if (passwordHash === '' || userName === '') {
@@ -30,9 +34,13 @@ const Form = () => {
             setPasswordHash(passwordHash);
             return;
         }
+        if (kingdomName === '') { //If '' => username's kingom
+            setKingdomName(`${userName}'s kingdom`);
+        }
         let myRequestObject = {
             username: userName,
             passwordhash: passwordHash,
+            kingdom_name: kingdomName,
         };
         fetch(`${process.env.REACT_APP_PORT}/register`, {
             method: 'POST',
@@ -45,6 +53,7 @@ const Form = () => {
                 setErrorMessage(response.error);
                 setUserName(userName);
                 setPasswordHash(passwordHash);
+                setKingdomName(kingdomName);
                 return;
             }
             let inputs = document.querySelectorAll("input");
@@ -74,6 +83,7 @@ const Form = () => {
             />
             <br />
             <InputField
+              onChange={handleKingdomNameChange}
               placeholder="Kingdom"
               name="kingdom"
               id="kingdom"
