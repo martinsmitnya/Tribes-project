@@ -6,7 +6,7 @@
   width: 450px;
 }
 
-.formWrapper form{
+.formWrapper form {
   width: 100%;
   height: 100%;
   display: flex;
@@ -14,13 +14,13 @@
   justify-content: space-between;
 }
 
-.inputWrapper{
+.inputWrapper {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
 }
 
-.formInput{
+.formInput {
   width: 100%;
   padding: 20px 0;
   margin: 0;
@@ -32,8 +32,8 @@
   border-right: none;
   border-bottom: 4px solid green;
 }
-.formInput:focus{
-  outline:none;
+.formInput:focus {
+  outline: none;
   background-color: rgba(0, 0, 0, 0.1);
 }
 
@@ -43,7 +43,7 @@
   display: flex;
   justify-content: space-between;
 }
-.errorMessageWrapper p{
+.errorMessageWrapper p {
   padding: 0;
   margin: 0;
   background-color: rgba(0, 0, 0, 0);
@@ -53,14 +53,14 @@
   display: flex;
   justify-content: space-between;
 }
-.errorMessageWrapper img{
+.errorMessageWrapper img {
   padding: 5px;
   margin: 0;
   background-color: rgba(0, 0, 0, 0);
   height: 28px;
 }
 
-.loginSubmitButton{
+.loginSubmitButton {
   color: white;
   background: yellowgreen;
   border: none;
@@ -69,11 +69,11 @@
   padding: 10px;
   width: 25%;
   align-self: flex-end;
-  outline:none;
+  outline: none;
 }
-.loginSubmitButton:active{
-  outline:none;
+.loginSubmitButton:active {
+  outline: none;
   background: rgb(130, 170, 50);
 }
 
-/*Form from here*//*Form from here*//*Form from here*/
+/*Form from here*/ /*Form from here*/ /*Form from here*/

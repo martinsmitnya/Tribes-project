@@ -3,16 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import RegisterPage from './components/register/RegisterPage';
-import Login from './components/login/LoginForm';
-import Resources from './components/resource/Resource';
 
 ReactDOM.render(
   <React.StrictMode>
-    <RegisterPage />
-    <Login />
     <App />
-    <Resources />
   </React.StrictMode>,
   document.getElementById('root')
 );
