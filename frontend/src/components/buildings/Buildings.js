@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './Buildings.css';
 import farm from '../../icons/farm.png';
 import mine from '../../icons/mine.png';
 import townhall from '../../icons/townhall1.png';
@@ -51,12 +52,12 @@ function Buildings() {
   }
 
   if (error) {
-    return <div className="resources"> Error: {error.message} </div>;
+    return <div className="buildings"> Error: {error.message} </div>;
   } else if (!isLoaded) {
-    return <div className="resources"> Loading... </div>;
+    return <div className="buildings"> Loading... </div>;
   } else {
     return (
-      <div className="resources">
+      <div className="buildings">
         {buildings.map(element => {
           console.log(element);
           return <img src={getImage(element.type)}></img>;
