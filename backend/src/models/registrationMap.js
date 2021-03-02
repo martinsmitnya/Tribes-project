@@ -3,7 +3,6 @@ import { getKingdomsInfoQuery } from '../data/getKingdomsInfoQuery';
 
 export async function getKingdomsInfo() {
   try {
-    // const queryResult = {Objectname: "Józsika"}
     const queryResult = await db.query(getKingdomsInfoQuery);
     // return queryResult.results;
     console.log(queryResult.results)
