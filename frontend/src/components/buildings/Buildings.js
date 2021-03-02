@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './Buildings.css';
 import farm from '../../icons/farm.png';
 import mine from '../../icons/mine.png';
-import townhall from '../../icons/townhall1.png';
+import townhall from '../../icons/townhall_1.png';
 import academy from '../../icons/academy.png';
 
 function Buildings() {
@@ -60,7 +60,14 @@ function Buildings() {
       <div className="buildings">
         {buildings.map(element => {
           console.log(element);
-          return <img src={getImage(element.type)}></img>;
+          return (
+            <div>
+              <img src={getImage(element.type)} alt={element.type}></img>
+              <label className="text">
+                {element.type} Level {element.level}
+              </label>
+            </div>
+          );
         })}
       </div>
     );

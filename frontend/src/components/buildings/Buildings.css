@@ -3,69 +3,24 @@
   padding: 20px;
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 3px;
-  height: 500px;
+  height: auto;
   width: 1000px;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
-  grid-template-columns: 1fr 3fr;
+  gap: 20px;
+  grid-auto-rows: auto;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-areas: 'farm food' 'farm foodgen' 'mine golds' 'mine goldsgen';
   font-weight: bold;
+  text-align: center;
 }
 
-.bread {
-  padding-top: 10px;
-  width: 35px;
-  height: 20px;
-}
-
-.coins {
-  padding-top: 5px;
-  width: 30px;
-  height: 30px;
-}
-
-.food {
-  grid-area: food;
-  font-size: 180%;
-}
-
-.gold {
-  grid-area: golds;
-  font-size: 180%;
-}
-
-.building {
-  padding-right: 15px;
-  height: 50px;
-  width: 50px;
-}
-
-.farm {
-  grid-area: farm;
-}
-
-.mine {
-  grid-area: mine;
-}
-
-.foodgen {
-  grid-area: foodgen;
-}
-
-.goldsgen {
-  grid-area: goldsgen;
+img {
+  height: 200px;
+  width: 200px;
 }
 
 .text {
-  grid-template-columns: 1fr 1fr;
-  display: grid;
-  color: rgb(107, 106, 106);
-  margin-bottom: -5px;
-}
-
-.pos {
-  color: rgb(64, 179, 64);
-}
-
-.neg {
-  color: rgb(245, 133, 6);
+  padding-left: 30%;
+  text-transform: capitalize;
+  font-size: 150%;
+  color: grey;
 }
