@@ -26,6 +26,10 @@ function Buildings() {
     setIsLoaded(true);
   };
 
+  useEffect(() => {
+    fetchResources();
+  }, [user]);
+
   function getImage(type) {
     if (type === 'farm') {
       return farm;
@@ -35,22 +39,6 @@ function Buildings() {
       return academy;
     } else if (type === 'mine') {
       return mine;
-    }
-  }
-
-  useEffect(() => {
-    fetchResources();
-  }, [user]);
-
-  function Generation(item, class_name) {
-    if (item.generation > 0) {
-      class_name = ' pos';
-      return <div className={class_name}>+{item.generation} / minute</div>;
-    } else if (item.generation < 0) {
-      class_name = ' neg';
-      return <div className={class_name}>{item.generation} / minute</div>;
-    } else {
-      return <div className={class_name}>{item.generation} / minute</div>;
     }
   }
 
