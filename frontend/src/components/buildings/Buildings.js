@@ -4,6 +4,9 @@ import farm from '../../icons/farm.png';
 import mine from '../../icons/mine.png';
 import townhall from '../../icons/townhall_1.png';
 import academy from '../../icons/academy.png';
+import addAcademy from '../../icons/addacademy.png';
+import addFarm from '../../icons/addfarm.png';
+import addMine from '../../icons/addmine.png';
 
 function Buildings() {
   const [buildings, setBuildings] = useState(null);
@@ -69,6 +72,18 @@ function Buildings() {
             </div>
           );
         })}
+        <div>
+          <img src={addFarm} alt="Add Farm"></img>
+          <label className="text">Add Farm</label>
+        </div>
+        <div>
+          <img src={addMine} alt="Add Mine"></img>
+          <label className="text">Add Mine</label>
+        </div>
+        <div>
+          <img src={addAcademy} alt="Add Academy"></img>
+          <label className="text">Add Academy</label>
+        </div>
       </div>
     );
   }
