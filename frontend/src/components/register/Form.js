@@ -36,6 +36,7 @@ const Form = () => {
         }
         if (kingdomName === '') { //If '' => username's kingom
             setKingdomName(`${userName}'s kingdom`);
+            return;
         }
         let myRequestObject = {
             username: userName,
