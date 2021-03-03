@@ -48,18 +48,18 @@ function Resources() {
   } else {
     return (
       <div className="resources">
-        <div className="building farm">
+        <div className="building farmR">
           <img src={farm} alt="farm"></img>
         </div>
-        <div className="text food">
+        <div className="textR food">
           {food.amount} <img className="bread" alt="bread" src={bread}></img>
         </div>
         {Generation(food, 'foodgen')}
 
         <div className="building mine">
-          <img src={mine} alt="mine"></img>
+          <img src={mine} alt="mineR"></img>
         </div>
-        <div className="text gold">
+        <div className="textR gold">
           {gold.amount}
           <img className="coins" alt="coin" src={coin}></img>
         </div>

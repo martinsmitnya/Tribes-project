@@ -11,6 +11,9 @@
   grid-template-areas: 'farm food' 'farm foodgen' 'mine golds' 'mine goldsgen';
   font-weight: bold;
   text-align: center;
+  margin: auto;
+  width: 50%;
+  padding: 10px;
 }
 
 img {
