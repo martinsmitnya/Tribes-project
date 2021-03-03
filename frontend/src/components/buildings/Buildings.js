@@ -53,24 +53,29 @@ function Buildings() {
           console.log(element);
           return (
             <div>
-              <img src={getImage(element.type)} alt={element.type}></img>
-              <label className="text">
-                {element.type} Level {element.level}
+              <img
+                className="imgB"
+                src={getImage(element.type)}
+                alt={element.type}
+              ></img>
+              <label className="textB">
+                {element.type} <br />
+                Level {element.level}
               </label>
             </div>
           );
         })}
         <div>
-          <img src={addFarm} alt="Add Farm"></img>
-          <label className="text">Add Farm</label>
+          <img className="imgB" src={addFarm} alt="Add Farm"></img>
+          <label className="textB">Add Farm</label>
         </div>
         <div>
-          <img src={addMine} alt="Add Mine"></img>
-          <label className="text">Add Mine</label>
+          <img className="imgB" src={addMine} alt="Add Mine"></img>
+          <label className="textB">Add Mine</label>
         </div>
         <div>
-          <img src={addAcademy} alt="Add Academy"></img>
-          <label className="text">Add Academy</label>
+          <img className="imgB" src={addAcademy} alt="Add Academy"></img>
+          <label className="textB">Add Academy</label>
         </div>
       </div>
     );

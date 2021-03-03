@@ -13,13 +13,12 @@
   text-align: center;
 }
 
-img {
+.imgB {
   height: 200px;
   width: 200px;
 }
 
-.text {
-  padding-left: 30%;
+.textB {
   text-transform: capitalize;
   font-size: 150%;
   color: grey;
