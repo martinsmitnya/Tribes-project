@@ -6,7 +6,6 @@ export const registerController = {
       req.body.username,
       req.body.passwordhash,
       req.body.kingdom_name,
-      req.body.user_id //ez kell egyáltalán?
     );
     res.status(data.status).json(data);
   },
