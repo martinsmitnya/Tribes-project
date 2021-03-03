@@ -9,19 +9,25 @@ export async function registerNewUser(username, password, kingdom_name) {
     } else if (result.results.length === 0) {
       try {
         const insert = await db.query(`INSERT INTO users (username, passwordhash) VALUES (?,?);`, [username, password]);
+        //console.log(insert);
       }
       catch (err) {
         return { status: 401, error : 'Username and passwordhash not succesfully inserted'};
       }
       try {
         //let mostRecentUserId = await getUserId;
-        const array = db.query(getUserId);
-        console.log(array.results);
-        const add = await db.query(addKingdom, [kingdom_name, 38]);
+        const selectUserId = await db.query(getUserId);
+        //console.log(selectUserId.results);
+        const add = await db.query(addKingdom, [kingdom_name, selectUserId.results[0].user_id]);
+        //console.log(selectUserId.results[0])
+        //console.log(add.results.insertId);
+        export const inesertedId = (add.results.insertId);
+        //console.log(inesertedId);
+
       }
       catch (err) {
-        console.log(err);
-        console.log(db.query(getUserId).results);
+        //console.log(err);
+        //console.log(db.query(getUserId).results);
         return { status: 401, error : 'Kingdom not succesfully added'};
       }
       return { status: 200, data: 'Success!' };
