@@ -39,11 +39,11 @@
   width: 50px;
 }
 
-.farmR {
+.farm {
   grid-area: farm;
 }
 
-.mineR {
+.mine {
   grid-area: mine;
 }
 
@@ -55,7 +55,7 @@
   grid-area: goldsgen;
 }
 
-.textR {
+.text {
   grid-template-columns: 1fr 1fr;
   display: grid;
   color: rgb(107, 106, 106);

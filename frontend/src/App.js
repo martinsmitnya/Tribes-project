@@ -21,7 +21,6 @@ function App() {
             <Resources />
           </Route>
           <Route path="/buildings">
-            <Resources />
             <Buildings />
           </Route>
           <Route path="/">
