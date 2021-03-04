@@ -17,7 +17,7 @@ const Form = () => {
         setPasswordHash(event.target.value);
     }
  
-    function handleKingdomNameChange(event) { //Ez kell?
+    function handleKingdomNameChange(event) {
         setKingdomName(event.target.value);
     }
     function handleSubmit(event) {
@@ -31,10 +31,10 @@ const Form = () => {
         if (passwordHash.length < 8) {
             setErrorMessage('Password must be at least 8 characters!');
             setUserName(userName);
-            setPasswordHash(passwordHash); //miért kell mindent setelni?
+            setPasswordHash(passwordHash);
             return;
         }
-        if (kingdomName === '') { //If '' => username's kingom
+        if (kingdomName === '') {
             setKingdomName(`${userName}'s kingdom`);
             return;
         }
