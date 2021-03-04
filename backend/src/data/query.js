@@ -4,4 +4,4 @@ export const postResource =
 export const getBuilding =
   'SELECT building_id,type,level,hp,started_at,finished_at FROM buildings WHERE kingdomId=1;';
 export const postBuilding =
-  'INSERT INTO buildings (type,level,hp,started_at,finished) VALUES (?,1,?,?,?);';
+  'INSERT INTO buildings (type,level,hp,started_at,finished,kingdomId) VALUES (?,1,?,?,?,1);';
