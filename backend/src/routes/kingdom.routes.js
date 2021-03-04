@@ -8,6 +8,7 @@ router.use(cors());
 router.use(express.json());
 
 router.get('/buildings', buildingController.get);
+router.get('/buildings/newBuilding', buildingController.get);
 router.get('/resource', resourceController.get);
 
 export default router;
