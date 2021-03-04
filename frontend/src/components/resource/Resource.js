@@ -5,12 +5,12 @@ import mine from '../../icons/svg/buildings/mine.svg';
 import bread from '../../icons/better_bread.png';
 import coin from '../../icons/better_coin.png';
 
-function Resources() {
+function Resources(props) {
   const [food, setFood] = useState(null);
   const [gold, setGold] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState(null);
-  const [user, setUser] = useState(0);
+  const [user, setUser] = useState(props.value);
 
   const fetchResources = async () => {
     const call = await fetch(`${process.env.REACT_APP_PORT}/kingdom/resource`);
@@ -28,10 +28,6 @@ function Resources() {
   useEffect(() => {
     fetchResources();
   }, [user]);
-
-  function getGold1() {
-    return gold;
-  }
 
   function Generation(item, class_name) {
     if (item.generation > 0) {

@@ -1,10 +1,5 @@
 import { db } from '../data/connection';
-import {
-  postBuilding,
-  getResourceAmount,
-  reduceResourceAmount,
-  getResource,
-} from '../data/query';
+import { postBuilding, getResourceAmount } from '../data/query';
 import { updatedResource } from '../middlewares/resource_update';
 import { resource } from '../models/resource';
 
