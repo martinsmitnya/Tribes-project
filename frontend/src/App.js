@@ -17,6 +17,9 @@ function App() {
           <Route path="/register">
             <RegisterPage />
           </Route>
+          <Route path="/resource">
+            <Resources />
+          </Route>
           <Route path="/buildings">
             <Buildings />
           </Route>

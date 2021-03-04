@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Resources from '../resource/Resource';
 import './Buildings.css';
 import farm from '../../icons/farm.png';
 import mine from '../../icons/mine.png';
@@ -80,52 +79,49 @@ function Buildings() {
     return <div className="buildings"> Loading... </div>;
   } else {
     return (
-      <div>
-        <Resources value={buildingCount} />
-        <div className="buildings">
-          {buildings.map(element => {
-            console.log(element);
-            return (
-              <div>
-                <img
-                  className="imgB"
-                  src={getImage(element.type)}
-                  alt={element.type}
-                ></img>
-                <label className="textB">
-                  {element.type} <br />
-                  Level {element.level}
-                </label>
-              </div>
-            );
-          })}
-          <div>
-            <img
-              className="imgB"
-              src={addFarm}
-              alt="Add Farm"
-              onClick={() => postBuilding('farm')}
-            ></img>
-            <label className="textB">Add Farm</label>
-          </div>
-          <div>
-            <img
-              className="imgB"
-              src={addMine}
-              alt="Add Mine"
-              onClick={() => postBuilding('mine')}
-            ></img>
-            <label className="textB">Add Mine</label>
-          </div>
-          <div>
-            <img
-              className="imgB"
-              src={addAcademy}
-              alt="Add Academy"
-              onClick={() => postBuilding('academy')}
-            ></img>
-            <label className="textB">Add Academy</label>
-          </div>
+      <div className="buildings">
+        {buildings.map(element => {
+          console.log(element);
+          return (
+            <div>
+              <img
+                className="imgB"
+                src={getImage(element.type)}
+                alt={element.type}
+              ></img>
+              <label className="textB">
+                {element.type} <br />
+                Level {element.level}
+              </label>
+            </div>
+          );
+        })}
+        <div>
+          <img
+            className="imgB"
+            src={addFarm}
+            alt="Add Farm"
+            onClick={() => postBuilding('farm')}
+          ></img>
+          <label className="textB">Add Farm</label>
+        </div>
+        <div>
+          <img
+            className="imgB"
+            src={addMine}
+            alt="Add Mine"
+            onClick={() => postBuilding('mine')}
+          ></img>
+          <label className="textB">Add Mine</label>
+        </div>
+        <div>
+          <img
+            className="imgB"
+            src={addAcademy}
+            alt="Add Academy"
+            onClick={() => postBuilding('academy')}
+          ></img>
+          <label className="textB">Add Academy</label>
         </div>
       </div>
     );
