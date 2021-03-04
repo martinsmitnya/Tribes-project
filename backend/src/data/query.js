@@ -5,3 +5,6 @@ export const getBuilding =
   'SELECT building_id,type,level,hp,started_at,finished_at FROM buildings WHERE kingdomId=1;';
 export const postBuilding =
   'INSERT INTO buildings (type,level,hp,started_at,finished_at,kingdomId) VALUES (?,1,?,?,?,1);';
+export const getResourceAmount = 'SELECT amount FROM resources WHERE type=?';
+export const reduceResourceAmount =
+  'UPDATE resources SET amount=? WHERE type=? AND kingdomId=1;';

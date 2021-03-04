@@ -29,6 +29,10 @@ function Resources() {
     fetchResources();
   }, [user]);
 
+  function getGold1() {
+    return gold;
+  }
+
   function Generation(item, class_name) {
     if (item.generation > 0) {
       class_name = ' pos';

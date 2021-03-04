@@ -3,19 +3,19 @@ import { postResource } from '../data/query';
 
 export function updatedResource(resource) {
   let output = [];
-  resource.then(result => {
-    output = Update(result);
-    db.query(postResource, [
-      output[0].amount,
-      output[0].updated_at,
-      output[0].type,
-    ]);
-    db.query(postResource, [
-      output[1].amount,
-      output[1].updated_at,
-      output[1].type,
-    ]);
-  });
+
+  output = Update(resource);
+  db.query(postResource, [
+    output[0].amount,
+    output[0].updated_at,
+    output[0].type,
+  ]);
+  db.query(postResource, [
+    output[1].amount,
+    output[1].updated_at,
+    output[1].type,
+  ]);
+
   return resource;
 }
 

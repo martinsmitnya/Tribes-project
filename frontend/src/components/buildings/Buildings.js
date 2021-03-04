@@ -45,11 +45,11 @@ function Buildings() {
 
   function addBuilding(type) {
     if (type === 'farm') {
-      return { type: 'farm', hp: 100, end: 60 };
+      return { type: 'farm', hp: 100, end: 60, price: 100 };
     } else if (type === 'mine') {
-      return { type: 'mine', hp: 100, end: 60 };
+      return { type: 'mine', hp: 100, end: 60, price: 100 };
     } else if (type === 'academy') {
-      return { type: 'academy', hp: 150, end: 90 };
+      return { type: 'academy', hp: 150, end: 90, price: 150 };
     }
   }
 
@@ -65,6 +65,8 @@ function Buildings() {
       .then(result => {
         if (result.status === 200) {
           setBuildingCount(buildingCount + 1);
+        } else {
+          alert(result.error);
         }
       })
       .catch(err => console.log(err));
