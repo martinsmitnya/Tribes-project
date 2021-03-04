@@ -12,13 +12,14 @@ function Buildings() {
   const [buildings, setBuildings] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState(null);
-  const [user, setUser] = useState(0);
+  const [buildingCount, setBuildingCount] = useState(0);
 
-  const fetchResources = async () => {
+  const fetchBuildings = async () => {
     const call = await fetch(`${process.env.REACT_APP_PORT}/kingdom/buildings`);
     const result = await call.json();
     if (call.ok) {
       console.log(result);
+      setBuildingCount(result.length);
       setBuildings(result);
     } else {
       setError(result);
@@ -27,8 +28,8 @@ function Buildings() {
   };
 
   useEffect(() => {
-    fetchResources();
-  }, [user]);
+    fetchBuildings();
+  }, [buildingCount]);
 
   function getImage(type) {
     if (type === 'farm') {
@@ -40,6 +41,33 @@ function Buildings() {
     } else if (type === 'mine') {
       return mine;
     }
+  }
+
+  function addBuilding(type) {
+    if (type === 'farm') {
+      return { type: 'farm', hp: 100, end: 60 };
+    } else if (type === 'mine') {
+      return { type: 'mine', hp: 100, end: 60 };
+    } else if (type === 'academy') {
+      return { type: 'academy', hp: 150, end: 90 };
+    }
+  }
+
+  function postBuilding(type) {
+    const body = addBuilding(type);
+    console.log(body);
+    fetch(`${process.env.REACT_APP_PORT}/kingdom/buildings/newBuilding`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    })
+      .then(response => response.json())
+      .then(result => {
+        if (result.status === 200) {
+          setBuildingCount(buildingCount + 1);
+        }
+      })
+      .catch(err => console.log(err));
   }
 
   if (error) {
@@ -66,15 +94,30 @@ function Buildings() {
           );
         })}
         <div>
-          <img className="imgB" src={addFarm} alt="Add Farm"></img>
+          <img
+            className="imgB"
+            src={addFarm}
+            alt="Add Farm"
+            onClick={() => postBuilding('farm')}
+          ></img>
           <label className="textB">Add Farm</label>
         </div>
         <div>
-          <img className="imgB" src={addMine} alt="Add Mine"></img>
+          <img
+            className="imgB"
+            src={addMine}
+            alt="Add Mine"
+            onClick={() => postBuilding('mine')}
+          ></img>
           <label className="textB">Add Mine</label>
         </div>
         <div>
-          <img className="imgB" src={addAcademy} alt="Add Academy"></img>
+          <img
+            className="imgB"
+            src={addAcademy}
+            alt="Add Academy"
+            onClick={() => postBuilding('academy')}
+          ></img>
           <label className="textB">Add Academy</label>
         </div>
       </div>
