@@ -18,7 +18,7 @@ const Form = () => {
     }
  
     function handleKingdomNameChange(event) {
-        setKingdomName(event.target.value);
+        setKingdomName(event.target.value.trim());
     }
     function handleSubmit(event) {
         event.preventDefault();
@@ -38,7 +38,6 @@ const Form = () => {
             setKingdomName(`${userName}'s kingdom`);
             return;
         }
-
         let myRequestObject = {
             username: userName,
             passwordhash: passwordHash,
