@@ -1,7 +1,7 @@
 .resources {
   display: grid;
   padding: 20px;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.8);
   border-radius: 3px;
   height: 100px;
   width: 200px;
@@ -55,7 +55,7 @@
   grid-area: goldsgen;
 }
 
-.text {
+.textR {
   grid-template-columns: 1fr 1fr;
   display: grid;
   color: rgb(107, 106, 106);

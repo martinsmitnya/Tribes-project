@@ -1,0 +1,14 @@
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background: #049484;
+    color: white;
+}
+
+
+.RightButtonsContainer {
+    display: flex;
+    height: 100%;
+}

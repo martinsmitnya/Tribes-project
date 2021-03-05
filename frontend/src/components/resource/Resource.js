@@ -51,7 +51,7 @@ function Resources() {
         <div className="building farm">
           <img src={farm} alt="farm"></img>
         </div>
-        <div className="text food">
+        <div className="textR food">
           {food.amount} <img className="bread" alt="bread" src={bread}></img>
         </div>
         {Generation(food, 'foodgen')}
@@ -59,7 +59,7 @@ function Resources() {
         <div className="building mine">
           <img src={mine} alt="mine"></img>
         </div>
-        <div className="text gold">
+        <div className="textR gold">
           {gold.amount}
           <img className="coins" alt="coin" src={coin}></img>
         </div>
