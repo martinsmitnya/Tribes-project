@@ -1,5 +1,5 @@
 import { db } from '../data/connection';
-import { addKingdom, getUserId, getSameKingdomName } from '../data/addKindomQuery';
+import { addKingdom, getUserId, getSameKingdomName } from '../data/addKingdomQuery';
 
 export async function registerNewUser(username, password, kingdom_name) {
   try {
