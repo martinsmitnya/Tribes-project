@@ -65,7 +65,6 @@ function Buildings() {
       .then(result => {
         if (result.status === 200) {
           setBuildingCount(buildingCount + 1);
-          window.location.reload();
         } else {
           alert(result.error);
         }
