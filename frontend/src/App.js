@@ -5,7 +5,7 @@ import RegisterPage from './components/register/RegisterPage';
 import Login from './components/login/LoginForm';
 import Resources from './components/resource/Resource';
 import Buildings from './components/buildings/Buildings';
-import Settings  from './components/settings/Settings';
+import SettingsPage  from './components/settings/SettingsPage';
 
 function App() {
   return (
@@ -25,7 +25,7 @@ function App() {
             <Buildings />
           </Route>
           <Route path="/settings">
-            <Settings />
+            <SettingsPage />
           </Route>
           <Route path="/">
             <NotImplemented />
