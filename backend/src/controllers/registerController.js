@@ -7,7 +7,7 @@ export const registerController = {
     let data = await registerService.postRegister(
       req.body.username,
       encryptedPassword
-    );
+      );
     res.status(data.status).json(data);
   },
 };
