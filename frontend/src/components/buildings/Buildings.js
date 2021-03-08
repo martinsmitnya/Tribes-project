@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Fetch from '../fetch/Fetch';
 import './Buildings.css';
 import farm from '../../icons/farm.png';
 import mine from '../../icons/mine.png';
@@ -13,8 +14,9 @@ function Buildings() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState(null);
   const [buildingCount, setBuildingCount] = useState(0);
+  let getBuildings = Fetch('GET', '/kingdom/buildings', '', '');
 
-  const fetchBuildings = async () => {
+  /*const fetchBuildings = async () => {
     const call = await fetch(`${process.env.REACT_APP_PORT}/kingdom/buildings`);
     const result = await call.json();
     if (call.ok) {
@@ -25,10 +27,13 @@ function Buildings() {
       setError(result);
     }
     setIsLoaded(true);
-  };
+  };*/
 
   useEffect(() => {
-    fetchBuildings();
+    getBuildings.then(result => {
+      setBuildings(result);
+      setIsLoaded(true);
+    });
   }, [buildingCount]);
 
   function getImage(type) {
@@ -45,15 +50,21 @@ function Buildings() {
 
   function addBuilding(type) {
     if (type === 'farm') {
-      return { type: 'farm', hp: 100, end: 60, price: 100 };
+      let body = { type: 'farm', hp: 100, end: 60, price: 100 };
+      Fetch('POST', '/kingdom/buildings/newBuilding', body, '');
+      setBuildingCount(buildingCount + 1);
     } else if (type === 'mine') {
-      return { type: 'mine', hp: 100, end: 60, price: 100 };
+      let body = { type: 'mine', hp: 100, end: 60, price: 100 };
+      Fetch('POST', '/kingdom/buildings/newBuilding', body, '');
+      setBuildingCount(buildingCount + 1);
     } else if (type === 'academy') {
-      return { type: 'academy', hp: 150, end: 90, price: 150 };
+      let body = { type: 'academy', hp: 150, end: 90, price: 150 };
+      Fetch('POST', '/kingdom/buildings/newBuilding', body, '');
+      setBuildingCount(buildingCount + 1);
     }
   }
 
-  function postBuilding(type) {
+  /*function postBuilding(type) {
     const body = addBuilding(type);
     console.log(body);
     fetch(`${process.env.REACT_APP_PORT}/kingdom/buildings/newBuilding`, {
@@ -70,7 +81,7 @@ function Buildings() {
         }
       })
       .catch(err => console.log(err));
-  }
+  }*/
 
   if (error) {
     return <div className="buildings"> Error: {error.message} </div>;
@@ -99,7 +110,7 @@ function Buildings() {
             className="imgB"
             src={addFarm}
             alt="Add Farm"
-            onClick={() => postBuilding('farm')}
+            onClick={() => addBuilding('farm')}
           ></img>
           <label className="textB">Add Farm</label>
         </div>
@@ -108,7 +119,7 @@ function Buildings() {
             className="imgB"
             src={addMine}
             alt="Add Mine"
-            onClick={() => postBuilding('mine')}
+            onClick={() => addBuilding('mine')}
           ></img>
           <label className="textB">Add Mine</label>
         </div>
@@ -117,7 +128,7 @@ function Buildings() {
             className="imgB"
             src={addAcademy}
             alt="Add Academy"
-            onClick={() => postBuilding('academy')}
+            onClick={() => addBuilding('academy')}
           ></img>
           <label className="textB">Add Academy</label>
         </div>
