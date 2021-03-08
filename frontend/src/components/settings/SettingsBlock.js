@@ -16,16 +16,17 @@ const SettingsBlock = () => {
       setErrorMessage(`Kingdom name is required`);
     } else {
       let myRequestObject = JSON.stringify({
-        kingdom_name : kingdomName
+        kingdomName : kingdomName
       })
       fetch(`${process.env.REACT_APP_PORT}/kingdom`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: myRequestObject,
+        body: myRequestObject
       })
       .then(response => response.json())
       .then(response => {
         if (response.status !== 200) {
+          console.log(response.status)
             setErrorMessage(response.error);
             setKingdomName(kingdomName);
             return;
@@ -41,7 +42,7 @@ const SettingsBlock = () => {
   return ( 
     <div className="settingsBlock">
     <h1>Kingdom Settings</h1>
-    <form autocomplete="off" onSubmit={handleSubmit}>
+    <form  onSubmit={handleSubmit}>
     <InputField
               onChange={handleKingdomNameChange}
               placeholder="Kingdom's name"
