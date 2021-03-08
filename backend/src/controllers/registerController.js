@@ -1,6 +1,8 @@
 import { registerService } from '../services';
 import { passwordEncrypter } from '../middlewares/passwordEncrypter';
 
+//Legyen PW lekezelés?
+//Egyből titkosítsuk a PW-t vagy inkább a service layerben titkosítsuk?
 export const registerController = {
   async post(req, res) {
     let data;
