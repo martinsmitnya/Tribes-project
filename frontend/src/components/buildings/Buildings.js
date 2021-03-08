@@ -80,7 +80,6 @@ function Buildings() {
     return (
       <div className="buildings">
         {buildings.map(element => {
-          console.log(element);
           return (
             <div>
               <img
