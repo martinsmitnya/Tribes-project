@@ -6,21 +6,21 @@ export async function registerNewUser(username, password, kingdom_name) {
     const result = await db.query(`SELECT * FROM users WHERE username = ?;`, [username]);
     if (result.results.length != 0) {
       return { status: 400, error: 'Username is already taken!' };
-    } else if (result.results.length === 0) {
-      try {
-        const insert = await db.query(`INSERT INTO users (username, passwordhash) VALUES (?,?);`, [username, password]);
-      }
-      catch (err) {
-        return { status: 401, error : 'Username and passwordhash not succesfully inserted' };
-      }
+    } else if (result.results.length === 0) { 
       let selectUserId;
       let addKingdomName;
       try {
         const alreadyExistsCheck = await db.query(getSameKingdomName, [kingdom_name]);
         if (alreadyExistsCheck.results.length !== 0) {
           return { status: 400, error: 'Kingdomname already taken!'};
-  
+          
         } else {
+          try {
+            const insert = await db.query(`INSERT INTO users (username, passwordhash) VALUES (?,?);`, [username, password]);
+          }
+          catch (err) {
+            return { status: 401, error : 'Username and passwordhash not succesfully inserted' };
+          }
           try {
             selectUserId = await db.query(getUserId);
             addKingdomName = await db.query(addKingdom, [kingdom_name, selectUserId.results[0].user_id])
