@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Fetch from '../fetch/Fetch';
 import './LoginForm.css';
 import oopsErrorIcon from '../../assets/oops.png';
 // require('dotenv').config()
@@ -17,11 +18,19 @@ function LoginForm() {
     if (password === '' || userName === '') {
       setErrorMessage(() => 'All the input fields are required.');
     } else {
-      let myRequestObject = JSON.stringify({
-        username: userName,
-        password: password,
+      let body = { username: userName, password: password };
+      let postLogin = Fetch('POST', '/api/login', body, '');
+      postLogin.then(response => {
+        if (response.status !== 200) {
+          setErrorMessage(response.error);
+          return;
+        } else {
+          setErrorMessage('');
+          localStorage.setItem('token', response.token);
+          window.location.reload();
+        }
       });
-      fetch(`${process.env.REACT_APP_PORT}/api/login`, {
+      /*fetch(`${process.env.REACT_APP_PORT}/api/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: myRequestObject,
@@ -41,7 +50,7 @@ function LoginForm() {
         .catch(error => {
           setErrorMessage(() => `${error}`);
           console.log(error);
-        });
+        });*/
     }
   }
 
