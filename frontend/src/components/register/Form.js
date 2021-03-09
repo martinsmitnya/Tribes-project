@@ -33,9 +33,8 @@ const Form = () => {
       setUserName(userName);
       setPasswordHash(passwordHash);
       return;
-    } else if (kingdomName === '') {
-      setKingdomName(`${userName}'s kingdom`);
     }
+    
     setSubmitted(true);
   }
 

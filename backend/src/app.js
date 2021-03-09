@@ -9,10 +9,10 @@ const app = express();
 
 app.use(morgan('combined', { stream: logger.stream }));
 
-app.use('/api', api);
-app.use('/system', system);
+//app.use('/api', api);
+//app.use('/system', system);
 app.use('/register', register);
-app.use('/kingdom', kingdom);
+//app.use('/kingdom', kingdom);
 
 app.use(errorHandler);
 
