@@ -3,7 +3,7 @@ async function Fetch(method, endpoint, body) {
     method: method,
     headers: { 'Content-Type': 'application/json' },
   };
-  if (method != 'GET') {
+  if (method !== 'GET') {
     settings.body = JSON.stringify(body);
   }
   const call = await fetch(
