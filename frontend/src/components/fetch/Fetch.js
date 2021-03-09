@@ -1,4 +1,4 @@
-async function Fetch(method, endpoint, body, params) {
+async function Fetch(method, endpoint, body) {
   const settings = {
     method: method,
     headers: { 'Content-Type': 'application/json' },

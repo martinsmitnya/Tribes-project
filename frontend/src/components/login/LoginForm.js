@@ -19,8 +19,7 @@ function LoginForm() {
       setErrorMessage(() => 'All the input fields are required.');
     } else {
       let body = { username: userName, password: password };
-      let postLogin = Fetch('POST', '/api/login', body, '');
-      postLogin.then(response => {
+      Fetch('POST', '/api/login', body).then(response => {
         if (response.status !== 200) {
           setErrorMessage(response.error);
           return;

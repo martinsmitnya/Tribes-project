@@ -14,7 +14,6 @@ function Buildings() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState(null);
   const [buildingCount, setBuildingCount] = useState(0);
-  let getBuildings = Fetch('GET', '/kingdom/buildings', '', '');
 
   /*const fetchBuildings = async () => {
     const call = await fetch(`${process.env.REACT_APP_PORT}/kingdom/buildings`);
@@ -30,7 +29,7 @@ function Buildings() {
   };*/
 
   useEffect(() => {
-    getBuildings.then(result => {
+    Fetch('GET', '/kingdom/buildings', '').then(result => {
       setBuildings(result);
       setIsLoaded(true);
     });
@@ -49,19 +48,21 @@ function Buildings() {
   }
 
   function addBuilding(type) {
+    let body = {};
     if (type === 'farm') {
-      let body = { type: 'farm', hp: 100, end: 60, price: 100 };
-      Fetch('POST', '/kingdom/buildings/newBuilding', body, '');
-      setBuildingCount(buildingCount + 1);
+      body = { type: 'farm', hp: 100, end: 60, price: 100 };
     } else if (type === 'mine') {
-      let body = { type: 'mine', hp: 100, end: 60, price: 100 };
-      Fetch('POST', '/kingdom/buildings/newBuilding', body, '');
-      setBuildingCount(buildingCount + 1);
+      body = { type: 'mine', hp: 100, end: 60, price: 100 };
     } else if (type === 'academy') {
-      let body = { type: 'academy', hp: 150, end: 90, price: 150 };
-      Fetch('POST', '/kingdom/buildings/newBuilding', body, '');
-      setBuildingCount(buildingCount + 1);
+      body = { type: 'academy', hp: 150, end: 90, price: 150 };
     }
+    Fetch('POST', '/kingdom/buildings/newBuilding', body, '').then(result => {
+      if (result.status === 200) {
+        setBuildingCount(buildingCount + 1);
+      } else {
+        alert(result.error);
+      }
+    });
   }
 
   /*function postBuilding(type) {
