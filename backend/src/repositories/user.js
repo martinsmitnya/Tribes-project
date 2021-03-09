@@ -23,6 +23,18 @@ export const userRepository = {
         catch(error) {
             throw {status:500, message: 'Database error'};
         }
+    },
+
+    async getUserByNameAndPassword(username, passwordhash) {
+        const query = 'SELECT * FROM users WHERE username = ? AND passwordhash= ?;';
+        const value = [username, passwordhash];
+        try {
+         const data = await db.query(query, value);
+         return data.results;
+        }
+        catch(error) {
+            console.log('Query error' + error)
+        }
     }
 
 }
