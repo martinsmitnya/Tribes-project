@@ -66,23 +66,6 @@ const Form = () => {
     }
   }, [submitted]);
 
-  function fetchRegister() {
-    let myRequestObject = {
-      username: userName,
-      passwordhash: passwordHash,
-      kingdom_name: kingdomName,
-    };
-    fetch(`${process.env.REACT_APP_PORT}/register`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(myRequestObject),
-    })
-      .then(response => response.json())
-
-      .catch(error => console.log(error));
-    setErrorMessage('');
-  }
-
   return (
     <div className="form-container">
       <form autocomplete="off" onSubmit={handleSubmit}>
