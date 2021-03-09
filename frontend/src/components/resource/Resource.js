@@ -14,19 +14,6 @@ function Resources() {
   const [user, setUser] = useState(0);
   let getResources = Fetch('GET', '/kingdom/resource', '', '');
 
-  /*const fetchResources = async () => {
-    const call = await fetch(`${process.env.REACT_APP_PORT}/kingdom/resource`);
-    const result = await call.json();
-    if (call.ok) {
-      console.log(result);
-      setFood(result[0]);
-      setGold(result[1]);
-    } else {
-      setError(result);
-    }
-    setIsLoaded(true);
-  };*/
-
   useEffect(() => {
     getResources.then(result => {
       setFood(result[0]);

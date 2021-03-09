@@ -29,27 +29,6 @@ function LoginForm() {
           window.location.reload();
         }
       });
-      /*fetch(`${process.env.REACT_APP_PORT}/api/login`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: myRequestObject,
-      })
-        .then(response => response.json())
-        .then(data => {
-          if (data.status !== 200) {
-            setErrorMessage(() => data.error);
-            return;
-          } else {
-            //Set token and redirect
-            setErrorMessage(() => ``);
-            localStorage.setItem('token', data.token);
-            window.location.replace('http://localhost:3000/');
-          }
-        })
-        .catch(error => {
-          setErrorMessage(() => `${error}`);
-          console.log(error);
-        });*/
     }
   }
 
