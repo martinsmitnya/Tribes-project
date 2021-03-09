@@ -1,12 +1,12 @@
-// import express from 'express';
-// const cors = require('cors');
-// import { loginController } from '../controllers';
+import express from 'express';
+const cors = require('cors');
+import { loginController } from '../controllers';
 
-// const router = express.Router();
+const router = express.Router();
 
-// router.use(cors());
-// router.use(express.json());
+router.use(cors());
+router.use(express.json());
 
-// //router.post('/login', loginController.post);
+router.post('/login', loginController.post);
 
-// export default router;
+export default router;
