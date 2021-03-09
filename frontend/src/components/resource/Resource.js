@@ -14,7 +14,7 @@ function Resources() {
   const [user, setUser] = useState(0);
 
   useEffect(() => {
-    Fetch('GET', '/kingdom/resource', '').then(result => {
+    Fetch('GET', '/kingdom/resource').then(result => {
       setFood(result[0]);
       setGold(result[1]);
       setIsLoaded(true);

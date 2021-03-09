@@ -16,7 +16,7 @@ function Buildings() {
   const [buildingCount, setBuildingCount] = useState(0);
 
   useEffect(() => {
-    Fetch('GET', '/kingdom/buildings', '').then(result => {
+    Fetch('GET', '/kingdom/buildings').then(result => {
       setBuildings(result);
       setIsLoaded(true);
     });
@@ -43,7 +43,7 @@ function Buildings() {
     } else if (type === 'academy') {
       body = { type: 'academy', hp: 150, end: 90, price: 150 };
     }
-    Fetch('POST', '/kingdom/buildings/newBuilding', body, '').then(result => {
+    Fetch('POST', '/kingdom/buildings/newBuilding', body).then(result => {
       if (result.status === 200) {
         setBuildingCount(buildingCount + 1);
       } else {
