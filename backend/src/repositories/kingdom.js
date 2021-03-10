@@ -67,7 +67,8 @@ export const kingdomRepository = {
       } else {
         await db.query(query, values);
         const pastResource = await this.getResourceByKingdomId(kingdomId);
-        pastResource[0].amount -= body.price;
+        pastResource[1].amount -= body.price;
+        console.log();
         updatedResource(pastResource);
         return { status: 200, message: 'Building created' };
       }
