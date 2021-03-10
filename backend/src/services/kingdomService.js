@@ -1,41 +1,32 @@
-// import {
-//     userRepo,
-//     buildingsRepo,
-//     resourceRepo,
-//     troopsRepo,
-//     kingdomRepo,
-//   } from '../repositories';
-  
-//   export const kingdomService = {
-//     emptyNameValidator(kingdomname) {
-//       if (kingdomname === undefined) {
-//         throw {
-//           message: 'Name is required.',
-//           status: 400,
-//         };
-//       }
-//     },
-//     async selectKingdomInformations(kingdomId) {
-//       const kingdomTable = await kingdomRepo.getKingdom(kingdomId);
-//       const buildingsWithKingdomId = await buildingsRepo.getBuildings(kingdomId);
-//       const resourceWithKingdomId = await resourceRepo.getResources(kingdomId);
-//       const troopsWithKingdomId = await troopsRepo.getTroops(kingdomId);
-//       return {
-//         id: kingdomTable.results[0].id,
-//         name: kingdomTable.results[0].kingdomname,
-//         userId: kingdomTable.results[0].user_id,
-//         buildings: buildingsWithKingdomId,
-//         resources: resourceWithKingdomId.results,
-//         troops: troopsWithKingdomId,
-//         location: { country_code: kingdomTable.results[0].location },
-//       };
-//     },
-//     async kingdomnameUpdateMainService(kingdomname, kingdomId) {
-//       this.emptyNameValidator(kingdomname);
-//       await kingdomRepo.updateName(kingdomname, kingdomId);
-//       return await this.selectKingdomInformations(kingdomId);
-//     },
-//     async getUserKingdomData(userId, kingdomId) {
-//       return await userRepo.getUserKingdomData(userId, kingdomId);
-//     },
-//   };
+import { kingdomRepository } from '../repositories/kingdom';
+import { updatedResource } from '../middlewares/resource_update';
+
+export const kingdomService = {
+  async getResource() {
+    try {
+      const result = await kingdomRepository.getResourceByKingdomId(1);
+      return updatedResource(result);
+    } catch (err) {
+      return err;
+    }
+  },
+
+  async getBuilding() {
+    return kingdomRepository.getBuildingsByKingdomId(1);
+  },
+
+  async postBuilding(body) {
+    if (body.type === 'farm' || body.type === 'mine') {
+      (body.hp = 100), (body.end = 60), (body.price = 100);
+    } else if (body.type === 'academy') {
+      (body.hp = 150), (body.end = 90), (body.price = 150);
+    } else {
+      throw { status: 401, message: 'Not a valid building type' };
+    }
+    try {
+      return kingdomRepository.insertBuildingByKingdomId(body, 1);
+    } catch (error) {
+      return error;
+    }
+  },
+};
