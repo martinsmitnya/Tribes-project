@@ -50,12 +50,10 @@ function LoginForm() {
   function handleUsernameChange(event) {
     let container = event.target.value;
     setUserName(() => container);
-    // console.log('Username: ' + userName)
   }
   function handlePasswordChange(event) {
     let container = event.target.value;
     setPassword(() => container);
-    // console.log('Password: ' + password)
   }
 
   return (
