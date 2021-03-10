@@ -1,8 +1,8 @@
-import { buildingService } from '../services';
+import { kingdomService } from '../services';
 
 export const buildingController = {
   async get(req, res) {
-    let data = await buildingService.getBuilding();
-    res.status(200).json(data);
+    let data = await kingdomService.getBuilding();
+    res.status(data.status).json(data.message);
   },
 };

@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import Fetch from '../fetch/Fetch';
 import './LoginForm.css';
 import oopsErrorIcon from '../../assets/oops.png';
-// require('dotenv').config()
+import { useHistory } from 'react-router-dom';
 
 function LoginForm() {
+  let history = useHistory();
   const [errorMessage, setErrorMessage] = useState('');
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
-  useEffect(() => {}, [errorMessage]);
+  useEffect(() => { }, [errorMessage]);
   useEffect(() => {
     setErrorMessage(() => ``);
   }, [userName, password]);
@@ -18,29 +18,42 @@ function LoginForm() {
     if (password === '' || userName === '') {
       setErrorMessage(() => 'All the input fields are required.');
     } else {
-      let body = { username: userName, password: password };
-      Fetch('POST', '/api/login', body).then(response => {
-        if (response.status !== 200) {
-          setErrorMessage(response.error);
-          return;
-        } else {
-          setErrorMessage('');
-          localStorage.setItem('token', response.token);
-          window.location.reload();
-        }
+      let myRequestObject = JSON.stringify({
+        username: userName,
+        password: password,
       });
+      fetch(`${process.env.REACT_APP_PORT}/login/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: myRequestObject,
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.status !== 200) {
+            //from throw {status: 406, message: 'Username or password is incorrect.'}
+            setErrorMessage(() => data);
+            return;
+          } else {
+            //Set token and history.push()
+            setErrorMessage(() => ``);
+            localStorage.setItem('token', data.token);
+            history.push('/buildings');
+          }
+        })
+        .catch(error => {
+          setErrorMessage(() => `${error}`);
+          console.log(error);
+        });
     }
   }
 
   function handleUsernameChange(event) {
     let container = event.target.value;
     setUserName(() => container);
-    // console.log('Username: ' + userName)
   }
   function handlePasswordChange(event) {
     let container = event.target.value;
     setPassword(() => container);
-    // console.log('Password: ' + password)
   }
 
   return (
@@ -73,7 +86,7 @@ function LoginForm() {
               )}
             </div>
           </div>
-          <button className="loginSubmitButton">Login</button>
+            <button className="loginSubmitButton">Login</button>
         </form>
       </div>
     </div>
