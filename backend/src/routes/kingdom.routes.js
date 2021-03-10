@@ -11,7 +11,7 @@ const router = express.Router();
 router.use(cors());
 router.use(express.json());
 
-//router.get('/buildings', buildingController.get);
+router.get('/buildings', buildingController.get);
 //router.post('/buildings/newBuilding', newBuildingController.post);
 router.get('/resource', resourceController.get);
 

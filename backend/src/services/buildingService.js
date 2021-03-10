@@ -1,7 +1,7 @@
-// import { building } from '../models/building';
+import { kingdomRepository } from '../repositories/kingdom';
 
-// export const buildingService = {
-//   async getBuilding() {
-//     return building();
-//   },
-// };
+export const buildingService = {
+  async getBuilding() {
+    return kingdomRepository.getBuildingsByKingdomId(1);
+  },
+};
