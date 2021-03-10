@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './LoginForm.css';
 import oopsErrorIcon from '../../assets/oops.png';
-// require('dotenv').config()
 
 function LoginForm() {
   const [errorMessage, setErrorMessage] = useState('');
@@ -26,15 +25,18 @@ function LoginForm() {
         headers: { 'Content-Type': 'application/json' },
         body: myRequestObject,
       })
-        .then(response => response.json())
+        .then(response => response.json() )
         .then(data => {
           if (data.status !== 200) {
-            setErrorMessage(() => data.error);
+            //from throw {status: 406, message: 'Username or password is incorrect.'}
+            setErrorMessage(() => data);
             return;
           } else {
             //Set token and redirect
             setErrorMessage(() => ``);
             localStorage.setItem('token', data.token);
+            
+            //Navlink
             window.location.replace('http://localhost:3000/');
           }
         })
