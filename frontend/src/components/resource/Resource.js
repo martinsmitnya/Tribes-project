@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Fetch from '../fetch/Fetch';
 import './Resource.css';
 import farm from '../../icons/svg/buildings/farm.svg';
 import mine from '../../icons/svg/buildings/mine.svg';
@@ -12,21 +13,12 @@ function Resources() {
   const [error, setError] = useState(null);
   const [user, setUser] = useState(0);
 
-  const fetchResources = async () => {
-    const call = await fetch(`${process.env.REACT_APP_PORT}/kingdom/resource`);
-    const result = await call.json();
-    if (call.ok) {
-      console.log(result);
+  useEffect(() => {
+    Fetch('GET', '/kingdom/resource').then(result => {
       setFood(result[0]);
       setGold(result[1]);
-    } else {
-      setError(result);
-    }
-    setIsLoaded(true);
-  };
-
-  useEffect(() => {
-    fetchResources();
+      setIsLoaded(true);
+    });
   }, [user]);
 
   function Generation(item, class_name) {
