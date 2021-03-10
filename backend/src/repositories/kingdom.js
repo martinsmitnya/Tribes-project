@@ -1,4 +1,5 @@
 import { db } from '../data/connection';
+import { updatedResource } from '../middlewares/resource_update';
 
 export const kingdomRepository = {
   async getKingdomByKingdomName(kingdom_name) {
@@ -40,7 +41,36 @@ export const kingdomRepository = {
     const values = [kingdomId];
     try {
       const data = await db.query(query, values);
-      return data.results;
+      return { status: 200, message: data.results };
+    } catch (error) {
+      throw { status: 500, message: 'Database error' };
+    }
+  },
+
+  async insertBuildingByKingdomId(body, kingdomId) {
+    const query =
+      'INSERT INTO buildings (type,level,hp,started_at,finished_at,kingdomId) VALUES (?,1,?,?,?,?);';
+    const values = [
+      body.type,
+      body.hp,
+      Math.floor(Date.now() / 1000),
+      Math.floor(Date.now() / 1000) + body.end,
+      kingdomId,
+    ];
+    const goldAmount = await db.query(
+      'SELECT amount FROM resources WHERE type=? AND kingdomId=?;',
+      ['gold', kingdomId]
+    );
+    try {
+      if (body.price > goldAmount) {
+        throw { status: 401, message: 'Not enough gold' };
+      } else {
+        await db.query(query, values);
+        const pastResource = await this.getResourceByKingdomId(kingdomId);
+        pastResource[0].amount -= body.price;
+        updatedResource(pastResource);
+        return { status: 200, message: 'Building created' };
+      }
     } catch (error) {
       throw { status: 500, message: 'Database error' };
     }

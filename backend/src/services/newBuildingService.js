@@ -1,7 +1,11 @@
-// import { newBuilding } from '../models/newBuilding';
+import { kingdomRepository } from '../repositories/kingdom';
 
-// export const newBuildingService = {
-//   async postBuilding(type, hp, end) {
-//     return await newBuilding(type, hp, end);
-//   },
-// };
+export const newBuildingService = {
+  async postBuilding(body) {
+    try {
+      return kingdomRepository.insertBuildingByKingdomId(body, 1);
+    } catch (error) {
+      return error;
+    }
+  },
+};
