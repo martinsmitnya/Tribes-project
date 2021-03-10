@@ -1,20 +1,11 @@
 import { db } from '../data/connection';
-import { postResource } from '../data/query';
 
 export function updatedResource(resource) {
   let output = [];
-
+  const query = `UPDATE resources SET amount=?, updated_at=? WHERE type=? AND kingdomId=${resource.kingdomId};`;
   output = Update(resource);
-  db.query(postResource, [
-    output[0].amount,
-    output[0].updated_at,
-    output[0].type,
-  ]);
-  db.query(postResource, [
-    output[1].amount,
-    output[1].updated_at,
-    output[1].type,
-  ]);
+  db.query(query, [output[0].amount, output[0].updated_at, output[0].type]);
+  db.query(query, [output[1].amount, output[1].updated_at, output[1].type]);
 
   return resource;
 }
