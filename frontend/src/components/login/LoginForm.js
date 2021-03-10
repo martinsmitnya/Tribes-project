@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Fetch from '../fetch/Fetch';
 import './LoginForm.css';
 import oopsErrorIcon from '../../assets/oops.png';
 
@@ -16,34 +17,17 @@ function LoginForm() {
     if (password === '' || userName === '') {
       setErrorMessage(() => 'All the input fields are required.');
     } else {
-      let myRequestObject = JSON.stringify({
-        username: userName,
-        password: password,
+      let body = { username: userName, password: password };
+      Fetch('POST', '/api/login', body).then(response => {
+        if (response.status !== 200) {
+          setErrorMessage(response.error);
+          return;
+        } else {
+          setErrorMessage('');
+          localStorage.setItem('token', response.token);
+          window.location.reload();
+        }
       });
-      fetch(`${process.env.REACT_APP_PORT}/api/login`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: myRequestObject,
-      })
-        .then(response => response.json() )
-        .then(data => {
-          if (data.status !== 200) {
-            //from throw {status: 406, message: 'Username or password is incorrect.'}
-            setErrorMessage(() => data);
-            return;
-          } else {
-            //Set token and redirect
-            setErrorMessage(() => ``);
-            localStorage.setItem('token', data.token);
-            
-            //Navlink
-            window.location.replace('http://localhost:3000/');
-          }
-        })
-        .catch(error => {
-          setErrorMessage(() => `${error}`);
-          console.log(error);
-        });
     }
   }
 

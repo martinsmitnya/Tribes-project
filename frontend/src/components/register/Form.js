@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Form.css';
 import InputField from './InputField';
+import Fetch from '../fetch/Fetch';
 
 const Form = () => {
   const [errorMessage, setErrorMessage] = useState('');
@@ -40,27 +41,12 @@ const Form = () => {
 
   useEffect(() => {
     if (submitted) {
-      fetchRegister();
-      setKingdomName('');
-      setUserName('');
-      setPasswordHash('');
-      setSubmitted(false);
-    }
-  }, [submitted]);
-
-  function fetchRegister() {
-    let myRequestObject = {
-      username: userName,
-      passwordhash: passwordHash,
-      kingdom_name: kingdomName,
-    };
-    fetch(`${process.env.REACT_APP_PORT}/register`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(myRequestObject),
-    })
-      .then(response => response.json())
-      .then(response => {
+      let body = {
+        username: userName,
+        passwordhash: passwordHash,
+        kingdom_name: kingdomName,
+      };
+      Fetch('POST', '/register', body).then(response => {
         if (response.status === 400) {
           setErrorMessage(response.error);
           setUserName(userName);
@@ -69,11 +55,15 @@ const Form = () => {
           return;
         }
         let inputs = document.querySelectorAll('input');
+        setErrorMessage('');
         Array.from(inputs).forEach(input => (input.value = ''));
-      })
-      .catch(error => console.log(error));
-    setErrorMessage('');
-  }
+      });
+      setKingdomName('');
+      setUserName('');
+      setPasswordHash('');
+      setSubmitted(false);
+    }
+  }, [submitted]);
 
   return (
     <div className="form-container">

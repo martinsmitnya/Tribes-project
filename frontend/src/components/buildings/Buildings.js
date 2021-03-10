@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Fetch from '../fetch/Fetch';
 import './Buildings.css';
 import farm from '../../icons/farm.png';
 import mine from '../../icons/mine.png';
@@ -14,21 +15,11 @@ function Buildings() {
   const [error, setError] = useState(null);
   const [buildingCount, setBuildingCount] = useState(0);
 
-  const fetchBuildings = async () => {
-    const call = await fetch(`${process.env.REACT_APP_PORT}/kingdom/buildings`);
-    const result = await call.json();
-    if (call.ok) {
-      console.log(result);
-      setBuildingCount(result.length);
-      setBuildings(result);
-    } else {
-      setError(result);
-    }
-    setIsLoaded(true);
-  };
-
   useEffect(() => {
-    fetchBuildings();
+    Fetch('GET', '/kingdom/buildings').then(result => {
+      setBuildings(result);
+      setIsLoaded(true);
+    });
   }, [buildingCount]);
 
   function getImage(type) {
@@ -44,32 +35,21 @@ function Buildings() {
   }
 
   function addBuilding(type) {
+    let body = {};
     if (type === 'farm') {
-      return { type: 'farm', hp: 100, end: 60, price: 100 };
+      body = { type: 'farm', hp: 100, end: 60, price: 100 };
     } else if (type === 'mine') {
-      return { type: 'mine', hp: 100, end: 60, price: 100 };
+      body = { type: 'mine', hp: 100, end: 60, price: 100 };
     } else if (type === 'academy') {
-      return { type: 'academy', hp: 150, end: 90, price: 150 };
+      body = { type: 'academy', hp: 150, end: 90, price: 150 };
     }
-  }
-
-  function postBuilding(type) {
-    const body = addBuilding(type);
-    console.log(body);
-    fetch(`${process.env.REACT_APP_PORT}/kingdom/buildings/newBuilding`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
-    })
-      .then(response => response.json())
-      .then(result => {
-        if (result.status === 200) {
-          setBuildingCount(buildingCount + 1);
-        } else {
-          alert(result.error);
-        }
-      })
-      .catch(err => console.log(err));
+    Fetch('POST', '/kingdom/buildings/newBuilding', body).then(result => {
+      if (result.status === 200) {
+        setBuildingCount(buildingCount + 1);
+      } else {
+        alert(result.error);
+      }
+    });
   }
 
   if (error) {
@@ -99,7 +79,7 @@ function Buildings() {
             className="imgB"
             src={addFarm}
             alt="Add Farm"
-            onClick={() => postBuilding('farm')}
+            onClick={() => addBuilding('farm')}
           ></img>
           <label className="textB">Add Farm</label>
         </div>
@@ -108,7 +88,7 @@ function Buildings() {
             className="imgB"
             src={addMine}
             alt="Add Mine"
-            onClick={() => postBuilding('mine')}
+            onClick={() => addBuilding('mine')}
           ></img>
           <label className="textB">Add Mine</label>
         </div>
@@ -117,7 +97,7 @@ function Buildings() {
             className="imgB"
             src={addAcademy}
             alt="Add Academy"
-            onClick={() => postBuilding('academy')}
+            onClick={() => addBuilding('academy')}
           ></img>
           <label className="textB">Add Academy</label>
         </div>
