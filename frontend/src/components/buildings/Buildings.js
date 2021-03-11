@@ -43,13 +43,11 @@ function Buildings() {
     } else if (type === 'academy') {
       body = { type: 'academy', hp: 150, end: 90, price: 150 };
     }
-    Fetch('POST', '/kingdom/buildings/newBuilding', body).then(result => {
-      if (result.status === 200) {
+    Fetch('POST', '/kingdom/buildings/newBuilding', body)
+      .then(result => {
         setBuildingCount(buildingCount + 1);
-      } else {
-        alert(result.error);
-      }
-    });
+      })
+      .catch(err => alert(err));
   }
 
   if (error) {

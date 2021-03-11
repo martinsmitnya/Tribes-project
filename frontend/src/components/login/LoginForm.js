@@ -8,7 +8,7 @@ function LoginForm() {
   const [errorMessage, setErrorMessage] = useState('');
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
-  useEffect(() => { }, [errorMessage]);
+  useEffect(() => {}, [errorMessage]);
   useEffect(() => {
     setErrorMessage(() => ``);
   }, [userName, password]);
@@ -86,7 +86,7 @@ function LoginForm() {
               )}
             </div>
           </div>
-            <button className="loginSubmitButton">Login</button>
+          <button className="loginSubmitButton">Login</button>
         </form>
       </div>
     </div>
