@@ -46,18 +46,19 @@ const Form = () => {
         password: passwordHash,
         kingdom_name: kingdomName,
       };
-      Fetch('POST', '/register', body).then(response => {
-        if (!response.ok) {
-          setErrorMessage(response.message);
+      Fetch('POST', '/register', body)
+        .then(response => {
+          let inputs = document.querySelectorAll('input');
+          setErrorMessage('');
+          Array.from(inputs).forEach(input => (input.value = ''));
+        })
+        .catch(error => {
+          setErrorMessage(error.toString());
           setUserName(userName);
           setPasswordHash(passwordHash);
           setKingdomName(kingdomName);
           return;
-        }
-        let inputs = document.querySelectorAll('input');
-        setErrorMessage('');
-        Array.from(inputs).forEach(input => (input.value = ''));
-      });
+        });
       setKingdomName('');
       setUserName('');
       setPasswordHash('');

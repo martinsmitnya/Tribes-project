@@ -11,9 +11,8 @@ async function Fetch(method, endpoint, body) {
     settings
   );
   const result = await call.json();
-  console.log(call);
   if (call.status !== 200) {
-    throw new Error(result.message);
+    throw new Error(result);
   }
   return result;
 }

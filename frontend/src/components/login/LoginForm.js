@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './LoginForm.css';
+import Fetch from '../fetch/Fetch';
 import oopsErrorIcon from '../../assets/oops.png';
 import { useHistory } from 'react-router-dom';
 
@@ -8,42 +9,30 @@ function LoginForm() {
   const [errorMessage, setErrorMessage] = useState('');
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
-  useEffect(() => {}, [errorMessage]);
+  const [submitted, setSubmitted] = useState(false);
+
   useEffect(() => {
-    setErrorMessage(() => ``);
-  }, [userName, password]);
+    if (submitted) {
+      let body = { username: userName, password: password };
+      Fetch('POST', '/login/login', body)
+        .then(response => {
+          setErrorMessage(() => ``);
+          localStorage.setItem('token', response.token);
+          history.push('/buildings');
+        })
+        .catch(err => {
+          setErrorMessage(() => `${err}`);
+        });
+      setSubmitted(false);
+    }
+  }, [submitted]);
 
   function handleSubmit(event) {
     event.preventDefault();
     if (password === '' || userName === '') {
       setErrorMessage(() => 'All the input fields are required.');
     } else {
-      let myRequestObject = JSON.stringify({
-        username: userName,
-        password: password,
-      });
-      fetch(`${process.env.REACT_APP_PORT}/login/login`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: myRequestObject,
-      })
-        .then(response => response.json())
-        .then(data => {
-          if (data.status !== 200) {
-            //from throw {status: 406, message: 'Username or password is incorrect.'}
-            setErrorMessage(() => data);
-            return;
-          } else {
-            //Set token and history.push()
-            setErrorMessage(() => ``);
-            localStorage.setItem('token', data.token);
-            history.push('/buildings');
-          }
-        })
-        .catch(error => {
-          setErrorMessage(() => `${error}`);
-          console.log(error);
-        });
+      setSubmitted(true);
     }
   }
 
