@@ -34,9 +34,8 @@ const Form = () => {
       setUserName(userName);
       setPasswordHash(passwordHash);
       return;
-    } else if (kingdomName === '') {
-      setKingdomName(`${userName}'s kingdom`);
     }
+
     setSubmitted(true);
   }
 
@@ -44,21 +43,22 @@ const Form = () => {
     if (submitted) {
       let body = {
         username: userName,
-        passwordhash: passwordHash,
+        password: passwordHash,
         kingdom_name: kingdomName,
       };
-      Fetch('POST', '/register', body).then(response => {
-        if (response.status === 400) {
-          setErrorMessage(response.error);
+      Fetch('POST', '/register', body)
+        .then(response => {
+          let inputs = document.querySelectorAll('input');
+          setErrorMessage('');
+          Array.from(inputs).forEach(input => (input.value = ''));
+        })
+        .catch(error => {
+          setErrorMessage(error.toString());
           setUserName(userName);
           setPasswordHash(passwordHash);
           setKingdomName(kingdomName);
           return;
-        }
-        let inputs = document.querySelectorAll('input');
-        setErrorMessage('');
-        Array.from(inputs).forEach(input => (input.value = ''));
-      });
+        });
       setKingdomName('');
       setUserName('');
       setPasswordHash('');
@@ -68,7 +68,7 @@ const Form = () => {
 
   return (
     <div className="form-container">
-      <form autocomplete="off" onSubmit={handleSubmit}>
+      <form autoComplete="off" onSubmit={handleSubmit}>
         <InputField
           onChange={handleUsernameChange}
           placeholder="Username"

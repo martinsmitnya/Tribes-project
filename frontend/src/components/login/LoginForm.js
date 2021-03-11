@@ -1,46 +1,48 @@
 import React, { useEffect, useState } from 'react';
-import Fetch from '../fetch/Fetch';
 import './LoginForm.css';
+import Fetch from '../fetch/Fetch';
 import oopsErrorIcon from '../../assets/oops.png';
-// require('dotenv').config()
+import { useHistory } from 'react-router-dom';
 
 function LoginForm() {
+  let history = useHistory();
   const [errorMessage, setErrorMessage] = useState('');
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
-  useEffect(() => {}, [errorMessage]);
+  const [submitted, setSubmitted] = useState(false);
+
   useEffect(() => {
-    setErrorMessage(() => ``);
-  }, [userName, password]);
+    if (submitted) {
+      let body = { username: userName, password: password };
+      Fetch('POST', '/login/login', body)
+        .then(response => {
+          setErrorMessage(() => ``);
+          localStorage.setItem('token', response.token);
+          history.push('/buildings');
+        })
+        .catch(err => {
+          setErrorMessage(() => `${err}`);
+        });
+      setSubmitted(false);
+    }
+  }, [submitted]);
 
   function handleSubmit(event) {
     event.preventDefault();
     if (password === '' || userName === '') {
       setErrorMessage(() => 'All the input fields are required.');
     } else {
-      let body = { username: userName, password: password };
-      Fetch('POST', '/api/login', body).then(response => {
-        if (response.status !== 200) {
-          setErrorMessage(response.error);
-          return;
-        } else {
-          setErrorMessage('');
-          localStorage.setItem('token', response.token);
-          window.location.reload();
-        }
-      });
+      setSubmitted(true);
     }
   }
 
   function handleUsernameChange(event) {
     let container = event.target.value;
     setUserName(() => container);
-    // console.log('Username: ' + userName)
   }
   function handlePasswordChange(event) {
     let container = event.target.value;
     setPassword(() => container);
-    // console.log('Password: ' + password)
   }
 
   return (

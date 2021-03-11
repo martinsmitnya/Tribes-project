@@ -1,9 +1,12 @@
-import { loginService } from '../services'
+import { loginService } from '../services';
 
 export const loginController = {
   async post(req, res) {
-    let sqlResponse = await loginService.postLogin(req.body);
-
-    res.status(sqlResponse.status).json(sqlResponse.data);
-  }
-}
+    try {
+      let serviceResponse = await loginService.postLogin(req.body);
+      res.status(200).json(serviceResponse.data);
+    } catch (err) {
+      res.status(err.status).json(err.message);
+    }
+  },
+};
