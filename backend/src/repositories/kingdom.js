@@ -77,4 +77,5 @@ export const kingdomRepository = {
       throw { status: 500, message: 'Database error' };
     }
   },
+
 };
