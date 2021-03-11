@@ -5,6 +5,7 @@ import RegisterPage from './components/register/RegisterPage';
 import Login from './components/login/LoginForm';
 import Resources from './components/resource/Resource';
 import Buildings from './components/buildings/Buildings';
+import OneBuilding from './components/OneBuilding/OneBuilding'
 
 function App() {
   return (
@@ -24,7 +25,7 @@ function App() {
             <Buildings />
           </Route>
           <Route path="/">
-            <NotImplemented />
+            <OneBuilding />
           </Route>
         </Switch>
       </div>
