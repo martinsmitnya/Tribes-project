@@ -68,7 +68,7 @@ const Form = () => {
 
   return (
     <div className="form-container">
-      <form autocomplete="off" onSubmit={handleSubmit}>
+      <form autoComplete="off" onSubmit={handleSubmit}>
         <InputField
           onChange={handleUsernameChange}
           placeholder="Username"
