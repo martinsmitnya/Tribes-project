@@ -35,7 +35,7 @@ const Form = () => {
       setPasswordHash(passwordHash);
       return;
     }
-    
+
     setSubmitted(true);
   }
 
@@ -43,12 +43,12 @@ const Form = () => {
     if (submitted) {
       let body = {
         username: userName,
-        passwordhash: passwordHash,
+        password: passwordHash,
         kingdom_name: kingdomName,
       };
       Fetch('POST', '/register', body).then(response => {
-        if (response.status === 400) {
-          setErrorMessage(response.error);
+        if (!response.ok) {
+          setErrorMessage(response.message);
           setUserName(userName);
           setPasswordHash(passwordHash);
           setKingdomName(kingdomName);
