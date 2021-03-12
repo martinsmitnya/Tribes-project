@@ -5,7 +5,7 @@ function BasicInfo(props) {
     <div className="BasicInfoContainer">
       <img
       className="oneBuildingImg"
-      src={props.src} //kell a function importálva
+      src={props.src}
       alt={props.type}>
       </img>
       <p>{props.type}</p>

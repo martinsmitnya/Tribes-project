@@ -8,6 +8,7 @@ import academy from '../../icons/academy.png';
 import addAcademy from '../../icons/addacademy.png';
 import addFarm from '../../icons/addfarm.png';
 import addMine from '../../icons/addmine.png';
+import OneBuilding from '../oneBuilding/OneBuilding';
 
 function Buildings() {
   const [buildings, setBuildings] = useState(null);
@@ -64,6 +65,8 @@ function Buildings() {
                 className="imgB"
                 src={getImage(element.type)}
                 alt={element.type}
+                //Itt kell onClick varázslat
+                onClick={() => OneBuilding(element.building_id)}
               ></img>
               <label className="textB">
                 {element.type} <br />
