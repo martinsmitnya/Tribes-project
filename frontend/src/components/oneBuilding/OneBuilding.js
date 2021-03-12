@@ -9,8 +9,8 @@ import Fetch from '../fetch/Fetch';
 
 function OneBuilding(buildingID) {
 
-  const [type, setType] = useState('farm');
-  const [level, setLevel] = useState('');
+  const [type, setType] = useState(null);
+  const [level, setLevel] = useState(null);
   const [buildingId, setBuildingId] = useState(buildingID);
   //let type = '';
   //let level = '';
