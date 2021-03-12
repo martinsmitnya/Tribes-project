@@ -5,13 +5,15 @@ import { passwordEncrypter } from '../middlewares/passwordEncrypter';
 export const registerService = {
     async postRegister(username, passwordhash, kingdom_name) {
 
-      if(!username && !passwordhash) {
+
+      if(!username || !passwordhash) {
         throw { message: 'Please fill out the input fields', status:400}
       }
 
       if (!kingdom_name) {
         kingdom_name = `${username}'s kingdom`;
       }
+
 
       const checkIfUsernameIsValid = await userRepository.getUserByUsername(username);
         if(checkIfUsernameIsValid) {
