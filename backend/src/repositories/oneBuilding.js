@@ -1,3 +1,4 @@
+/*
 import { db } from '../data/connection';
 
 export async function getBuildingInfoByBuildingId (buildingId) {
@@ -13,3 +14,4 @@ export async function getBuildingInfoByBuildingId (buildingId) {
     return { status: error.status, message: error.message };
   }
 }
+*/
