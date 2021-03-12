@@ -20,7 +20,6 @@ const kingdomTableData = [{
 
 const responseData = {
   status: 200,
-  id: 1,
   username: 'Mate',
   kingdomId: 2
 }
