@@ -8,12 +8,15 @@ import academy from '../../icons/academy.png';
 import addAcademy from '../../icons/addacademy.png';
 import addFarm from '../../icons/addfarm.png';
 import addMine from '../../icons/addmine.png';
+import Header from '../header/Header';
 
 function Buildings() {
   const [buildings, setBuildings] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState(null);
   const [buildingCount, setBuildingCount] = useState(0);
+
+  const userId= localStorage.getItem('token');
 
   useEffect(() => {
     Fetch('GET', '/kingdom/buildings').then(result => {
@@ -33,6 +36,12 @@ function Buildings() {
       return mine;
     }
   }
+
+function renderHeader(){
+  let out = <p>Asd</p>;
+  Header('Settings', 'Logout', userId).then(res => {out=res})
+  return out;
+}
 
   function addBuilding(type) {
     let body = {};
@@ -56,6 +65,8 @@ function Buildings() {
     return <div className="buildings"> Loading... </div>;
   } else {
     return (
+      <div>
+      {renderHeader()}
       <div className="buildings">
         {buildings.map(element => {
           return (
@@ -99,6 +110,7 @@ function Buildings() {
           ></img>
           <label className="textB">Add Academy</label>
         </div>
+      </div>
       </div>
     );
   }

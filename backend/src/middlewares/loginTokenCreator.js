@@ -19,7 +19,6 @@ export const loginTokenCreator = {
     ) {
       //Generate JWT token
       let token = jwt.sign({ userid: queryArray[0].user_id }, privateKey);
-
       return {
         status: 200,
         data: { status: 200, token: token },

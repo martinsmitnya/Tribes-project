@@ -11,8 +11,17 @@ export const kingdomService = {
     }
   },
 
-  async getBuilding() {
-    return kingdomRepository.getBuildingsByKingdomId(1);
+  async getKingdom(id) {
+    try {
+      const result = await kingdomRepository.getKingdomByUserId(id);
+      return result;
+    } catch (err) {
+      return err;
+    }
+  },
+
+  async getBuilding(id) {
+    return kingdomRepository.getBuildingsByKingdomId(id);
   },
 
   async postBuilding(body) {

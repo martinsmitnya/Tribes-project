@@ -5,7 +5,8 @@ import RegisterPage from './components/register/RegisterPage';
 import Login from './components/login/LoginForm';
 import Resources from './components/resource/Resource';
 import Buildings from './components/buildings/Buildings';
-import SettingsBlock from './compontents/settings/SettingsBlock';
+import SettingsBlock from './components/settings/SettingsBlock';
+import Header from './components/header/Header';
 
 function App() {
   return (
