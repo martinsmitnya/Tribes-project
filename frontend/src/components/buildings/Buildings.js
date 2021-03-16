@@ -16,8 +16,6 @@ function Buildings() {
   const [error, setError] = useState(null);
   const [buildingCount, setBuildingCount] = useState(0);
 
-  const userId= localStorage.getItem('token');
-
   useEffect(() => {
     Fetch('GET', '/kingdom/buildings').then(result => {
       setBuildings(result);
@@ -36,12 +34,6 @@ function Buildings() {
       return mine;
     }
   }
-
-function renderHeader(){
-  let out = <p>Asd</p>;
-  Header('Settings', 'Logout', userId).then(res => {out=res})
-  return out;
-}
 
   function addBuilding(type) {
     let body = {};
@@ -66,7 +58,7 @@ function renderHeader(){
   } else {
     return (
       <div>
-      {renderHeader()}
+        <Header button1='settings' button2='logout' />
       <div className="buildings">
         {buildings.map(element => {
           return (
