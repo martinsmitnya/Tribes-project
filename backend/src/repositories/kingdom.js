@@ -77,4 +77,27 @@ export const kingdomRepository = {
       throw { status: 500, message: 'Database error' };
     }
   },
+
+  async updateKingdomNameByKingdom_id(kingdom_name, kingdom_id) {
+    const query = `UPDATE kingdoms SET kingdom_name = ? WHERE  id = ?;`;
+    const values = [kingdom_name, kingdom_id];
+    try {
+      const data = await db.query(query, values);
+      return data.results.insertId;
+    } catch (error) {
+      throw { status: 500, message: 'Database error' };
+    }
+  },  
+
+  async getKingdomInfoByKingdom_id(kingdom_id) {
+    const query = `SELECT * FROM kingdoms WHERE id = ?`;
+    const values = [kingdom_id];
+    try {
+      const data = await db.query(query, values);
+      return data.results[0];
+    } catch (error) {
+      throw { status: 500, message: 'Database error' };
+    }
+  }, 
+
 };
