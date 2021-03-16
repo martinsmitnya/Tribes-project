@@ -5,6 +5,7 @@ import RegisterPage from './components/register/RegisterPage';
 import Login from './components/login/LoginForm';
 import Resources from './components/resource/Resource';
 import Buildings from './components/buildings/Buildings';
+import Settings from './components/settings/Settings';
 
 function App() {
   return (
@@ -19,6 +20,9 @@ function App() {
           </Route>
           <Route path="/resource">
             <Resources />
+          </Route>
+          <Route path="/settings">
+            <Settings />
           </Route>
           <Route path="/buildings">
             <Buildings />
