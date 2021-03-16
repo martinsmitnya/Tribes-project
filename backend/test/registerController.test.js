@@ -1,67 +1,90 @@
 import request from 'supertest';
 import app from '../src/app';
 import { userRepository } from '../src/repositories/user'
-import { loginTokenCreator } from '../src/middlewares/loginTokenCreator'
+import { kingdomRepository } from '../src/repositories/kingdom'
 
 jest.mock('../src/repositories/user');
-jest.mock('../src/middlewares/loginTokenCreator');
+jest.mock('../src/repositories/kingdom');
 
-const userTableData = {
-  username: 'Mate',
+const userTableData = [{
+  id: 1,
+  username: 'Martinka',
+  password: 'jelszo123'
+}]
+
+const kingdomTableData = [{
+  kingdomId: 2,
+  kingdomname: 'MartinkaKiralysaga',
+  userId: 1
+}]
+
+const responseData = {
+  status: 200,
+  username: 'Martinka',
+  kingdomId: 2
 }
-userRepository.getUserByUsernameAndPassword.mockResolvedValue(userTableData.username);
-loginTokenCreator.tokenCreator.mockResolvedValue(userTableData.username);
 
-test('Username', done => {
-  const inputData = {
-    username: 'NOTMate12312321',
-  }
+beforeAll(() => {
+  userRepository.getUserByUsername.mockResolvedValue(userTableData[0].id);
+  userRepository.insertNewUser.mockResolvedValue(userTableData[0].kingdomId);
+  kingdomRepository.getKingdomByKingdomName.mockResolvedValue(kingdomTableData[0].id);
+  kingdomRepository.insertKingdom.mockResolvedValue(kingdomTableData[0].kingdomId);
+})
+
+
+test('should respond with 400 in case of empty request body', done => {
+  const registerData = {}
 
   request(app)
-    .post('/login/login')
-    .send(inputData)
+    .post('/register')
+    .send(registerData)
     .set('Accept', 'application/json')
-    .expect('Content-type', 'application/json; charset=utf-8')
+    .expect('Content-type', /json/)
     .expect(400)
     .end((err, data) => {
       if (err) return done(err);
-      expect(data.body).toEqual('Password is required.');
+      expect(data.body).toEqual('Please fill out the input fields');
       return done();
     })
 })
 
-test('Password', done => {
-  const inputData = {
-    password: 'NOTMate12312321',
+test('should respond with 400 in case of only username sent', done => {
+  const registerData = {
+    username: "Martinka"
   }
 
   request(app)
-    .post('/login/login')
-    .send(inputData)
+    .post('/register')
+    .send(registerData)
     .set('Accept', 'application/json')
-    .expect('Content-type', 'application/json; charset=utf-8')
+    .expect('Content-type', /json/)
     .expect(400)
     .end((err, data) => {
       if (err) return done(err);
-      expect(data.body).toEqual('Username is required.');
+      expect(data.body).toEqual('Please fill out the input fields');
       return done();
     })
 })
 
-test('NO username OR password', done => {
-  const inputData = {
-    
+test('should respond with 200', done => {
+  const registerData = {
+    username: 'Martinka',
+    password: 'jelszo123',
+    kingdom_name: 'MartinkaKiralysaga'
   }
 
+  userRepository.getUserByUsername.mockResolvedValue(undefined);
+  kingdomRepository.getKingdomByKingdomName.mockResolvedValue(undefined);
+
   request(app)
-    .post('/login/login')
-    .send(inputData)
+    .post('/register')
+    .send(registerData)
     .set('Accept', 'application/json')
-    .expect('Content-type', 'application/json; charset=utf-8')
-    .expect(400)
+    .expect('Content-type', /json/)
+    .expect(200)
     .end((err, data) => {
       if (err) return done(err);
-      expect(data.body).toEqual('All fields are required.');
+      expect(data.body).toEqual(responseData);
       return done();
     })
 })
