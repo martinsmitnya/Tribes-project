@@ -58,7 +58,7 @@ function Buildings() {
   } else {
     return (
       <div>
-        <Header button1='settings' button2='logout' />
+        <Header />
       <div className="buildings">
         {buildings.map(element => {
           return (

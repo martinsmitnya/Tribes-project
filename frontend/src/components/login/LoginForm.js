@@ -17,8 +17,8 @@ function LoginForm() {
       Fetch('POST', '/login/login', body)
         .then(response => {
           setErrorMessage(() => ``);
-          history.push('/buildings');
           localStorage.setItem('token', response.token);
+          history.push('/buildings');
         })
         .catch(err => {
           setErrorMessage(() => `${err}`);
