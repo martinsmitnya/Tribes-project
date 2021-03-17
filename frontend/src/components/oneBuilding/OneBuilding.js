@@ -5,10 +5,10 @@ import farm from '../../icons/farm.png';
 import mine from '../../icons/mine.png';
 import townhall from '../../icons/townhall_1.png';
 import academy from '../../icons/academy.png';
-import { MineDescription } from './MineDescription';
-import { FarmDescription } from '../oneBuilding/Farm';
-import { TownhallDescription } from './TownhallDescription';
-import { AcademyDescription } from '../oneBuilding/AcademyDescription';
+import  MineDescription  from './MineDescription';
+import  FarmDescription  from './FarmDescription';
+import  TownhallDescription  from './TownhallDescription';
+import  AcademyDescription  from './AcademyDescription';
 import Fetch from '../fetch/Fetch';
 
 function OneBuilding(element) {

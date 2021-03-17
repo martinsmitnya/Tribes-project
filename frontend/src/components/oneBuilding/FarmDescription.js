@@ -1,10 +1,8 @@
 import React from 'react';
-function FarmDescription(props) {
+function FarmDescription() {
   return (
     <div className="farmDescription">
-      <p>You can create troops in your troops in your Farm. The higher level your Farm is, the stronger your troops are.</p>
-      <p>Every level increases 1 ? and 1 ? of the Troops.</p>
-      <p>Every Troop eats 1 ? every minute</p>
+      <p>Generates food for your kingdom. Every level increases food production by 5.</p>
     </div>
   )
 }

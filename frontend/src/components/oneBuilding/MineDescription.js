@@ -1,10 +1,8 @@
 import React from 'react';
-function MineDescription(props) {
+function MineDescription() {
   return (
     <div className="mineDescription">
-      <p>You can create troops in your troops in your Mine. The higher level your Mine is, the stronger your troops are.</p>
-      <p>Every level increases 1 ? and 1 ? of the Troops.</p>
-      <p>Every Troop eats 1 ? every minute</p>
+      <p>Generates gold for your kingdom. Every level increases gold production by 5.</p>
     </div>
   )
 }
