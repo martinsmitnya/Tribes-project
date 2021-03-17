@@ -2,10 +2,11 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import NotImplemented from './components/notImplemented/NotImplemented';
 import RegisterPage from './components/register/RegisterPage';
-import Login from './components/login/LoginForm';
 import Resources from './components/resource/Resource';
 import Buildings from './components/buildings/Buildings';
 import SettingsBlock from './components/settings/SettingsBlock';
+import LoginPage from './components/login/LoginPage';
+import SettingsPage from './components/settings/SettingsPage';
 import Header from './components/header/Header';
 
 function App() {
@@ -14,7 +15,7 @@ function App() {
       <div className="App">
         <Switch>
           <Route path="/login">
-            <Login />
+            <LoginPage />
           </Route>
           <Route path="/register">
             <RegisterPage />
@@ -23,10 +24,13 @@ function App() {
             <Resources />
           </Route>
           <Route path="/settings">
-            <SettingsBlock />
+            <SettingsPage />
           </Route>
           <Route path="/buildings">
             <Buildings />
+          </Route>
+          <Route path="/header">
+            <Header />
           </Route>
           <Route path="/">
             <NotImplemented />
