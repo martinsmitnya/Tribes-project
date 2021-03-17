@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import './Header.css';
-import HeaderKingdomName from './HeaderKingdomName';
 import HeaderButton from './HeaderButton';
 
 function Header() {
@@ -24,24 +23,40 @@ function Header() {
 
     const user = ((
         <div className="header-container">
-            <Link to={'/buildings'} class='kingdomNameLink'>
+            <Link to={'/buildings'} className='kingdomNameLink'>
                 <h1 className="header-title" >{userKingdomName}</h1>
             </Link>
             <div className="RightButtonsContainer">
-                <HeaderButton text={'Settings'} />
-                <HeaderButton text={'Logout'} />
+                <NavLink to={'/settings'} className="buttonLink" activeClassName='selected'>
+                    <div className="header-button-container" >
+                        <p className="header-button-text">{'Settings'}</p>
+                    </div>
+                </NavLink>
+                <Link to={'/login'} className="buttonLink" onClick={()=> {localStorage.removeItem('token')}}>
+                    <div className="header-button-container" >
+                        <p className="header-button-text">{'Logout'}</p>
+                    </div>
+                </Link>
             </div>
         </div>
     ))
 
     const guest = ((
         <div className="header-container">
-             <div class='kingdomNameLink'>
+            <div class='kingdomNameLink'>
                 <h1 className="header-title" >{userKingdomName}</h1>
             </div>
             <div className="RightButtonsContainer">
-                <HeaderButton text={'Register'} />
-                <HeaderButton text={'Login'} />
+                <Link to={'/register'} className="buttonLink">
+                    <div className="header-button-container" >
+                        <p className="header-button-text">{'Register'}</p>
+                    </div>
+                </Link>
+                <Link to={'/login'} className="buttonLink">
+                    <div className="header-button-container" >
+                        <p className="header-button-text">{'Login'}</p>
+                    </div>
+                </Link>
             </div>
         </div>
     ))
