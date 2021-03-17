@@ -57,7 +57,7 @@ function Buildings() {
   } else if (!isLoaded) {
     return <div className="buildings"> Loading... </div>;
   } else if (element) {
-    return <div className="buildings">{OneBuilding(element)}</div>;
+    return <div>{OneBuilding(element)}</div>;
   } else {
     return (
       <div className="buildings">

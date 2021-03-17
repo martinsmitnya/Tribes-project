@@ -8,8 +8,8 @@ function BasicInfo(props) {
       src={props.src}
       alt={props.type}>
       </img>
-      <p>{props.type}</p>
-      <p>{props.level}</p>
+      <p className="OneBuildingType">{props.type}</p>
+      <p>Level: {props.level}</p>
     </div>
   )
 }

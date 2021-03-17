@@ -4,17 +4,19 @@ import defence from '../../icons/defence1.png';
 import bread from '../../icons/bread.png';
 function AcademyDescription() {
   return (
-    <div className="academyDescription">
-      <p>You can create troops in your troops in your Academy. The higher level your Academy is, the stronger your troops are.</p>
+    <div className="description">
+      <p>You can create troops in your Academy. The higher level your Academy is, the stronger your troops are.</p>
       <p>
         Every level increases 1 
         <img src={attack} alt="attack" className="SingleBuilding-icon" />
         and 1 
         <img src={defence} alt="defence" className="SingleBuilding-icon" />
-         of the Troops.</p>
+         of the Troops.
+      </p>
       <p>Every Troop eats 1 
         <img src={bread} alt="bread" className="SingleBuilding-icon" />
-        every minute</p>
+        every minute
+      </p>
     </div>
   )
 }

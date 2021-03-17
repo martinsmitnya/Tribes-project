@@ -1,28 +1,16 @@
-import React, { useState } from 'react';
-import Description from './Description';
+import React from 'react';
+import './OneBuilding.css'
 import BasicInfo from './BasicInfoBox';
 import farm from '../../icons/farm.png';
 import mine from '../../icons/mine.png';
 import townhall from '../../icons/townhall_1.png';
 import academy from '../../icons/academy.png';
-import  MineDescription  from './MineDescription';
-import  FarmDescription  from './FarmDescription';
-import  TownhallDescription  from './TownhallDescription';
-import  AcademyDescription  from './AcademyDescription';
-import Fetch from '../fetch/Fetch';
+import MineDescription from './MineDescription';
+import FarmDescription from './FarmDescription';
+import TownhallDescription from './TownhallDescription';
+import AcademyDescription from './AcademyDescription';
 
 function OneBuilding(element) {
-  //setBuldingId(buildingID);
-
-  /*Fetch('GET', `/kingdom/buildings/${buildingID}`)
-    .then(result => {
-      buildingID = result.bulding_id;
-      type = result.type;
-      level = result.level;
-    })
-    .catch(error => {
-      console.log(error.message);
-    });*/
 
   function getDescription(type) {
     if (type === 'farm') {
@@ -58,7 +46,6 @@ function OneBuilding(element) {
         type={element.type}
         level={element.level}
       />
-      <Description/>
       <div className="descriptionBoxWithButtons">
         {getDescription(element.type)}
       </div>
