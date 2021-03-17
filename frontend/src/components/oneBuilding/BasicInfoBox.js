@@ -9,7 +9,7 @@ function BasicInfo(props) {
       alt={props.type}>
       </img>
       <p className="OneBuildingType">{props.type}</p>
-      <p>Level: {props.level}</p>
+      <p className="OneBuildingLevel">Level: {props.level}</p>
     </div>
   )
 }
