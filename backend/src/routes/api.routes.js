@@ -1,6 +1,5 @@
 import express from 'express';
 const cors = require('cors');
-import { helloController } from '../controllers';
 import { loginController } from '../controllers';
 
 const router = express.Router();

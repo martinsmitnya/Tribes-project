@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import NotImplemented from './components/notImplemented/NotImplemented';
 import RegisterPage from './components/register/RegisterPage';
-import Login from './components/login/LoginForm';
+import Login from './components/login/LoginPage';
 import Resources from './components/resource/Resource';
 import Buildings from './components/buildings/Buildings';
 import SettingsBlock from './components/settings/SettingsBlock'
