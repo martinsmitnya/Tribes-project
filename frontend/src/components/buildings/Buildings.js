@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Fetch from '../fetch/Fetch';
 import './Buildings.css';
 import farm from '../../icons/farm.png';
@@ -8,18 +8,22 @@ import academy from '../../icons/academy.png';
 import addAcademy from '../../icons/addacademy.png';
 import addFarm from '../../icons/addfarm.png';
 import addMine from '../../icons/addmine.png';
+import { useSelector, useDispatch } from "react-redux";
 
 function Buildings() {
-  const [buildings, setBuildings] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [error, setError] = useState(null);
-  const [buildingCount, setBuildingCount] = useState(0);
+
+  const dispatch = useDispatch();
+  const buildings = useSelector(state => state.buildingReducer.buildings);
+  const isLoaded = useSelector(state => state.buildingReducer.isLoaded);
+  const error = useSelector(state => state.buildingReducer.error);
+  const buildingCount = useSelector(state => state.buildingReducer.buildingCount);
 
   useEffect(() => {
     Fetch('GET', '/kingdom/buildings').then(result => {
-      setBuildings(result);
-      setIsLoaded(true);
-    });
+      return dispatch({type: 'GET_BUILDINGS', buildings: result});
+    }).catch(error => {
+      return dispatch({type: 'ERROR', error: error.toString()});
+    })
   }, [buildingCount]);
 
   function getImage(type) {
@@ -45,7 +49,7 @@ function Buildings() {
     }
     Fetch('POST', '/kingdom/buildings/newBuilding', body)
       .then(result => {
-        setBuildingCount(buildingCount + 1);
+        return dispatch({type: 'INCREASE_BUILDING_COUNT'})
       })
       .catch(err => alert(err));
   }

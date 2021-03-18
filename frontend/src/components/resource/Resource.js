@@ -1,27 +1,28 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Fetch from '../fetch/Fetch';
 import './Resource.css';
 import farm from '../../icons/svg/buildings/farm.svg';
 import mine from '../../icons/svg/buildings/mine.svg';
 import bread from '../../icons/better_bread.png';
 import coin from '../../icons/better_coin.png';
+import { useSelector, useDispatch } from "react-redux";
 
 function Resources() {
-  const [food, setFood] = useState(null);
-  const [gold, setGold] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [error, setError] = useState(null);
-  const [user, setUser] = useState(0);
+
+  const dispatch = useDispatch();
+  const food = useSelector(state => state.resourceReducer.food);
+  const gold = useSelector(state => state.resourceReducer.gold);
+  const isLoaded = useSelector(state => state.resourceReducer.isLoaded);
+  const error = useSelector(state => state.resourceReducer.error);
+  const user = useSelector(state => state.resourceReducer.user);
 
   useEffect(() => {
     Fetch('GET', '/kingdom/resource')
       .then(result => {
-        setFood(result[0]);
-        setGold(result[1]);
-        setIsLoaded(true);
+        return dispatch({type: 'GET_RESOURCES', food: result[0], gold: result[1]})
       })
       .catch(error => {
-        setError(error);
+        return dispatch({type: 'ERROR', error: error.toString()})
       });
   }, [user]);
 
