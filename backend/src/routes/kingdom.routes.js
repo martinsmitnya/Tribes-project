@@ -4,7 +4,8 @@ import {
   resourceController,
   buildingController,
   newBuildingController,
-  settingsController
+  settingsController,
+  troopsController,
 } from '../controllers';
 
 const router = express.Router();
@@ -15,6 +16,7 @@ router.use(express.json());
 router.get('/buildings', buildingController.get);
 router.post('/buildings/newBuilding', newBuildingController.post);
 router.get('/resource', resourceController.get);
+router.get('/troops', troopsController.get);
 
 router.put('/', settingsController.put);
 

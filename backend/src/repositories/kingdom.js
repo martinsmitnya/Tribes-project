@@ -87,7 +87,7 @@ export const kingdomRepository = {
     } catch (error) {
       throw { status: 500, message: 'Database error' };
     }
-  },  
+  },
 
   async getKingdomInfoByKingdom_id(kingdom_id) {
     const query = `SELECT * FROM kingdoms WHERE id = ?`;
@@ -98,6 +98,28 @@ export const kingdomRepository = {
     } catch (error) {
       throw { status: 500, message: 'Database error' };
     }
-  }, 
+  },
 
+  async getKingdomIdbyUser_id(user_id) {
+    const query = `SELECT id FROM kingdoms WHERE user_id = ?`;
+    const values = [user_id];
+    try {
+      const data = await db.query(query, values);
+      return data.results[0].id;
+    } catch (error) {
+      throw { status: 500, message: 'Database error' };
+    }
+  },
+
+  async getTroopsInfoByKingdomId(kingdom_id) {
+    const query = `SELECT * FROM troops WHERE kingdom_id = ?`;
+    const values = [kingdom_id];
+    try {
+      const data = await db.query(query, values);
+      console.log(data.results);
+      return { status: 200, message: data.results };
+    } catch (error) {
+      throw { status: 500, message: 'Database error' };
+    }
+  },
 };

@@ -15,6 +15,20 @@ export const kingdomService = {
     return kingdomRepository.getBuildingsByKingdomId(1);
   },
 
+  async getTroops(user_id) {
+    const result = await kingdomRepository.getKingdomIdbyUser_id(user_id);
+    let kingdomId = result;
+
+    try {
+      const result = await kingdomRepository.getTroopsInfoByKingdomId(
+        kingdomId
+      );
+      return result;
+    } catch (err) {
+      return err;
+    }
+  },
+
   async postBuilding(body) {
     if (body.type === 'farm' || body.type === 'mine') {
       (body.hp = 100), (body.end = 60), (body.price = 100);
