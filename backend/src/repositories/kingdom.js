@@ -78,7 +78,6 @@ export const kingdomRepository = {
     }
   },
 
-<<<<<<< HEAD
   async getBuildingInfoByBuildingId (buildingId) {
     const query = `SELECT * FROM buildings WHERE building_id = ?;`;
     const values = [buildingId];
@@ -91,8 +90,8 @@ export const kingdomRepository = {
     } catch (error) {
       return { status: error.status, message: error.message };
     }
-  }
-=======
+  },
+  
   async updateKingdomNameByKingdom_id(kingdom_name, kingdom_id) {
     const query = `UPDATE kingdoms SET kingdom_name = ? WHERE  id = ?;`;
     const values = [kingdom_name, kingdom_id];
@@ -114,6 +113,5 @@ export const kingdomRepository = {
       throw { status: 500, message: 'Database error' };
     }
   }, 
->>>>>>> origin/development
 
 };
