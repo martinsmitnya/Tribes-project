@@ -1,80 +1,36 @@
 import request from 'supertest';
 import app from '../src/app';
-import { userRepository } from '../src/repositories/user'
-import { kingdomRepository } from '../src/repositories/kingdom'
+import { registerService } from '../src/services/registerService'
 
-jest.mock('../src/repositories/user');
-jest.mock('../src/repositories/kingdom');
+//Here
+jest.mock('../src/services/registerService');
 
-const userTableData = [{
-  id: 1,
-  username: 'Martinka',
-  password: 'jelszo123'
-}]
+//HERE
+const registerServiceData = {
+  status: 200, 
+  id: 12, 
+  username: 'Janos', 
+  kingdomId: 12
+}
 
-const kingdomTableData = [{
-  kingdomId: 2,
-  kingdomname: 'MartinkaKiralysaga',
-  userId: 1
-}]
-
-const responseData = {
+const registerServiceResponse = {
   status: 200,
-  username: 'Martinka',
-  kingdomId: 2
+  id: 12,
+  username: "Janos",
+  kingdomId: 12
 }
 
 beforeAll(() => {
-  userRepository.getUserByUsername.mockResolvedValue(userTableData[0].id);
-  userRepository.insertNewUser.mockResolvedValue(userTableData[0].kingdomId);
-  kingdomRepository.getKingdomByKingdomName.mockResolvedValue(kingdomTableData[0].id);
-  kingdomRepository.insertKingdom.mockResolvedValue(kingdomTableData[0].kingdomId);
+  registerService.postRegister.mockResolvedValue(registerServiceData)
 })
 
 
-test('should respond with 400 in case of empty request body', done => {
-  const registerData = {}
-
-  request(app)
-    .post('/register')
-    .send(registerData)
-    .set('Accept', 'application/json')
-    .expect('Content-type', /json/)
-    .expect(400)
-    .end((err, data) => {
-      if (err) return done(err);
-      expect(data.body).toEqual('Please fill out the input fields');
-      return done();
-    })
-})
-
-test('should respond with 400 in case of only username sent', done => {
+test('RegisterController unit test, with mocked service value:', done => {
   const registerData = {
-    username: "Martinka"
-  }
-
-  request(app)
-    .post('/register')
-    .send(registerData)
-    .set('Accept', 'application/json')
-    .expect('Content-type', /json/)
-    .expect(400)
-    .end((err, data) => {
-      if (err) return done(err);
-      expect(data.body).toEqual('Please fill out the input fields');
-      return done();
-    })
-})
-
-test('should respond with 200', done => {
-  const registerData = {
-    username: 'Martinka',
+    username: 'Janos',
     password: 'jelszo123',
-    kingdom_name: 'MartinkaKiralysaga'
+    kingdom_name: 'JanosKiralysaga'
   }
-
-  userRepository.getUserByUsername.mockResolvedValue(undefined);
-  kingdomRepository.getKingdomByKingdomName.mockResolvedValue(undefined);
 
   request(app)
     .post('/register')
@@ -84,7 +40,7 @@ test('should respond with 200', done => {
     .expect(200)
     .end((err, data) => {
       if (err) return done(err);
-      expect(data.body).toEqual(responseData);
+      expect(data.body).toEqual(registerServiceResponse);
       return done();
     })
 })
