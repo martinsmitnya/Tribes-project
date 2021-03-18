@@ -2,10 +2,8 @@ import request from 'supertest';
 import app from '../src/app';
 import { registerService } from '../src/services/registerService'
 
-//Here
 jest.mock('../src/services/registerService');
 
-//HERE
 const registerServiceData = {
   status: 200, 
   id: 12, 
@@ -19,11 +17,6 @@ const registerServiceResponse = {
   username: "Janos",
   kingdomId: 12
 }
-
-// beforeAll(() => {
-//   registerService.postRegister.mockResolvedValue(registerServiceData)
-// })
-
 
 test('Should return correct insertion message:', done => {
   const registerData = {
