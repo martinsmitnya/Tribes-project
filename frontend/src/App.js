@@ -12,6 +12,7 @@ import Header from './components/header/Header';
 function App() {
   return (
     <Router>
+          <Header />
       <div className="App">
         <Switch>
           <Route path="/login">
