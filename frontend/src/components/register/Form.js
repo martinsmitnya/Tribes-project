@@ -67,7 +67,7 @@ const Form = () => {
   }, [submitted]);
 
   return (
-    <div className="form-container">
+    <div className="register-form-container">
       <form autoComplete="off" onSubmit={handleSubmit}>
         <InputField
           onChange={handleUsernameChange}
@@ -93,7 +93,7 @@ const Form = () => {
           type="text"
         />
         <br />
-        {errorMessage && <span className="errormessage">{errorMessage}</span>}
+        {errorMessage && <span className="register-errormessage">{errorMessage}</span>}
         <button type="submit">SIGN UP</button>
       </form>
     </div>

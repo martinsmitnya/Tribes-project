@@ -4,7 +4,8 @@ import {
   resourceController,
   buildingController,
   newBuildingController,
-  oneBuildingContoroller
+  oneBuildingContoroller,
+  settingsController
 } from '../controllers';
 
 const router = express.Router();
@@ -16,5 +17,7 @@ router.get('/buildings', buildingController.get);
 router.post('/buildings/newBuilding', newBuildingController.post);
 router.get('/buildings/:buildingId', oneBuildingContoroller.get)
 router.get('/resource', resourceController.get);
+
+router.put('/', settingsController.put);
 
 export default router;

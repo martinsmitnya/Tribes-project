@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import RegisterBlock from './RegisterBlock'
 import Header from './Header'
 import './RegisterPage.css'
