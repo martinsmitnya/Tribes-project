@@ -1,4 +1,5 @@
 import { userRepository } from '../repositories/user';
+import { kingdomRepository } from '../repositories/kingdom';
 const jwt = require('jsonwebtoken');
 
 const privateKey = 'secretkeycode';
@@ -10,7 +11,9 @@ export const loginTokenCreator = {
       requestBody.username,
       requestBody.password
     );
-    console.log('Query array: ', queryArray);
+    let KingdomName = await kingdomRepository.getKingdomByUserId(queryArray[0].user_id);
+    console.log('Query array: ', queryArray, KingdomName);
+
     if (queryArray.length < 1) {
       throw { status: 406, message: 'Username or password is incorrect.' };
     } else if (
@@ -18,8 +21,7 @@ export const loginTokenCreator = {
       queryArray[0].passwordhash === requestBody.password
     ) {
       //Generate JWT token
-      let token = jwt.sign({ userid: queryArray[0].user_id }, privateKey);
-
+      let token = jwt.sign({ userid: queryArray[0].user_id, kindomName: KingdomName }, privateKey);
       return {
         status: 200,
         data: { status: 200, token: token },

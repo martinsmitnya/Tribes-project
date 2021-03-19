@@ -13,6 +13,17 @@ export const kingdomRepository = {
     }
   },
 
+  async getKingdomByUserId(user_id) {
+    const query = `SELECT kingdom_name FROM kingdoms WHERE user_id = ?`;
+    const values = [user_id];
+    try {
+      const data = await db.query(query, values);
+      return data.results[0].kingdom_name;
+    } catch (error) {
+      throw { status: 500, message: 'Database error' };
+    }
+  },
+
   async insertKingdom(kingdom_name, userId) {
     const query = `INSERT INTO kingdoms (kingdom_name, user_id) VALUES(?,?)`;
     const values = [kingdom_name, userId];

@@ -10,6 +10,7 @@ import addFarm from '../../icons/addfarm.png';
 import addMine from '../../icons/addmine.png';
 import { useSelector, useDispatch } from "react-redux";
 import OneBuilding from '../oneBuilding/OneBuilding'
+import Header from '../header/Header';
 
 function Buildings() {
 
@@ -64,6 +65,8 @@ function Buildings() {
     return <div><OneBuilding type={element.type}/></div>;
   } else {
     return (
+      <div>
+        <Header />
       <div className="buildings">
         {buildings.map(element => {
           console.log(element);
@@ -110,6 +113,7 @@ function Buildings() {
           ></img>
           <label className="textB">Add Academy</label>
         </div>
+      </div>
       </div>
     );
   }
