@@ -3,11 +3,13 @@ import './Form.css';
 import Fetch from '../fetch/Fetch';
 import { useHistory } from 'react-router-dom';
 import InputField from "../register/InputField";
+import {useDispatch, useSelector} from "react-redux";
 
 const Form = () => {
 
   let history = useHistory();
-  const [errorMessage, setErrorMessage] = useState('');
+  const dispatch = useDispatch();
+  const errormessage = useSelector(state => state.userReducer.errormessage);
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [submitted, setSubmitted] = useState(false);
@@ -25,7 +27,7 @@ const Form = () => {
   function handleSubmit(event) {
     event.preventDefault();
     if (password === '' || userName === '') {
-      setErrorMessage(() => 'All the input fields are required.');
+      return dispatch({type: 'MISSING_USERNAME_OR_PASSWORD'});
     } else {
       setSubmitted(true);
     }
@@ -36,12 +38,12 @@ const Form = () => {
       let body = { username: userName, password: password };
       Fetch('POST', '/login/login', body)
         .then(response => {
-          setErrorMessage(() => ``);
           localStorage.setItem('token', response.token);
           history.push('/buildings');
+          return dispatch({type: 'CLEAR_FIELDS'});
         })
         .catch(err => {
-          setErrorMessage(() => `${err}`);
+          return dispatch({type: 'BACKEND_ERROR', errormessage: err.toString()});
         });
       setSubmitted(false);
     }
@@ -66,7 +68,7 @@ const Form = () => {
           type="password"
         />
         <br />
-        {errorMessage && <span className="login-errormessage">{errorMessage}</span>}
+        {errormessage && <span className="login-errormessage">{errormessage}</span>}
         <button type="submit">LOGIN</button>
       </form>
     </div>

@@ -2,9 +2,13 @@ import React, { useState, useEffect } from 'react';
 import './Form.css';
 import InputField from './InputField';
 import Fetch from '../fetch/Fetch';
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 const Form = () => {
-  const [errorMessage, setErrorMessage] = useState('');
+
+  const dispatch = useDispatch();
+  const errormessage = useSelector(state => state.userReducer.errormessage);
   const [userName, setUserName] = useState('');
   const [passwordHash, setPasswordHash] = useState('');
   const [kingdomName, setKingdomName] = useState('');
@@ -25,15 +29,13 @@ const Form = () => {
   async function handleSubmit(event) {
     event.preventDefault();
     if (passwordHash === '' || userName === '') {
-      setErrorMessage('Username and Password are required!');
       setUserName(userName);
       setPasswordHash(passwordHash);
-      return;
+      return dispatch({type: 'MISSING_USERNAME_OR_PASSWORD'});
     } else if (passwordHash.length < 8) {
-      setErrorMessage('Password must be at least 8 characters!');
       setUserName(userName);
       setPasswordHash(passwordHash);
-      return;
+      return dispatch({type: 'PASSWORD_UNDER_8_CHARACTERS'});
     }
 
     setSubmitted(true);
@@ -49,15 +51,14 @@ const Form = () => {
       Fetch('POST', '/register', body)
         .then(response => {
           let inputs = document.querySelectorAll('input');
-          setErrorMessage('');
           Array.from(inputs).forEach(input => (input.value = ''));
+          return dispatch({type: 'CLEAR_FIELDS'});
         })
         .catch(error => {
-          setErrorMessage(error.toString());
           setUserName(userName);
           setPasswordHash(passwordHash);
           setKingdomName(kingdomName);
-          return;
+          return dispatch({type: 'BACKEND_ERROR', errormessage: error.toString()});
         });
       setKingdomName('');
       setUserName('');
@@ -93,7 +94,7 @@ const Form = () => {
           type="text"
         />
         <br />
-        {errorMessage && <span className="register-errormessage">{errorMessage}</span>}
+        {errormessage && <span className="errormessage">{errormessage}</span>}
         <button type="submit">SIGN UP</button>
       </form>
     </div>
