@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Fetch from '../fetch/Fetch';
 import './Buildings.css';
 import farm from '../../icons/farm.png';
@@ -9,6 +9,7 @@ import addAcademy from '../../icons/addacademy.png';
 import addFarm from '../../icons/addfarm.png';
 import addMine from '../../icons/addmine.png';
 import { useSelector, useDispatch } from "react-redux";
+import OneBuilding from '../oneBuilding/OneBuilding'
 
 function Buildings() {
 
@@ -17,6 +18,7 @@ function Buildings() {
   const isLoaded = useSelector(state => state.buildingReducer.isLoaded);
   const error = useSelector(state => state.buildingReducer.error);
   const buildingCount = useSelector(state => state.buildingReducer.buildingCount);
+  const[element, setElement] = useState(null);
 
   useEffect(() => {
     Fetch('GET', '/kingdom/buildings').then(result => {
@@ -59,7 +61,7 @@ function Buildings() {
   } else if (!isLoaded) {
     return <div className="buildings"> Loading... </div>;
   } else if (element) {
-    return <div>{OneBuilding(element)}</div>;
+    return <div><OneBuilding type={element.type}/></div>;
   } else {
     return (
       <div className="buildings">
