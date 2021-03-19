@@ -58,16 +58,21 @@ function Buildings() {
     return <div className="buildings"> Error: {error.message} </div>;
   } else if (!isLoaded) {
     return <div className="buildings"> Loading... </div>;
+  } else if (element) {
+    return <div>{OneBuilding(element)}</div>;
   } else {
     return (
       <div className="buildings">
         {buildings.map(element => {
+          console.log(element);
           return (
             <div>
               <img
                 className="imgB"
                 src={getImage(element.type)}
                 alt={element.type}
+                //Itt kell onClick varázslat
+                onClick={() => setElement(element)}
               ></img>
               <label className="textB">
                 {element.type} <br />
