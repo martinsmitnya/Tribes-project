@@ -18,7 +18,7 @@ export const kingdomService = {
   async getTroops(token) {
     let user_id = '';
     if (token) {
-      user_id = JSON.parse(token).user_id;
+      user_id = JSON.parse(token).userid;
     } else {
       throw { status: 500, message: 'Invalid Token' };
     }

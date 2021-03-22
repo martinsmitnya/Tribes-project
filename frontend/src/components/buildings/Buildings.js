@@ -66,7 +66,7 @@ function Buildings() {
   } else if (element) {
     return (
       <div>
-        <OneBuilding type={element.type} />
+        <OneBuilding level={element.level} type={element.type} />
       </div>
     );
   } else {

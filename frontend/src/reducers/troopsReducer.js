@@ -3,7 +3,7 @@ const initialState = {
   isLoaded: false,
   error: '',
   stats: { attack: 0, defence: 0, sustenance: 0 },
-  levels: {};
+  levels: {},
 };
 
 const troopsReducer = (state = initialState, action) => {
@@ -17,14 +17,14 @@ const troopsReducer = (state = initialState, action) => {
     case 'SET_STATS':
       return {
         ...state,
-        stats: action.stats
+        stats: action.stats,
       };
 
     case 'SET_LEVELS':
-        return {
-            ...state,
-            levels: action.levels
-        }
+      return {
+        ...state,
+        levels: action.levels,
+      };
     case 'ERROR':
       return {
         ...state,
