@@ -1,4 +1,4 @@
-# Tribes Backend
+# Tribes backend
 
 ## Steps
 

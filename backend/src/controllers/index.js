@@ -5,3 +5,4 @@ export * from './buildingController';
 export * from './newBuildingController';
 export * from './settingsController';
 export * from './troopsController';
+export * from './oneBuildingController';

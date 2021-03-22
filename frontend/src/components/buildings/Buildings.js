@@ -8,18 +8,24 @@ import academy from '../../icons/academy.png';
 import addAcademy from '../../icons/addacademy.png';
 import addFarm from '../../icons/addfarm.png';
 import addMine from '../../icons/addmine.png';
+import { useSelector, useDispatch } from "react-redux";
+import OneBuilding from '../oneBuilding/OneBuilding'
 
 function Buildings() {
-  const [buildings, setBuildings] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [error, setError] = useState(null);
-  const [buildingCount, setBuildingCount] = useState(0);
+
+  const dispatch = useDispatch();
+  const buildings = useSelector(state => state.buildingReducer.buildings);
+  const isLoaded = useSelector(state => state.buildingReducer.isLoaded);
+  const error = useSelector(state => state.buildingReducer.error);
+  const buildingCount = useSelector(state => state.buildingReducer.buildingCount);
+  const[element, setElement] = useState(null);
 
   useEffect(() => {
     Fetch('GET', '/kingdom/buildings').then(result => {
-      setBuildings(result);
-      setIsLoaded(true);
-    });
+      return dispatch({type: 'GET_BUILDINGS', buildings: result});
+    }).catch(error => {
+      return dispatch({type: 'ERROR', error: error.toString()});
+    })
   }, [buildingCount]);
 
   function getImage(type) {
@@ -45,7 +51,7 @@ function Buildings() {
     }
     Fetch('POST', '/kingdom/buildings/newBuilding', body)
       .then(result => {
-        setBuildingCount(buildingCount + 1);
+        return dispatch({type: 'INCREASE_BUILDING_COUNT'})
       })
       .catch(err => alert(err));
   }
@@ -54,16 +60,21 @@ function Buildings() {
     return <div className="buildings"> Error: {error.message} </div>;
   } else if (!isLoaded) {
     return <div className="buildings"> Loading... </div>;
+  } else if (element) {
+    return <div><OneBuilding type={element.type}/></div>;
   } else {
     return (
       <div className="buildings">
         {buildings.map(element => {
+          console.log(element);
           return (
             <div>
               <img
                 className="imgB"
                 src={getImage(element.type)}
                 alt={element.type}
+                //Itt kell onClick varázslat
+                onClick={() => setElement(element)}
               ></img>
               <label className="textB">
                 {element.type} <br />
