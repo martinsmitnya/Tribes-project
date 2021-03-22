@@ -60,12 +60,12 @@
   padding: 10px;
   grid-template-columns: 1fr 9fr;
   background-color: rgb(0, 149, 135);
-  box-shadow: 1px 6px rgba(0, 0, 0, 0.158);
+  box-shadow: 0px 5px rgba(0, 0, 0, 0.158);
   border-radius: 22px;
   height: 90px;
   width: 400px;
   color: white;
-  font-size: 130%;
+  font-size: 180%;
   font-weight: normal;
   z-index: 1;
 }
