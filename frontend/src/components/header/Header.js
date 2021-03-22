@@ -1,18 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import './Header.css';
 
 function Header() {
+    const dispatch = useDispatch();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [userKingdomName, setUserKingdomName] = useState('Tribes of Gymnocercus');
+    // const [userKingdomName, setUserKingdomName] = useState('Tribes of Gymnocercus');
+    const kingdomName = useSelector(state => state.userReducer.kingdomName);
 
     const tokenCheck = () => {
         if (localStorage.getItem('token')) {
             setIsLoggedIn(true);
-            setUserKingdomName(JSON.parse(atob(localStorage.getItem('token').split('.')[1])).kindomName);
+            // setUserKingdomName(JSON.parse(atob(localStorage.getItem('token').split('.')[1])).kindomName);
+            return dispatch({ type: 'SET_NEW_KINGDOMNAME', kingdomName: JSON.parse(atob(localStorage.getItem('token').split('.')[1])).kindomName })
         } else {
             setIsLoggedIn(false);
-            setUserKingdomName('Tribes of Gymnocercus');
+            return dispatch({ type: 'SET_NEW_KINGDOMNAME', kingdomName: 'Tribes of Gymnocercus' })
         }
     }
 
@@ -23,7 +27,7 @@ function Header() {
     const user = ((
         <div className="header-container">
             <Link to={'/buildings'} className='kingdomNameLink'>
-                <h1 className="header-title" >{userKingdomName}</h1>
+                <h1 className="header-title" >{kingdomName}</h1>
             </Link>
             <p>USER USER</p>
             <div className="RightButtonsContainer">
@@ -32,7 +36,7 @@ function Header() {
                         <p className="header-button-text">{'Settings'}</p>
                     </div>
                 </NavLink>
-                <Link to={'/login'} className="buttonLink" onClick={()=> {localStorage.removeItem('token')}}>
+                <Link to={'/login'} className="buttonLink" onClick={() => { localStorage.removeItem('token') }}>
                     <div className="header-button-container" >
                         <p className="header-button-text">{'Logout'}</p>
                     </div>
@@ -44,7 +48,7 @@ function Header() {
     const guest = ((
         <div className="header-container">
             <div class='kingdomNameLink'>
-                <h1 className="header-title" >{userKingdomName}</h1>
+                <h1 className="header-title" >{kingdomName}</h1>
             </div>
             <p>Guest Guest</p>
             <div className="RightButtonsContainer">

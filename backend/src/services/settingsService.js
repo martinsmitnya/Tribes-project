@@ -14,9 +14,9 @@ export const settingsService = {
      throw { status: 400, message: 'Kingdom name is already taken'}
     }
    
-    const updateKingdomName = await kingdomRepository.updateKingdomNameByKingdom_id(trimmedkingdom_name, 39);
+    const updateKingdomName = await kingdomRepository.updateKingdomNameByKingdom_id(trimmedkingdom_name, 45);
    
-    const kingdomInfo = await kingdomRepository.getKingdomInfoByKingdom_id(39);
+    const kingdomInfo = await kingdomRepository.getKingdomInfoByKingdom_id(45);
     const buildingInfo = await buildingRepository.getBuildingInfoByKingdomId(1);
     const resourceInfo = await resourceRepository.getResourceInfoByKingdomId(1);
     const troopsInfo = await troopRepository.getTroopsInfoByKingdomId(1);

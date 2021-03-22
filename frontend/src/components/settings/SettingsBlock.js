@@ -1,19 +1,23 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import './SettingsBlock.css';
 import InputField from './InputField'
 import Fetch from '../fetch/Fetch'
+import Header from '../header/Header';
 
 const SettingsBlock = () => {
-
+  const dispatch = useDispatch();
   const [errorMessage, setErrorMessage] = useState('');
-  const [kingdomName, setKingdomName] = useState('');
+  const kingdomName = useSelector(state => state.userReducer.kingdomName);
+
 
   useEffect(() => {
     setErrorMessage(() => ``);
   }, [kingdomName]);
 
   function handleKingdomNameChange(event) {
-    setKingdomName(event.target.value.trim());
+    return dispatch({type: 'SET_NEW_KINGDOMNAME', kingdomName: event.target.value.trim()})
+
   }
 
   async function handleSubmit(event) {
@@ -35,12 +39,13 @@ const SettingsBlock = () => {
     .catch (error => {
       console.log(error)
       setErrorMessage(error.message)
-      setKingdomName(kingdomName);
     })
     }
   }
   
   return ( 
+    <div>
+      <Header />
     <div className="settingsBlock">
     <h1>Kingdom Settings</h1>
     <form autoComplete="off" onSubmit={handleSubmit}>
@@ -57,6 +62,7 @@ const SettingsBlock = () => {
     <button type="submit">UPDATE SETTINGS</button>
     </form>
     </div> 
+    </div>
   );
 }
  

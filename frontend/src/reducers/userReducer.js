@@ -1,5 +1,6 @@
 const initialState = {
   errormessage: '',
+  kingdomName: 'Tribes of Gymnocercus'
 }
 
 const userReducer = (state = initialState, action) => {
@@ -24,6 +25,11 @@ const userReducer = (state = initialState, action) => {
         ...state,
         errormessage: '',
       };
+    case 'SET_NEW_KINGDOMNAME':
+      return {
+        ...state, 
+        kingdomName: action.kingdomName,
+      }
     default:
       return state;
   }
