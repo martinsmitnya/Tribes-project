@@ -15,7 +15,11 @@ const SettingsBlock = () => {
   }, [kingdomName]);
 
   function handleKingdomNameChange(event) {
-    localStorage.setItem('kingdomName', event.target.value.trim());
+    if (kingdomName === '') {
+      setErrorMessage(`Kingdom name is required`);
+    } else {
+      localStorage.setItem('kingdomName', event.target.value.trim());
+    }
     return dispatch({type: 'SET_NEW_KINGDOMNAME', kingdomName: event.target.value.trim()})
   }
 
