@@ -6,14 +6,12 @@ import './Header.css';
 function Header() {
     const dispatch = useDispatch();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    // const [userKingdomName, setUserKingdomName] = useState('Tribes of Gymnocercus');
     const kingdomName = useSelector(state => state.userReducer.kingdomName);
 
     const tokenCheck = () => {
         if (localStorage.getItem('token')) {
             setIsLoggedIn(true);
-            // setUserKingdomName(JSON.parse(atob(localStorage.getItem('token').split('.')[1])).kindomName);
-            return dispatch({ type: 'SET_NEW_KINGDOMNAME', kingdomName: JSON.parse(atob(localStorage.getItem('token').split('.')[1])).kindomName })
+            return dispatch({ type: 'SET_NEW_KINGDOMNAME', kingdomName: localStorage.getItem('kingdomName')})
         } else {
             setIsLoggedIn(false);
             return dispatch({ type: 'SET_NEW_KINGDOMNAME', kingdomName: 'Tribes of Gymnocercus' })
@@ -29,14 +27,13 @@ function Header() {
             <Link to={'/buildings'} className='kingdomNameLink'>
                 <h1 className="header-title" >{kingdomName}</h1>
             </Link>
-            <p>USER USER</p>
             <div className="RightButtonsContainer">
                 <NavLink to={'/settings'} className="buttonLink" activeClassName='selected'>
                     <div className="header-button-container" >
                         <p className="header-button-text">{'Settings'}</p>
                     </div>
                 </NavLink>
-                <Link to={'/login'} className="buttonLink" onClick={() => { localStorage.removeItem('token') }}>
+                <Link to={'/login'} className="buttonLink" onClick={() => { localStorage.removeItem('token'); localStorage.removeItem('kingdomName') }}>
                     <div className="header-button-container" >
                         <p className="header-button-text">{'Logout'}</p>
                     </div>
@@ -50,7 +47,6 @@ function Header() {
             <div class='kingdomNameLink'>
                 <h1 className="header-title" >{kingdomName}</h1>
             </div>
-            <p>Guest Guest</p>
             <div className="RightButtonsContainer">
                 <Link to={'/register'} className="buttonLink">
                     <div className="header-button-container" >

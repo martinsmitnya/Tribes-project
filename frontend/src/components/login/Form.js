@@ -39,6 +39,7 @@ const Form = () => {
       Fetch('POST', '/login/login', body)
         .then(response => {
           localStorage.setItem('token', response.token);
+          localStorage.setItem('kingdomName', JSON.parse(atob(localStorage.getItem('token').split('.')[1])).kindomName);
           history.push('/buildings');
           return dispatch({type: 'CLEAR_FIELDS'});
         })

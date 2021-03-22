@@ -13,9 +13,6 @@ function App() {
     <Router>
       <div className="App">
         <Switch>
-        <Route path="/header">
-            <Header />
-          </Route>
           <Route path="/login">
             <Login />
           </Route>

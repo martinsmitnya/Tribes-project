@@ -10,14 +10,13 @@ const SettingsBlock = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const kingdomName = useSelector(state => state.userReducer.kingdomName);
 
-
   useEffect(() => {
     setErrorMessage(() => ``);
   }, [kingdomName]);
 
   function handleKingdomNameChange(event) {
+    localStorage.setItem('kingdomName', event.target.value.trim());
     return dispatch({type: 'SET_NEW_KINGDOMNAME', kingdomName: event.target.value.trim()})
-
   }
 
   async function handleSubmit(event) {

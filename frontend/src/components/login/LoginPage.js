@@ -1,13 +1,13 @@
 import React from 'react';
 import LoginBlock from './LoginBlock'
-import Header from '../register/Header'
+import Header from '../header/Header'
 import './LoginPage.css'
 
 const LoginPage = () => {
 
   return (
     <div className='login-page-container'>
-      <Header/>
+      <Header />
       <LoginBlock />
     </div>
   );
