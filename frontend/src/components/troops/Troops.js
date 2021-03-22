@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import './Troops.css';
 import Fetch from '../fetch/Fetch';
 import { useSelector, useDispatch } from 'react-redux';
+import troopMainLogo from '../../icons/troopMainLogo.png';
+import troopRoundedLogo from '../../icons/Asset_9.png';
 
 function Troops() {
   const dispatch = useDispatch();
@@ -41,18 +44,57 @@ function Troops() {
     dispatch({ type: 'SET_STATS', stats: troopsStats });
   }
   if (error) {
-    return <div className="troops_container"> Error: {error.message} </div>;
+    return <div className="troops-container"> Error: {error.message} </div>;
   } else if (!isLoaded) {
-    return <div className="troops_container"> Loading... </div>;
+    return <div className="troops-container"> Loading... </div>;
   } else {
     return (
-      <div>
-        <div>Attack: {stats.attack}</div>
-        <div>Defence: {stats.defence}</div>
-        <div>Sustenance: {stats.sustenance}</div>
-        <div>{levels[0]} Troop Level 1</div>
-        <div>{levels[1]} Troop Level 2</div>
-        <div>{levels[2]} Troop Level 3</div>
+      <div className="troops-container">
+        <div className="troops-stats">
+          <img
+            className="troops-mainLogo"
+            src={troopMainLogo}
+            alt="Troop Logo"
+          ></img>
+          <div>Attack: {stats.attack}</div>
+          <div>Defence: {stats.defence}</div>
+          <div>Sustenance: {stats.sustenance}</div>
+        </div>
+        <div className="troops-levels">
+          <div className="troops-levelButton">
+            <img
+              className="troops-roundedLogo"
+              src={troopRoundedLogo}
+              alt="Troop Logo Rounded"
+            ></img>
+            <div>
+              <div className="troops-levelNumber">{levels[0]}</div> Troop Level
+              1
+            </div>
+          </div>
+          <div className="troops-levelButton">
+            <img
+              className="troops-roundedLogo"
+              src={troopRoundedLogo}
+              alt="Troop Logo Rounded"
+            ></img>
+            <div>
+              <div className="troops-levelNumber">{levels[1]}</div> Troop Level
+              2
+            </div>
+          </div>
+          <div className="troops-levelButton">
+            <img
+              className="troops-roundedLogo"
+              src={troopRoundedLogo}
+              alt="Troop Logo Rounded"
+            ></img>
+            <div>
+              <div className="troops-levelNumber">{levels[2]}</div> Troop Level
+              3
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
