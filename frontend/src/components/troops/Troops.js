@@ -3,8 +3,10 @@ import Fetch from '../fetch/Fetch';
 import { useSelector, useDispatch } from 'react-redux';
 
 function Troops() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatcsh();
   const troops = useSelector(state => state.troopsReducer.troops);
+  const stats = useSelector(state => state.troopsReducer.stats);
+  const levels = useSelector(state => state.troopsReducer.levels);
   const isLoaded = useSelector(state => state.troopsReducer.isLoaded);
   const error = useSelector(state => state.troopsReducer.error);
   const [element, setElement] = useState(null);
@@ -23,6 +25,18 @@ function Troops() {
         return dispatch({ type: 'ERROR', error: error.toString() });
       });
   }, [isLoaded]);
+
+  getLevels(){
+      let troopsLevels = [0,0,0,0,0,0];
+      let troopsStats= {attack:0, defence:0, sustenance: 0};
+      troops.map(element => {
+          troopsLevels[element.level-1] += 1;
+          troopsStats.attack += element.attack;
+          troopStats.defence += element.defence;
+          troopStats.sustenance += element.sustenance;
+      })
+      
+  }
 
   if (error) {
     return <div className="troops_container"> Error: {error.message} </div>;
