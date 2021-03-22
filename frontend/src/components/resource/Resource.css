@@ -1,4 +1,4 @@
-.resources {
+.resources-container {
   display: grid;
   padding: 20px;
   background-color: rgba(255, 255, 255, 0.8);
@@ -11,61 +11,61 @@
   font-weight: bold;
 }
 
-.bread {
+.resource-bread {
   padding-top: 10px;
   width: 35px;
   height: 20px;
 }
 
-.coins {
+.resource-coins {
   padding-top: 5px;
   width: 30px;
   height: 30px;
 }
 
-.food {
+.resource-food {
   grid-area: food;
   font-size: 180%;
 }
 
-.gold {
+.resource-gold {
   grid-area: golds;
   font-size: 180%;
 }
 
-.building {
+.resource-building {
   padding-right: 15px;
   height: 50px;
   width: 50px;
 }
 
-.farm {
+.resource-farm {
   grid-area: farm;
 }
 
-.mine {
+.resource-mine {
   grid-area: mine;
 }
 
-.foodgen {
+.resource-foodgen {
   grid-area: foodgen;
 }
 
-.goldsgen {
+.resource-goldsgen {
   grid-area: goldsgen;
 }
 
-.textR {
+.resource-text {
   grid-template-columns: 1fr 1fr;
   display: grid;
   color: rgb(107, 106, 106);
   margin-bottom: -5px;
 }
 
-.pos {
+.resource-pos {
   color: rgb(64, 179, 64);
 }
 
-.neg {
+.resource-neg {
   color: rgb(245, 133, 6);
 }

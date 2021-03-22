@@ -9,7 +9,6 @@ function Troops() {
   const levels = useSelector(state => state.troopsReducer.levels);
   const isLoaded = useSelector(state => state.troopsReducer.isLoaded);
   const error = useSelector(state => state.troopsReducer.error);
-  const [element, setElement] = useState(null);
 
   const test =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOiI2NyIsIm5hbWUiOiJKb2huIERvZSIsImlhdCI6MTUxNjIzOTAyMn0.Nr70kjGqR3NgAM1rnsTeYYI6DQmKtOlUpzePZQsg9Wo';
