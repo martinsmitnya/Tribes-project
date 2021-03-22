@@ -8,24 +8,27 @@ import academy from '../../icons/academy.png';
 import addAcademy from '../../icons/addacademy.png';
 import addFarm from '../../icons/addfarm.png';
 import addMine from '../../icons/addmine.png';
-import { useSelector, useDispatch } from "react-redux";
-import OneBuilding from '../oneBuilding/OneBuilding'
+import { useSelector, useDispatch } from 'react-redux';
+import OneBuilding from '../oneBuilding/OneBuilding';
 
 function Buildings() {
-
   const dispatch = useDispatch();
   const buildings = useSelector(state => state.buildingReducer.buildings);
   const isLoaded = useSelector(state => state.buildingReducer.isLoaded);
   const error = useSelector(state => state.buildingReducer.error);
-  const buildingCount = useSelector(state => state.buildingReducer.buildingCount);
-  const[element, setElement] = useState(null);
+  const buildingCount = useSelector(
+    state => state.buildingReducer.buildingCount
+  );
+  const [element, setElement] = useState(null);
 
   useEffect(() => {
-    Fetch('GET', '/kingdom/buildings').then(result => {
-      return dispatch({type: 'GET_BUILDINGS', buildings: result});
-    }).catch(error => {
-      return dispatch({type: 'ERROR', error: error.toString()});
-    })
+    Fetch('GET', '/kingdom/buildings')
+      .then(result => {
+        return dispatch({ type: 'GET_BUILDINGS', buildings: result });
+      })
+      .catch(error => {
+        return dispatch({ type: 'ERROR', error: error.toString() });
+      });
   }, [buildingCount]);
 
   function getImage(type) {
@@ -51,7 +54,7 @@ function Buildings() {
     }
     Fetch('POST', '/kingdom/buildings/newBuilding', body)
       .then(result => {
-        return dispatch({type: 'INCREASE_BUILDING_COUNT'})
+        return dispatch({ type: 'INCREASE_BUILDING_COUNT' });
       })
       .catch(err => alert(err));
   }
@@ -61,7 +64,11 @@ function Buildings() {
   } else if (!isLoaded) {
     return <div className="buildings"> Loading... </div>;
   } else if (element) {
-    return <div><OneBuilding type={element.type}/></div>;
+    return (
+      <div>
+        <OneBuilding type={element.type} />
+      </div>
+    );
   } else {
     return (
       <div className="buildings">

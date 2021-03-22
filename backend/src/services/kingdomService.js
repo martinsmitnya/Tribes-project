@@ -15,10 +15,15 @@ export const kingdomService = {
     return kingdomRepository.getBuildingsByKingdomId(1);
   },
 
-  async getTroops(user_id) {
+  async getTroops(token) {
+    let user_id = '';
+    if (token) {
+      user_id = JSON.parse(token).user_id;
+    } else {
+      throw { status: 500, message: 'Invalid Token' };
+    }
     const result = await kingdomRepository.getKingdomIdbyUser_id(user_id);
     let kingdomId = result;
-
     try {
       const result = await kingdomRepository.getTroopsInfoByKingdomId(
         kingdomId
