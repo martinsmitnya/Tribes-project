@@ -6,7 +6,6 @@ export const troopsController = {
       let data = await kingdomService.getTroops(req.headers.token);
       res.status(data.status).json(data.message);
     } catch (err) {
-      console.log(err);
       return res.status(err.status).json(err.message);
     }
   },
