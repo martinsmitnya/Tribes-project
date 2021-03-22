@@ -18,9 +18,13 @@ export const kingdomService = {
   async getTroops(token) {
     let user_id = '';
     if (token) {
-      user_id = JSON.parse(token).userid;
+      try {
+        user_id = JSON.parse(token).userid;
+      } catch (err) {
+        throw { status: 500, message: 'Invalid Token' };
+      }
     } else {
-      throw { status: 500, message: 'Invalid Token' };
+      throw { status: 500, message: 'Missing Token' };
     }
     const result = await kingdomRepository.getKingdomIdbyUser_id(user_id);
     let kingdomId = result;
@@ -30,7 +34,7 @@ export const kingdomService = {
       );
       return result;
     } catch (err) {
-      return err;
+      throw { status: 500, message: 'Database Error' };
     }
   },
 
