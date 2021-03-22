@@ -66,7 +66,6 @@ function Buildings() {
   } else {
     return (
       <div>
-        <Header />
       <div className="buildings">
         {buildings.map(element => {
           console.log(element);

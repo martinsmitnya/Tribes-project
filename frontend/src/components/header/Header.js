@@ -24,7 +24,7 @@ function Header() {
 
     const user = ((
         <div className="header-container">
-            <Link to={'/buildings'} className='kingdomNameLink'>
+            <Link to={'/kingdom'} className='kingdomNameLink'>
                 <h1 className="header-title" >{kingdomName}</h1>
             </Link>
             <div className="RightButtonsContainer">
