@@ -5,7 +5,6 @@
   border-radius: 3px;
   height: 500px;
   width: 1000px;
-  gap: 20px;
   grid-template-columns: 1fr 4fr;
   font-weight: bold;
   text-align: center;
@@ -34,7 +33,8 @@
 .troops-levels {
   margin: 10px;
   display: grid;
-  height: 400px;
+  gap: 20px;
+  height: 300px;
   justify-content: center;
 }
 
@@ -49,21 +49,48 @@
   color: grey;
 }
 
+.troops-levelBox {
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+}
+
 .troops-levelButton {
   display: grid;
   align-items: center;
   padding: 10px;
   grid-template-columns: 1fr 9fr;
   background-color: rgb(0, 149, 135);
-  box-shadow: 3px 6px rgba(0, 0, 0, 0.219);
-  border-radius: 12px;
+  box-shadow: 1px 6px rgba(0, 0, 0, 0.158);
+  border-radius: 22px;
   height: 90px;
   width: 400px;
   color: white;
   font-size: 130%;
   font-weight: normal;
+  z-index: 1;
 }
 
 .troops-levelNumber {
   font-weight: bold;
+}
+
+.troops-levelUpgrade {
+  display: grid;
+  background-color: rgb(252, 143, 1);
+  box-shadow: 3px 6px rgba(0, 0, 0, 0.158);
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+  margin-top: 10px;
+  height: 90px;
+  width: 100px;
+  color: white;
+  font-size: 130%;
+  align-items: center;
+  z-index: 0;
+  margin-left: -6px;
+}
+
+.troops-coin {
+  height: 28px;
+  width: 28px;
 }
