@@ -113,5 +113,15 @@ export const kingdomRepository = {
       throw { status: 500, message: 'Database error' };
     }
   }, 
+  async getKingdomInfoByUserId(user_id) {
+    const query = `SELECT * FROM kingdoms WHERE user_id = ?`;
+    const values = [user_id];
+    try {
+      const data = await db.query(query, values);
+      return data.results[0];
+    } catch (error) {
+      throw { status: 500, message: 'Database error' };
+    }
+  },
 
 };

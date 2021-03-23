@@ -1,6 +1,7 @@
 import { kingdomRepository } from '../repositories/kingdom';
 import { updatedResource } from '../middlewares/resource_update';
 
+
 export const kingdomService = {
   async getResource() {
     try {
@@ -9,10 +10,6 @@ export const kingdomService = {
     } catch (err) {
       return err;
     }
-  },
-
-  async getBuilding() {
-    return kingdomRepository.getBuildingsByKingdomId(1);
   },
 
   async postBuilding(body) {
