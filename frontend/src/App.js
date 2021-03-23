@@ -7,12 +7,16 @@ import Resources from './components/resource/Resource';
 import Buildings from './components/buildings/Buildings';
 import Troops from './components/troops/Troops';
 import SettingsBlock from './components/settings/SettingsBlock';
+import KingdomPage from './components/kingdom/KingdomPage'
 
 function App() {
   return (
     <Router>
       <div className="App">
         <Switch>
+        <Route path="/kingdom">
+            <KingdomPage />
+          </Route>
           <Route path="/login">
             <Login />
           </Route>

@@ -40,7 +40,7 @@ const Form = () => {
         .then(response => {
           localStorage.setItem('token', response.token);
           localStorage.setItem('kingdomName', JSON.parse(atob(localStorage.getItem('token').split('.')[1])).kingdomName);
-          history.push('/buildings');
+          history.push('/kingdom');
           return dispatch({type: 'CLEAR_FIELDS'});
         })
         .catch(err => {
