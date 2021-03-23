@@ -1,7 +1,6 @@
 import { kingdomRepository } from '../repositories/kingdom';
 import { updatedResource } from '../middlewares/resource_update';
 
-
 export const kingdomService = {
   async getResource() {
     try {
@@ -9,6 +8,31 @@ export const kingdomService = {
       return updatedResource(result);
     } catch (err) {
       return err;
+    }
+  },
+
+  async getBuilding() {
+    return kingdomRepository.getBuildingsByKingdomId(1);
+  },
+
+  async getTroops(token) {
+    let kingdomId = null;
+    if (token) {
+      try {
+        kingdomId = JSON.parse(token).kingdomId;
+      } catch (err) {
+        throw { status: 500, message: 'Invalid Token' };
+      }
+    } else {
+      throw { status: 500, message: 'Missing Token' };
+    }
+    try {
+      const result = await kingdomRepository.getTroopsInfoByKingdomId(
+        kingdomId
+      );
+      return result;
+    } catch (err) {
+      throw { status: 500, message: 'Database Error' };
     }
   },
 

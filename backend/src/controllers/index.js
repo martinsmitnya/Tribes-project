@@ -3,5 +3,6 @@ export * from './loginController';
 export * from './resourceController';
 export * from './buildingController';
 export * from './newBuildingController';
-export * from './oneBuildingController';
 export * from './settingsController';
+export * from './troopsController';
+export * from './oneBuildingController';
