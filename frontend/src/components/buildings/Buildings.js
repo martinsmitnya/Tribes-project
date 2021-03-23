@@ -8,8 +8,8 @@ import academy from '../../icons/academy.png';
 import addAcademy from '../../icons/addacademy.png';
 import addFarm from '../../icons/addfarm.png';
 import addMine from '../../icons/addmine.png';
-import { useSelector, useDispatch } from "react-redux";
-import OneBuilding from '../oneBuilding/OneBuilding'
+import { useSelector, useDispatch } from 'react-redux';
+import OneBuilding from '../oneBuilding/OneBuilding';
 import Header from '../header/Header';
 
 function Buildings() {
@@ -74,7 +74,6 @@ function Buildings() {
     return (
       <div className="buildings-container">
         {buildings.map(element => {
-          console.log(element);
           return (
             <div>
               <img
