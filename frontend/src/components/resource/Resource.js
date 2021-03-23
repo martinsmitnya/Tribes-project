@@ -43,7 +43,7 @@ function Resources() {
     }
   }
 
-  if (false) {
+  if (error) {
     return <div className="resources-container"> Error: {error.message} </div>;
   } else if (!isLoaded) {
     return <div className="resources*-container"> Loading... </div>;
