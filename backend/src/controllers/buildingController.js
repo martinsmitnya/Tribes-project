@@ -2,7 +2,13 @@ import { kingdomService } from '../services';
 
 export const buildingController = {
   async get(req, res) {
-    let data = await kingdomService.getBuilding();
-    res.status(data.status).json(data.message);
+    console.log(req.headers)
+    try{
+    let data = await kingdomService.getBuilding(req.headers);
+    res.status(200).json(data.message);
+    }
+    catch(e){
+      res.status(e.status).json(e.message);
+    }
   },
 };
