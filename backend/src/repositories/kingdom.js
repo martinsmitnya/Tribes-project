@@ -124,17 +124,6 @@ export const kingdomRepository = {
     }
   },
 
-  async getKingdomIdbyUser_id(user_id) {
-    const query = `SELECT id FROM kingdoms WHERE user_id = ?`;
-    const values = [user_id];
-    try {
-      const data = await db.query(query, values);
-      return data.results[0].id;
-    } catch (error) {
-      throw { status: 500, message: 'Database error' };
-    }
-  },
-
   async getTroopsInfoByKingdomId(kingdom_id) {
     const query = `SELECT * FROM troops WHERE kingdom_id = ?`;
     const values = [kingdom_id];
