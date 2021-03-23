@@ -15,6 +15,27 @@ export const kingdomService = {
     return kingdomRepository.getBuildingsByKingdomId(1);
   },
 
+  async getTroops(token) {
+    let kingdomId = null;
+    if (token) {
+      try {
+        kingdomId = JSON.parse(token).kingdomId;
+      } catch (err) {
+        throw { status: 500, message: 'Invalid Token' };
+      }
+    } else {
+      throw { status: 500, message: 'Missing Token' };
+    }
+    try {
+      const result = await kingdomRepository.getTroopsInfoByKingdomId(
+        kingdomId
+      );
+      return result;
+    } catch (err) {
+      throw { status: 500, message: 'Database Error' };
+    }
+  },
+
   async postBuilding(body) {
     if (body.type === 'farm' || body.type === 'mine') {
       (body.hp = 100), (body.end = 60), (body.price = 100);

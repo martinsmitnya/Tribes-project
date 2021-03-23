@@ -89,20 +89,20 @@ export const kingdomRepository = {
     }
   },
 
-  async getBuildingInfoByBuildingId (buildingId) {
+  async getBuildingInfoByBuildingId(buildingId) {
     const query = `SELECT * FROM buildings WHERE building_id = ?;`;
     const values = [buildingId];
     try {
-      const data = await db.query(query,values);
+      const data = await db.query(query, values);
       if (data.results.length === 0) {
-      throw { status: 400, message: 'No buildingId like this'};
-    }
+        throw { status: 400, message: 'No buildingId like this' };
+      }
       return data.results[0];
     } catch (error) {
       return { status: error.status, message: error.message };
     }
   },
-  
+
   async updateKingdomNameByKingdom_id(kingdom_name, kingdom_id) {
     const query = `UPDATE kingdoms SET kingdom_name = ? WHERE  id = ?;`;
     const values = [kingdom_name, kingdom_id];
@@ -112,7 +112,7 @@ export const kingdomRepository = {
     } catch (error) {
       throw { status: 500, message: 'Database error' };
     }
-  },  
+  },
 
   async getKingdomInfoByKingdom_id(kingdom_id) {
     const query = `SELECT * FROM kingdoms WHERE id = ?`;
@@ -123,10 +123,9 @@ export const kingdomRepository = {
     } catch (error) {
       throw { status: 500, message: 'Database error' };
     }
-  }, 
-
+  },
   async getKingdomInfoByUserId(user_id) {
-    const query = 'SELECT * FROM kingdoms WHERE user_id = ?;';
+    const query = `SELECT * FROM kingdoms WHERE user_id = ?`;
     const values = [user_id];
     try {
       const data = await db.query(query, values);
@@ -135,5 +134,15 @@ export const kingdomRepository = {
       throw { status: 500, message: 'Database error' };
     }
   },
-
+  async getTroopsInfoByKingdomId(kingdom_id) {
+    const query = `SELECT * FROM troops WHERE kingdom_id = ?`;
+    const values = [kingdom_id];
+    try {
+      const data = await db.query(query, values);
+      console.log(data.results);
+      return { status: 200, message: data.results };
+    } catch (error) {
+      throw { status: 500, message: 'Database error' };
+    }
+  },
 };

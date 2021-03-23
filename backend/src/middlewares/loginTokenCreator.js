@@ -10,10 +10,10 @@ export const loginTokenCreator = {
       requestBody.username,
     );
 
-    let kingdomData = await kingdomRepository.getKingdomInfoByUserId(userData.user_id);
-
+    let kingdomData = await kingdomRepository.getKingdomInfoByUserId(userData.user_id)
+   
     let token = jwt.sign({
-      userid: kingdomData.user_id,
+      userid: userData.user_id,   
       kingdomId: kingdomData.id, 
       kingdomName: kingdomData.kingdom_name, 
     }, privateKey);
@@ -21,6 +21,6 @@ export const loginTokenCreator = {
     return {
       status: 200,
       data: { status: 200, token: token },
-    };
+      };
   }
 }

@@ -1,4 +1,4 @@
-.buildings {
+.buildings-container {
   display: grid;
   padding: 20px;
   background-color: rgba(255, 255, 255, 0.8);
@@ -13,12 +13,12 @@
   text-align: center;
 }
 
-.imgB {
+.buildings-img {
   height: 200px;
   width: 200px;
 }
 
-.textB {
+.buildings-text {
   text-transform: capitalize;
   font-size: 150%;
   color: grey;
