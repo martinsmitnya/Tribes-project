@@ -13,7 +13,9 @@ function Resources() {
   const gold = useSelector(state => state.resourceReducer.gold);
   const isLoaded = useSelector(state => state.resourceReducer.isLoaded);
   const error = useSelector(state => state.resourceReducer.error);
-  const user = useSelector(state => state.resourceReducer.user);
+  const buildingCount = useSelector(
+    state => state.buildingReducer.buildingCount
+  );
 
   useEffect(() => {
     Fetch('GET', '/kingdom/resource')
@@ -27,7 +29,7 @@ function Resources() {
       .catch(error => {
         return dispatch({ type: 'ERROR', error: error.toString() });
       });
-  }, [user]);
+  }, [buildingCount]);
 
   function Generation(item, class_name) {
     if (item.generation > 0) {
