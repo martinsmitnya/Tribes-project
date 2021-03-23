@@ -6,7 +6,6 @@ import Login from './components/login/LoginPage';
 import Resources from './components/resource/Resource';
 import Buildings from './components/buildings/Buildings';
 import SettingsBlock from './components/settings/SettingsBlock'
-import Header from './components/header/Header';
 
 function App() {
   return (

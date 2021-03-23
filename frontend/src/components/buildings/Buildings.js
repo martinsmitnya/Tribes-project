@@ -19,13 +19,13 @@ function Buildings() {
   const isLoaded = useSelector(state => state.buildingReducer.isLoaded);
   const error = useSelector(state => state.buildingReducer.error);
   const buildingCount = useSelector(state => state.buildingReducer.buildingCount);
-  const[element, setElement] = useState(null);
+  const [element, setElement] = useState(null);
 
   useEffect(() => {
     Fetch('GET', '/kingdom/buildings').then(result => {
-      return dispatch({type: 'GET_BUILDINGS', buildings: result});
+      return dispatch({ type: 'GET_BUILDINGS', buildings: result });
     }).catch(error => {
-      return dispatch({type: 'ERROR', error: error.toString()});
+      return dispatch({ type: 'ERROR', error: error.toString() });
     })
   }, [buildingCount]);
 
@@ -52,7 +52,7 @@ function Buildings() {
     }
     Fetch('POST', '/kingdom/buildings/newBuilding', body)
       .then(result => {
-        return dispatch({type: 'INCREASE_BUILDING_COUNT'})
+        return dispatch({ type: 'INCREASE_BUILDING_COUNT' })
       })
       .catch(err => alert(err));
   }
@@ -62,58 +62,58 @@ function Buildings() {
   } else if (!isLoaded) {
     return <div className="buildings"> Loading... </div>;
   } else if (element) {
-    return <div><OneBuilding type={element.type}/></div>;
+    return <div><OneBuilding type={element.type} /></div>;
   } else {
     return (
       <div>
         <Header />
-      <div className="buildings">
-        {buildings.map(element => {
-          console.log(element);
-          return (
-            <div>
-              <img
-                className="imgB"
-                src={getImage(element.type)}
-                alt={element.type}
-                //Itt kell onClick varázslat
-                onClick={() => setElement(element)}
-              ></img>
-              <label className="textB">
-                {element.type} <br />
+        <div className="buildings">
+          {buildings.map(element => {
+            console.log(element);
+            return (
+              <div>
+                <img
+                  className="imgB"
+                  src={getImage(element.type)}
+                  alt={element.type}
+                  //Itt kell onClick varázslat
+                  onClick={() => setElement(element)}
+                ></img>
+                <label className="textB">
+                  {element.type} <br />
                 Level {element.level}
-              </label>
-            </div>
-          );
-        })}
-        <div>
-          <img
-            className="imgB"
-            src={addFarm}
-            alt="Add Farm"
-            onClick={() => addBuilding('farm')}
-          ></img>
-          <label className="textB">Add Farm</label>
+                </label>
+              </div>
+            );
+          })}
+          <div>
+            <img
+              className="imgB"
+              src={addFarm}
+              alt="Add Farm"
+              onClick={() => addBuilding('farm')}
+            ></img>
+            <label className="textB">Add Farm</label>
+          </div>
+          <div>
+            <img
+              className="imgB"
+              src={addMine}
+              alt="Add Mine"
+              onClick={() => addBuilding('mine')}
+            ></img>
+            <label className="textB">Add Mine</label>
+          </div>
+          <div>
+            <img
+              className="imgB"
+              src={addAcademy}
+              alt="Add Academy"
+              onClick={() => addBuilding('academy')}
+            ></img>
+            <label className="textB">Add Academy</label>
+          </div>
         </div>
-        <div>
-          <img
-            className="imgB"
-            src={addMine}
-            alt="Add Mine"
-            onClick={() => addBuilding('mine')}
-          ></img>
-          <label className="textB">Add Mine</label>
-        </div>
-        <div>
-          <img
-            className="imgB"
-            src={addAcademy}
-            alt="Add Academy"
-            onClick={() => addBuilding('academy')}
-          ></img>
-          <label className="textB">Add Academy</label>
-        </div>
-      </div>
       </div>
     );
   }

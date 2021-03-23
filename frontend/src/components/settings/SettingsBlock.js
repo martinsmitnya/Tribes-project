@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import './SettingsBlock.css';
 import InputField from './InputField'
 import Fetch from '../fetch/Fetch'
+import { useDispatch, useSelector } from 'react-redux';
 import Header from '../header/Header';
 
 const SettingsBlock = () => {

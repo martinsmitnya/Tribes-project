@@ -11,8 +11,12 @@ export const loginService = {
     } else if (requestBody.username && requestBody.password) {
       /*When username and pw is here*/
       //run the token creator middleware
-      let tokenResponse = await loginTokenCreator.tokenCreator(requestBody);
-      return tokenResponse;
+      try {
+        let tokenResponse = await loginTokenCreator.tokenCreator(requestBody);
+        return tokenResponse;
+      } catch (error) {
+        throw { status: 400, message: 'Failed to create Token' };
+      }
     }
   },
 };

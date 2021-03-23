@@ -13,10 +13,11 @@ export const settingsService = {
     if(checkIfKingdomNameisValid) {
      throw { status: 400, message: 'Kingdom name is already taken'}
     }
+   // ITT AZ ID LEGYEN DINAMIKUS
+    const updateKingdomName = await kingdomRepository.updateKingdomNameByKingdom_id(trimmedkingdom_name, 72);
    
-    const updateKingdomName = await kingdomRepository.updateKingdomNameByKingdom_id(trimmedkingdom_name, 45);
-   
-    const kingdomInfo = await kingdomRepository.getKingdomInfoByKingdom_id(45);
+    const kingdomInfo = await kingdomRepository.getKingdomInfoByKingdom_id(72);
+    // ITT AZ ID LEGYEN DINAMIKUS
     const buildingInfo = await buildingRepository.getBuildingInfoByKingdomId(1);
     const resourceInfo = await resourceRepository.getResourceInfoByKingdomId(1);
     const troopsInfo = await troopRepository.getTroopsInfoByKingdomId(1);
