@@ -15,7 +15,7 @@ function Troops() {
   const error = useSelector(state => state.troopsReducer.error);
 
   const test =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOiI2NyIsIm5hbWUiOiJKb2huIERvZSIsImlhdCI6MTUxNjIzOTAyMn0.Nr70kjGqR3NgAM1rnsTeYYI6DQmKtOlUpzePZQsg9Wo';
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJraW5nZG9tSWQiOiIzOSIsInVzZXJpZCI6IjY3In0.ORn2_k4LVmrGxWI_XUNASD5DnCzIclUuFF8iJ0v28xg'; //Test Token Login nélkül
   let token = JSON.parse(atob(test.split('.')[1]));
   if (localStorage.getItem('token')) {
     token = JSON.parse(atob(localStorage.getItem('token').split('.')[1]));

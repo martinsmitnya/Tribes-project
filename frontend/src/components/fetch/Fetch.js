@@ -1,4 +1,4 @@
-async function Fetch(method, endpoint, body, headers) {
+async function Fetch(method, endpoint, body, token) {
   const settings = {
     method: method,
     headers: { 'Content-Type': 'application/json' },
@@ -6,8 +6,8 @@ async function Fetch(method, endpoint, body, headers) {
   if (body) {
     settings.body = JSON.stringify(body);
   }
-  if (headers) {
-    settings.headers.token = JSON.stringify(headers);
+  if (token) {
+    settings.headers.token = JSON.stringify(token);
   }
 
   const call = await fetch(
