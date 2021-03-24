@@ -34,7 +34,7 @@ function Resources() {
       .catch(error => {
         return dispatch({ type: 'RESOURCE_ERROR', error: error.toString() });
       });
-  }, [buildingCount, isLoaded]);
+  }, [buildingCount, isLoaded, localStorage.getItem('token')]);
 
   function Generation(item, class_name) {
     if (item.generation > 0) {
