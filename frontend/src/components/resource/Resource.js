@@ -16,7 +16,12 @@ function Resources() {
   const user = useSelector(state => state.resourceReducer.user);
 
   useEffect(() => {
-    Fetch('GET', '/kingdom/resource')
+    Fetch(
+      'GET',
+      '/kingdom/resource',
+      '',
+      JSON.parse(atob(localStorage.getItem('token').split('.')[1]))
+    )
       .then(result => {
         return dispatch({
           type: 'GET_RESOURCES',
