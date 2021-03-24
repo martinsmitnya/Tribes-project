@@ -6,6 +6,7 @@ export const userRepository = {
     const value = [username];
     try {
       const data = await db.query(query, value);
+      return data.results[0];
     } catch (err) {
       throw { status: 500, message: 'Database error' };
     }
