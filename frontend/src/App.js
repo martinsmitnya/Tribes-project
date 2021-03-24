@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import NotImplemented from './components/notImplemented/NotImplemented';
 import RegisterPage from './components/register/RegisterPage';
@@ -10,6 +10,11 @@ import SettingsBlock from './components/settings/SettingsBlock';
 import KingdomPage from './components/kingdom/KingdomPage'
 
 function App() {
+
+  useEffect(() => {
+    document.title = 'Tribes of Gymnocercus';
+  })
+
   return (
     <Router>
       <div className="App">
