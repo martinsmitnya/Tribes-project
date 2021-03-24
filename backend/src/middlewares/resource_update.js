@@ -6,7 +6,6 @@ export function updatedResource(resource) {
   output = Update(resource);
   db.query(query, [output[0].amount, output[0].updated_at, output[0].type]);
   db.query(query, [output[1].amount, output[1].updated_at, output[1].type]);
-
   return resource;
 }
 

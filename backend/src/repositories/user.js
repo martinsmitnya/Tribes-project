@@ -44,7 +44,7 @@ export const userRepository = {
       kingdomId,
     ];
     const values2 = [
-      'food',
+      'gold',
       500,
       100,
       Math.floor(Date.now() / 1000),

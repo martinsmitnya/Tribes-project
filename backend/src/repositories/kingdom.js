@@ -73,7 +73,9 @@ export const kingdomRepository = {
       'SELECT amount FROM resources WHERE type=? AND kingdomId=?;',
       ['gold', kingdomId]
     );
+    console.log(kingdomId);
     try {
+      console.log(goldAmount);
       if (body.price > goldAmount.results[0].amount) {
         return { status: 401, message: 'Not enough gold' };
       } else {
