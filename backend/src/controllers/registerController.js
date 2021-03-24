@@ -11,6 +11,7 @@ export const registerController = {
       );
       res.status(200).json(data);
     } catch (error) {
+      console.log(error);
       res.status(error.status).json(error.message);
     }
   },
