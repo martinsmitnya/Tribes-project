@@ -11,8 +11,9 @@ function Troops() {
   const troops = useSelector(state => state.troopsReducer.troops);
   const stats = useSelector(state => state.troopsReducer.stats);
   const levels = useSelector(state => state.troopsReducer.levels);
-  const isLoaded = useSelector(state => state.troopsReducer.isLoaded);
+  const [isLoaded, setIsLoaded] = useState(null);
   const error = useSelector(state => state.troopsReducer.error);
+  const [troopsCount, setTroopsCount] = useState(0);
 
   useEffect(() => {
     Fetch(
@@ -23,9 +24,11 @@ function Troops() {
     )
       .then(result => {
         dispatch({ type: 'GET_TROOPS', troops: result });
+        setIsLoaded(true);
         return getLevels();
       })
       .catch(error => {
+        setIsLoaded(true);
         return dispatch({ type: 'TROOPS_ERROR', error: error.toString() });
       });
   }, [isLoaded]);

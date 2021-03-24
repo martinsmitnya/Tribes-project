@@ -20,6 +20,15 @@ const resourceReducer = (state = initialState, action) => {
         ...state,
         error: action.error,
       };
+    case 'CLEAR_ALL':
+      return {
+        ...state,
+        food: null,
+        gold: null,
+        isLoaded: false,
+        error: null,
+        user: 0,
+      };
     default:
       return state;
   }

@@ -23,6 +23,14 @@ const buildingReducer = (state = initialState, action) => {
         ...state,
         error: action.errormessage,
       };
+    case 'CLEAR_ALL':
+      return {
+        ...state,
+        buildings: null,
+        isLoaded: false,
+        error: '',
+        buildingCount: 0,
+      };
     default:
       return state;
   }
