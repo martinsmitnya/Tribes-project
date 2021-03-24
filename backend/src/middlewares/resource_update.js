@@ -36,7 +36,6 @@ function UpdateAmount(input) {
 
 async function UpdateGen(resources, kingdomId) {
   let buildings = null;
-  const query = 'SELECT * FROM buildings WHERE kingdomId=?';
   try {
     buildings = await (
       await kingdomRepository.getBuildingsByKingdomId(kingdomId)
