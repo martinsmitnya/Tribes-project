@@ -28,7 +28,7 @@ export const settingsService = {
 
     const updateKingdomName = await kingdomRepository.updateKingdomNameByKingdom_id(
       trimmedkingdom_name,
-      39
+      kingdomId
     );
 
     const kingdomInfo = await kingdomRepository.getKingdomInfoByKingdom_id(
