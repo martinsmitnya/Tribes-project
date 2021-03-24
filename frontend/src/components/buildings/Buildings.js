@@ -23,7 +23,12 @@ function Buildings() {
   const [element, setElement] = useState(null);
 
   useEffect(() => {
-    Fetch('GET', '/kingdom/buildings')
+    Fetch(
+      'GET',
+      '/kingdom/buildings',
+      '',
+      JSON.parse(atob(localStorage.getItem('token').split('.')[1]))
+    )
       .then(result => {
         return dispatch({ type: 'GET_BUILDINGS', buildings: result });
       })
@@ -53,7 +58,12 @@ function Buildings() {
     } else if (type === 'academy') {
       body = { type: 'academy', hp: 150, end: 90, price: 150 };
     }
-    Fetch('POST', '/kingdom/buildings/newBuilding', body)
+    Fetch(
+      'POST',
+      '/kingdom/buildings/newBuilding',
+      body,
+      JSON.parse(atob(localStorage.getItem('token').split('.')[1]))
+    )
       .then(result => {
         return dispatch({ type: 'INCREASE_BUILDING_COUNT' });
       })

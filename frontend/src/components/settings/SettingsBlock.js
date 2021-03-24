@@ -29,10 +29,10 @@ const SettingsBlock = () => {
       setErrorMessage(`Kingdom name is required`);
     } else {
       let body = {
-        kingdom_name : kingdomName
-      }
+        kingdom_name: kingdomName,
+      };
 
-    Fetch('PUT', '/kingdom', body)
+    Fetch('PUT', '/kingdom', body, JSON.parse(atob(localStorage.getItem('token').split('.')[1])))
     .then(response => {
       setErrorMessage('');
       let input = document.querySelector('input');
@@ -67,6 +67,6 @@ const SettingsBlock = () => {
     </div> 
     </div>
   );
-}
- 
+};
+
 export default SettingsBlock;

@@ -85,6 +85,7 @@ export const kingdomRepository = {
         return { status: 200, message: 'Building created' };
       }
     } catch (error) {
+      console.log(error);
       throw { status: 500, message: 'Database error' };
     }
   },

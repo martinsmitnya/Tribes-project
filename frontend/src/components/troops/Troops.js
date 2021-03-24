@@ -14,15 +14,13 @@ function Troops() {
   const isLoaded = useSelector(state => state.troopsReducer.isLoaded);
   const error = useSelector(state => state.troopsReducer.error);
 
-  const test =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJraW5nZG9tSWQiOiIzOSIsInVzZXJpZCI6IjY3In0.ORn2_k4LVmrGxWI_XUNASD5DnCzIclUuFF8iJ0v28xg'; //Test Token Login nélkül
-  let token = JSON.parse(atob(test.split('.')[1]));
-  if (localStorage.getItem('token')) {
-    token = JSON.parse(atob(localStorage.getItem('token').split('.')[1]));
-  }
-
   useEffect(() => {
-    Fetch('GET', '/kingdom/troops', '', token)
+    Fetch(
+      'GET',
+      '/kingdom/troops',
+      '',
+      JSON.parse(atob(localStorage.getItem('token').split('.')[1]))
+    )
       .then(result => {
         dispatch({ type: 'GET_TROOPS', troops: result });
         return getLevels();
