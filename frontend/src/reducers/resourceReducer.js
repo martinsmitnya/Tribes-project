@@ -3,8 +3,8 @@ const initialState = {
   gold: null,
   isLoaded: false,
   error: null,
-  user: 0
-}
+  user: 0,
+};
 
 const resourceReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -14,15 +14,15 @@ const resourceReducer = (state = initialState, action) => {
         food: action.food,
         gold: action.gold,
         isLoaded: true,
-      }
-    case 'ERROR':
+      };
+    case 'RESOURCE_ERROR':
       return {
         ...state,
         error: action.error,
-      }
+      };
     default:
       return state;
   }
-}
+};
 
 export default resourceReducer;

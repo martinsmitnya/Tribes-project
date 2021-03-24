@@ -26,7 +26,7 @@ function Troops() {
         return getLevels();
       })
       .catch(error => {
-        return dispatch({ type: 'ERROR', error: error.toString() });
+        return dispatch({ type: 'TROOPS_ERROR', error: error.toString() });
       });
   }, [isLoaded]);
 

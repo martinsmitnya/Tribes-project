@@ -3,7 +3,7 @@ const initialState = {
   isLoaded: false,
   error: '',
   buildingCount: 0,
-}
+};
 
 const buildingReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -18,14 +18,14 @@ const buildingReducer = (state = initialState, action) => {
         ...state,
         buildingCount: state.buildingCount + 1,
       };
-    case 'ERROR':
+    case 'BUILDING_ERROR':
       return {
         ...state,
         error: action.errormessage,
-      }
+      };
     default:
       return state;
   }
-}
+};
 
 export default buildingReducer;

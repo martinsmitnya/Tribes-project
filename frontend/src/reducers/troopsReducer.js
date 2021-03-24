@@ -25,7 +25,7 @@ const troopsReducer = (state = initialState, action) => {
         ...state,
         levels: action.levels,
       };
-    case 'ERROR':
+    case 'TROOPS_ERROR':
       return {
         ...state,
         error: action.errormessage,
