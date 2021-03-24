@@ -6,7 +6,6 @@ export const userRepository = {
     const value = [username];
     try {
       const data = await db.query(query, value);
-      return data.results[0];
     } catch (err) {
       throw { status: 500, message: 'Database error' };
     }
@@ -36,20 +35,8 @@ export const userRepository = {
   async insertNewResource(kingdomId) {
     const query =
       'INSERT INTO resources (type,amount,generation,updated_at,kingdomId) VALUES (?,?,?,?,?)';
-    const values1 = [
-      'food',
-      500,
-      100,
-      Math.floor(Date.now() / 1000),
-      kingdomId,
-    ];
-    const values2 = [
-      'gold',
-      500,
-      100,
-      Math.floor(Date.now() / 1000),
-      kingdomId,
-    ];
+    const values1 = ['food', 500, 0, Math.floor(Date.now() / 1000), kingdomId];
+    const values2 = ['gold', 500, 0, Math.floor(Date.now() / 1000), kingdomId];
     try {
       await db.query(query, values1);
       await db.query(query, values2);

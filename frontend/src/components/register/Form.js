@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 import './Form.css';
 import InputField from './InputField';
 import Fetch from '../fetch/Fetch';
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 const Form = () => {
-
   const dispatch = useDispatch();
-  const errormessage = useSelector(state => state.userReducer.errormessage);
+  const errormessage = useSelector(
+    state => state.userReducer.errormessageRegister
+  );
   const [userName, setUserName] = useState('');
   const [passwordHash, setPasswordHash] = useState('');
   const [kingdomName, setKingdomName] = useState('');
@@ -31,11 +32,11 @@ const Form = () => {
     if (passwordHash === '' || userName === '') {
       setUserName(userName);
       setPasswordHash(passwordHash);
-      return dispatch({type: 'MISSING_USERNAME_OR_PASSWORD'});
+      return dispatch({ type: 'REGISTER_MISSING_USERNAME_OR_PASSWORD' });
     } else if (passwordHash.length < 8) {
       setUserName(userName);
       setPasswordHash(passwordHash);
-      return dispatch({type: 'PASSWORD_UNDER_8_CHARACTERS'});
+      return dispatch({ type: 'PASSWORD_UNDER_8_CHARACTERS' });
     }
 
     setSubmitted(true);
@@ -52,13 +53,16 @@ const Form = () => {
         .then(response => {
           let inputs = document.querySelectorAll('input');
           Array.from(inputs).forEach(input => (input.value = ''));
-          return dispatch({type: 'CLEAR_FIELDS'});
+          return dispatch({ type: 'CLEAR_FIELDS' });
         })
         .catch(error => {
           setUserName(userName);
           setPasswordHash(passwordHash);
           setKingdomName(kingdomName);
-          return dispatch({type: 'BACKEND_ERROR', errormessage: error.toString()});
+          return dispatch({
+            type: 'REGISTER_ERROR',
+            errormessage: error.toString(),
+          });
         });
       setKingdomName('');
       setUserName('');
