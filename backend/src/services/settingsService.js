@@ -4,7 +4,17 @@ import { resourceRepository } from '../repositories/resource';
 import { buildingRepository } from '../repositories/building';
 
 export const settingsService = {
-  async putSettings(kingdom_name) {
+  async putSettings(kingdom_name, token) {
+    let kingdomId = null;
+    if (token) {
+      try {
+        kingdomId = JSON.parse(token).kingdomId;
+      } catch (err) {
+        throw { status: 500, message: 'Invalid Token' };
+      }
+    } else {
+      throw { status: 500, message: 'Missing Token' };
+    }
     const trimmedkingdom_name = kingdom_name.trim();
     if (!trimmedkingdom_name) {
       throw { status: 400, message: 'Name is required' };
@@ -21,10 +31,18 @@ export const settingsService = {
       39
     );
 
-    const kingdomInfo = await kingdomRepository.getKingdomInfoByKingdom_id(39);
-    const buildingInfo = await buildingRepository.getBuildingInfoByKingdomId(1);
-    const resourceInfo = await resourceRepository.getResourceInfoByKingdomId(1);
-    const troopsInfo = await troopRepository.getTroopsInfoByKingdomId(1);
+    const kingdomInfo = await kingdomRepository.getKingdomInfoByKingdom_id(
+      kingdomId
+    );
+    const buildingInfo = await buildingRepository.getBuildingInfoByKingdomId(
+      kingdomId
+    );
+    const resourceInfo = await resourceRepository.getResourceInfoByKingdomId(
+      kingdomId
+    );
+    const troopsInfo = await troopRepository.getTroopsInfoByKingdomId(
+      kingdomId
+    );
 
     const settingsResponse = {
       status: 200,
