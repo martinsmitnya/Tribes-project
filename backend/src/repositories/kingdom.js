@@ -73,6 +73,7 @@ export const kingdomRepository = {
       'SELECT amount FROM resources WHERE type=? AND kingdomId=?;',
       ['gold', kingdomId]
     );
+
     try {
       if (body.price > goldAmount.results[0].amount) {
         return { status: 401, message: 'Not enough gold' };
@@ -80,8 +81,8 @@ export const kingdomRepository = {
         await db.query(query, values);
         const pastResource = await this.getResourceByKingdomId(kingdomId);
         pastResource[1].amount -= body.price;
-        console.log();
-        updatedResource(pastResource);
+        console.log(pastResource[1]);
+        await updatedResource(pastResource);
         return { status: 200, message: 'Building created' };
       }
     } catch (error) {
@@ -140,7 +141,6 @@ export const kingdomRepository = {
     const values = [kingdom_id];
     try {
       const data = await db.query(query, values);
-      console.log(data.results);
       return { status: 200, message: data.results };
     } catch (error) {
       throw { status: 500, message: 'Database error' };

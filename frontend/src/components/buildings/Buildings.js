@@ -10,7 +10,6 @@ import addFarm from '../../icons/addfarm.png';
 import addMine from '../../icons/addmine.png';
 import { useSelector, useDispatch } from 'react-redux';
 import OneBuilding from '../oneBuilding/OneBuilding';
-import Header from '../header/Header';
 
 function Buildings() {
   const dispatch = useDispatch();

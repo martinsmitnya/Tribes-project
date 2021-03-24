@@ -49,6 +49,7 @@ function Header() {
           onClick={() => {
             localStorage.removeItem('token');
             localStorage.removeItem('kingdomName');
+            dispatch({ type: 'CLEAR_ALL' });
           }}
         >
           <div className="header-button-container">

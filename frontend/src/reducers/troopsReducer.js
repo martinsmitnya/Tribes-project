@@ -25,10 +25,19 @@ const troopsReducer = (state = initialState, action) => {
         ...state,
         levels: action.levels,
       };
-    case 'ERROR':
+    case 'TROOPS_ERROR':
       return {
         ...state,
         error: action.errormessage,
+      };
+    case 'CLEAR_ALL':
+      return {
+        ...state,
+        troops: null,
+        isLoaded: false,
+        error: '',
+        stats: { attack: 0, defence: 0, sustenance: 0 },
+        levels: {},
       };
     default:
       return state;

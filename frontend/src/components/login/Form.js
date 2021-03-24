@@ -2,14 +2,15 @@ import React, { useEffect, useState } from 'react';
 import './Form.css';
 import Fetch from '../fetch/Fetch';
 import { useHistory } from 'react-router-dom';
-import InputField from "../register/InputField";
-import {useDispatch, useSelector} from "react-redux";
+import InputField from '../register/InputField';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Form = () => {
-
   let history = useHistory();
   const dispatch = useDispatch();
-  const errormessage = useSelector(state => state.userReducer.errormessage);
+  const errormessage = useSelector(
+    state => state.userReducer.errormessageLogin
+  );
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [submitted, setSubmitted] = useState(false);
@@ -27,7 +28,7 @@ const Form = () => {
   function handleSubmit(event) {
     event.preventDefault();
     if (password === '' || userName === '') {
-      return dispatch({type: 'MISSING_USERNAME_OR_PASSWORD'});
+      return dispatch({ type: 'LOGIN_MISSING_USERNAME_OR_PASSWORD' });
     } else {
       setSubmitted(true);
     }
@@ -39,12 +40,19 @@ const Form = () => {
       Fetch('POST', '/login/login', body)
         .then(response => {
           localStorage.setItem('token', response.token);
-          localStorage.setItem('kingdomName', JSON.parse(atob(localStorage.getItem('token').split('.')[1])).kingdomName);
+          localStorage.setItem(
+            'kingdomName',
+            JSON.parse(atob(localStorage.getItem('token').split('.')[1]))
+              .kingdomName
+          );
           history.push('/kingdom');
-          return dispatch({type: 'CLEAR_FIELDS'});
+          return dispatch({ type: 'CLEAR_FIELDS' });
         })
         .catch(err => {
-          return dispatch({type: 'BACKEND_ERROR', errormessage: err.toString()});
+          return dispatch({
+            type: 'LOGIN_ERROR',
+            errormessage: err.toString(),
+          });
         });
       setSubmitted(false);
     }
@@ -69,7 +77,9 @@ const Form = () => {
           type="password"
         />
         <br />
-        {errormessage && <span className="login-errormessage">{errormessage}</span>}
+        {errormessage && (
+          <span className="login-errormessage">{errormessage}</span>
+        )}
         <button type="submit">LOGIN</button>
       </form>
     </div>

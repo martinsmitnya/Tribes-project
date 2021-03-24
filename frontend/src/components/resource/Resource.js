@@ -32,9 +32,9 @@ function Resources() {
         });
       })
       .catch(error => {
-        return dispatch({ type: 'ERROR', error: error.toString() });
+        return dispatch({ type: 'RESOURCE_ERROR', error: error.toString() });
       });
-  }, [buildingCount]);
+  }, [buildingCount, isLoaded]);
 
   function Generation(item, class_name) {
     if (item.generation > 0) {

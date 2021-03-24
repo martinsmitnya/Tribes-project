@@ -34,7 +34,7 @@ export const kingdomService = {
       throw { status: 500, message: 'Missing Token' };
     }
     try {
-      const result = kingdomRepository.getBuildingsByKingdomId(kingdomId);
+      const result = await kingdomRepository.getBuildingsByKingdomId(kingdomId);
       return result;
     } catch (err) {
       throw { status: 500, message: 'Database Error' };

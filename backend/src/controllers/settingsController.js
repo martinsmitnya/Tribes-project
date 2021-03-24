@@ -9,7 +9,6 @@ export const settingsController = {
       );
       res.status(200).json(response.data);
     } catch (error) {
-      console.log(error);
       res.status(error.status).json(error.message);
     }
   },
