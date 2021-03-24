@@ -1,14 +1,16 @@
 .menu-container {
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.8);
   width: 600px;
-  height: 150px;
+  height: 100%;
   display: flex;
+  border-radius: 3px;
 }
 
 .selected {
   font-weight: bold;
   color: white !important;
   background: gray;
+  border-radius: 3px;
 }
 
 .navlink {

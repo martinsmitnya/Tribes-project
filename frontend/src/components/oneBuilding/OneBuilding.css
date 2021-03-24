@@ -4,7 +4,7 @@
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 3px;
   height: auto;
-  width: 1000px;
+  width: 980px;
   grid-auto-rows: auto;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-areas: 'infobox' 'description' 'description' 'description' 'description'

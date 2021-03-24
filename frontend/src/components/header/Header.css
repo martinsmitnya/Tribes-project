@@ -5,6 +5,7 @@
     width: 100%;
     background: #049484;
     color: white;
+    height: 84px;
 }
 
 
@@ -34,7 +35,7 @@
     justify-content: center;
     align-items: center;
     width: 120px;
-    height: 84px;
+    height: 100%;
     background: transparent;
     cursor: pointer;
     color: black;
@@ -46,9 +47,10 @@
     color: white;
     background: #005e55;
 }
-.selected{
+.RightButtonsContainer .selected{
   color: white;
   background: #005e55;
+  border-radius: 0;
 }
 
 .header-button-text{
