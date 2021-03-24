@@ -84,7 +84,7 @@ function Buildings() {
       <div className="buildings-container">
         {buildings.map(element => {
           return (
-            <div>
+            <div className='building-tile'>
               <img
                 className="buildings-img"
                 src={getImage(element.type)}

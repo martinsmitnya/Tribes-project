@@ -14,6 +14,14 @@
   margin-bottom: 50px;
 }
 
+.building-tile:hover .buildings-text{
+  color: white;
+}
+.building-tile:hover{
+  background: gray;
+  border-radius: 30px;
+}
+
 .buildings-img {
   height: 200px;
   width: 200px;
