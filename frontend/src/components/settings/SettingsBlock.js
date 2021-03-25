@@ -5,31 +5,27 @@ import Fetch from '../fetch/Fetch'
 import { useDispatch, useSelector } from 'react-redux';
 import Header from '../header/Header';
 
-const SettingsBlock = () => {
+const SettingsBlock = () => {   
   const dispatch = useDispatch();
+  const [oldKingdomName,setoldKingdomName] = useState('')
   const [errorMessage, setErrorMessage] = useState('');
   const kingdomName = useSelector(state => state.userReducer.kingdomName);
 
   useEffect(() => {
     setErrorMessage(() => ``);
-  }, [kingdomName]);
+  }, [oldKingdomName]);
 
   function handleKingdomNameChange(event) {
-    if (kingdomName === '') {
-      setErrorMessage(`Kingdom name is required`);
-    } else {
-      localStorage.setItem('kingdomName', event.target.value.trim());
-    }
-    return dispatch({type: 'SET_NEW_KINGDOMNAME', kingdomName: event.target.value.trim()})
+    setoldKingdomName(event.target.value.trim());
   }
 
   async function handleSubmit(event) {
     event.preventDefault();
-    if (kingdomName === '') {
+    if (oldKingdomName === '') {
       setErrorMessage(`Kingdom name is required`);
     } else {
       let body = {
-        kingdom_name: kingdomName,
+        kingdom_name: oldKingdomName,
       };
 
     Fetch('PUT', '/kingdom', body, JSON.parse(atob(localStorage.getItem('token').split('.')[1])))
@@ -38,6 +34,8 @@ const SettingsBlock = () => {
       let input = document.querySelector('input');
       input.value = '';
       setErrorMessage('');
+      dispatch({type: 'SET_NEW_KINGDOMNAME', kingdomName: response.kingdom_name})
+      localStorage.setItem('kingdomName', oldKingdomName);
      })
     .catch (error => {
       console.log(error)
