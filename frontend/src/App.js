@@ -40,8 +40,11 @@ function App() {
           <Route path="/troops">
             <Troops />
           </Route>
+          <Route exact path="/">
+          <Login />
+          </Route>
           <Route path="/">
-            <NotImplemented />
+          <NotImplemented />
           </Route>
         </Switch>
       </div>
