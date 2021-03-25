@@ -40,11 +40,12 @@ const Form = () => {
       Fetch('POST', '/login/login', body)
         .then(response => {
           localStorage.setItem('token', response.token);
-          localStorage.setItem(
-            'kingdomName',
-            JSON.parse(atob(localStorage.getItem('token').split('.')[1]))
-              .kingdomName
-          );
+          dispatch({
+            type: 'SET_NEW_KINGDOMNAME',
+            kingdomName: JSON.parse(
+              atob(localStorage.getItem('token').split('.')[1])
+            ).kingdomName,
+          });
           history.push('/kingdom');
           return dispatch({ type: 'CLEAR_FIELDS' });
         })

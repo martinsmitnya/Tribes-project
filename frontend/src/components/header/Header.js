@@ -13,7 +13,7 @@ function Header() {
       setIsLoggedIn(true);
       return dispatch({
         type: 'SET_NEW_KINGDOMNAME',
-        kingdomName: localStorage.getItem('kingdomName'),
+        kingdomName: kingdomName,
       });
     } else {
       setIsLoggedIn(false);
@@ -48,7 +48,6 @@ function Header() {
           className="buttonLink"
           onClick={() => {
             localStorage.removeItem('token');
-            localStorage.removeItem('kingdomName');
             dispatch({ type: 'CLEAR_ALL' });
           }}
         >

@@ -13,7 +13,6 @@ function Troops() {
   const levels = useSelector(state => state.troopsReducer.levels);
   const [isLoaded, setIsLoaded] = useState(null);
   const error = useSelector(state => state.troopsReducer.error);
-  const [troopsCount, setTroopsCount] = useState(0);
 
   useEffect(() => {
     Fetch(
