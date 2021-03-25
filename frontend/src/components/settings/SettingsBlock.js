@@ -7,24 +7,24 @@ import Header from '../header/Header';
 
 const SettingsBlock = () => {
   const dispatch = useDispatch();
-  const [oldKingdomName, setoldKingdomName] = useState('');
+  const [inputKingdomName, setinputKingdomName] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     setErrorMessage(() => ``);
-  }, [oldKingdomName]);
+  }, [inputKingdomName]);
 
   function handleKingdomNameChange(event) {
-    setoldKingdomName(event.target.value.trim());
+    setinputKingdomName(event.target.value.trim());
   }
 
   async function handleSubmit(event) {
     event.preventDefault();
-    if (oldKingdomName === '') {
+    if (inputKingdomName === '') {
       setErrorMessage(`Kingdom name is required`);
     } else {
       let body = {
-        kingdom_name: oldKingdomName,
+        kingdom_name: inputKingdomName,
       };
 
       Fetch(
