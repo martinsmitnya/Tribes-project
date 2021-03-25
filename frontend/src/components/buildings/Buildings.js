@@ -89,7 +89,6 @@ function Buildings() {
                 className="buildings-img"
                 src={getImage(element.type)}
                 alt={element.type}
-                //Itt kell onClick varázslat
                 onClick={() => setElement(element)}
               ></img>
               <label className="buildings-text">
