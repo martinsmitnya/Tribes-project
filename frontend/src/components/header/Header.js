@@ -1,13 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import './Header.css';
 
-function Header() {
+function Header(props) {
   const dispatch = useDispatch();
+  let history = useHistory();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const kingdomName = useSelector(state => state.userReducer.kingdomName);
-
+  let kingdomName = useSelector(state => state.userReducer.kingdomName);
+  const [pageLocation, setPageLocation] = useState('');
+  if (props.kingdomName) {
+    kingdomName = props.kingdomName;
+  }
+  history.listen((location, action) => setPageLocation(location));
   const tokenCheck = () => {
     if (localStorage.getItem('token')) {
       setIsLoggedIn(true);
@@ -25,8 +31,13 @@ function Header() {
   };
 
   useEffect(() => {
+    console.log(pageLocation);
+    return dispatch({
+      type: 'SET_NEW_KINGDOMNAME',
+      kingdomName: localStorage.getItem('kingdomName'),
+    });
     tokenCheck();
-  }, []);
+  }, [pageLocation]);
 
   const user = (
     <div className="header-container">

@@ -2,6 +2,7 @@ const initialState = {
   errormessageLogin: '',
   errormessageRegister: '',
   kingdomName: 'Tribes of Gymnocercus',
+  tempKingdomName: 'Tribes of Gymnocercus',
 };
 
 const userReducer = (state = initialState, action) => {
@@ -41,6 +42,11 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         kingdomName: action.kingdomName,
+      };
+    case 'SET_TEMP_KINGDOMNAME':
+      return {
+        ...state,
+        tempKingdomName: action.kingdomName,
       };
     default:
       return state;
